@@ -5,7 +5,7 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/content">Home</a>
+      <a mat-list-item routerLink="/">Home</a>
       <a mat-list-item href="#">Search</a>
       <a mat-list-item href="#">Post</a>
       <a mat-list-item href="#">Book Appointment</a>
@@ -21,7 +21,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>AutoHub</span>
+      <span class="spacer">AutoHub</span>
+      <button mat-icon-button>
+        <mat-icon aria-label="My Account">account_box</mat-icon>
+      </button>
     </mat-toolbar>
 
     <!-- Pages go inside here -->
