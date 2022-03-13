@@ -11,28 +11,37 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { ContentComponent } from './content/content.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
-const appRoutes: Routes = [
-  {path: '', component: AppComponent},
+const routes: Routes = [
+  {path: 'content', component: ContentComponent},
 
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule,
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
