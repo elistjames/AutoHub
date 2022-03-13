@@ -22,23 +22,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="spacer">AutoHub</span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+      <button mat-icon-button>
         <mat-icon aria-label="My Account">account_box</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="">
-
-          <span>Sign in</span>
-        </button>
-        <button mat-menu-item routerLink="">
-
-          <span>Sign out</span>
-        </button>
-        <button mat-menu-item routerLink="">
-
-          <span>Create Account</span>
-        </button>
-      </mat-menu>
     </mat-toolbar>
 
     <!-- Pages go inside here -->
