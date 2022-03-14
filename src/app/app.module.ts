@@ -22,10 +22,11 @@ import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 const routes: Routes = [
   {path: '', component: ContentComponent},
-
+  { path: 'create-account', component: CreateAccountComponent },
 ]
 
 @NgModule({
@@ -34,7 +35,8 @@ const routes: Routes = [
     NavbarComponent,
     ContentComponent,
     SignInComponent,
-    SignInDialogComponent
+    SignInDialogComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

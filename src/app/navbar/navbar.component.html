@@ -6,9 +6,9 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item href="#">Search</a>
-      <a mat-list-item href="#">Post</a>
-      <a mat-list-item href="#">Book Appointment</a>
+      <a mat-list-item routerLink="/">Search</a>
+      <a *ngIf="signed_in" mat-list-item href="#">Post</a>
+      <a mat-list-item (click)="onBook()" href="#">Book Appointment</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

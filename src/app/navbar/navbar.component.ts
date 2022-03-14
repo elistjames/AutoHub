@@ -47,4 +47,13 @@ export class NavbarComponent {
     }
   }
 
+  onBook(): void{
+    if(!this.signed_in){
+      alert("Create an account or sign in to book an appointment.")
+    }
+    else{
+      // book appointment
+    }
+  }
+
 }
