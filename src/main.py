@@ -18,7 +18,6 @@ class CAR(db.Model):
 
 
 car_put_args = reqparse.RequestParser()
-##car_put_args.add_argument ("plateNum", type = str, help = "plateNum needs to be a string", required=True)
 car_put_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required=True)
 car_put_args.add_argument ("weight", type = int, help = "weight is an int", required=True)
 
@@ -33,11 +32,17 @@ class CARS(Resource):
         @marshal_with(resource_fields)
         def get(self, plateNo):
                 result = CAR.query.filter_by(plateNum = plateNo).first()
+                if not result:
+                        abort(404, message="Could not find plate number")
                 return result
 
         @marshal_with(resource_fields)
         def put(self, plateNo):
                 args = car_put_args.parse_args()
+                result = CAR.query.filter_by(plateNum = plateNo)
+                if result:
+                        abort(409, message="Plate Number taken...")
+
                 car = CAR(plateNum = plateNo, topSpeed = args['topSpeed'] , weight = args['weight'])
                 db.session.add(car)
                 db.session.commit()
