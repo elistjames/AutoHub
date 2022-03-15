@@ -1,0 +1,23 @@
+<h1 mat-dialog-actions mat-dialog-title>{{data.make}}
+  <button mat-raised-button color="accent" style="margin-left:50px" mat-dialog-close>Close</button>
+</h1>
+
+<mat-dialog-content>
+  <div fxLayout="column">
+
+    <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
+    <b>Specs:</b>
+
+    <p>Number of seats: {{data.numSeats}}</p>
+    <p>Make: {{data.make}}</p>
+    <p>Year: {{data.numSeats}}</p>
+    <p>Plate #: {{data.numSeats}}</p>
+
+    <p>
+      authored by : {{data?.user}}
+    </p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+  </div>
+</mat-dialog-content>

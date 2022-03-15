@@ -23,10 +23,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignInDialogComponent } from './sign-in-dialog/sign-in-dialog.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehicleViewComponent } from './vehicle-view/vehicle-view.component';
+import { PostVehicleComponent } from './post-vehicle/post-vehicle.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatSelectModule} from "@angular/material/select";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+
 
 const routes: Routes = [
   {path: '', component: ContentComponent},
   { path: 'create-account', component: CreateAccountComponent },
+  { path: 'post-vehicle', component: PostVehicleComponent },
 ]
 
 @NgModule({
@@ -36,7 +45,10 @@ const routes: Routes = [
     ContentComponent,
     SignInComponent,
     SignInDialogComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    VehicleComponent,
+    VehicleViewComponent,
+    PostVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +68,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-
+    ImageCropperModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatCheckboxModule,
   ],
   exports: [RouterModule],
   providers: [AuthenticationService],

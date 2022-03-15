@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import {from, Observable} from "rxjs";
+import {images} from './images';
 
 @Component({
   selector: 'app-content',
@@ -8,26 +10,85 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
+  public innerWidth: any;
+  isHandset: boolean = false;
   /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
-        return [
-          { title: 'Card 1', cols: 2, rows: 1 },
-          { title: 'Card 2', cols: 2, rows: 1 },
-          { title: 'Card 3', cols: 2, rows: 1 },
-          { title: 'Card 4', cols: 2, rows: 1 }
-        ];
+        return true;
       }
 
-      return [
-        { title: 'Card 1', cols: 1, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 1 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
+      return false;
     })
   );
+
+  ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+    this.isHandsetObserver.subscribe(currentObserverValue => {
+      this.isHandset = currentObserverValue;
+      console.log(this.innerWidth);
+    })
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.innerWidth = event.target.innerWidth;
+    console.log(this.innerWidth);
+  }
+
+  vehicles = [
+    {
+      user: 'ehstjames@gmail.com',
+      plateNum: '',
+      numSeats: 4,
+      color: 'red',
+      make: 'Honda Accord',
+      price: 20000,
+      year: 2015,
+      image: images[0],
+    },
+    {
+      user: 'ehstjames@gmail.com',
+      plateNum: '',
+      numSeats: 4,
+      color: 'red',
+      make: 'Ford F-150',
+      price: 20000,
+      year: 2015,
+      image: images[0],
+    },
+    {
+      user: 'ehstjames@gmail.com',
+      plateNum: '',
+      numSeats: 4,
+      color: 'red',
+      make: 'Infinity G-37x',
+      price: 20000,
+      year: 2015,
+      image: images[0],
+    },
+    {
+      user: 'ehstjames@gmail.com',
+      plateNum: '',
+      numSeats: 4,
+      color: 'red',
+      make: 'Subaru WRX sti',
+      price: 20000,
+      year: 2015,
+      image: images[0],
+    },
+    {
+      user: 'ehstjames@gmail.com',
+      plateNum: '',
+      numSeats: 4,
+      color: 'red',
+      make: 'Honda Civic',
+      price: 20000,
+      year: 2015,
+      image: images[0],
+    },
+  ];
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 }
