@@ -21,6 +21,10 @@ car_put_args = reqparse.RequestParser()
 car_put_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required=True)
 car_put_args.add_argument ("weight", type = int, help = "weight is an int", required=True)
 
+car_update_args = reqparse.RequestParser()
+car_update_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required=False)
+car_update_args.add_argument ("weight", type = int, help = "weight is an int", required=False)
+
 resource_fields = {
         'plateNum' : fields.String,
         'topSpeed' : fields.Integer,
@@ -47,6 +51,19 @@ class CARS(Resource):
                 db.session.add(car)
                 db.session.commit()
                 return car, 201
+
+        @marshal_with(resource_fields)
+        def patch(self, plateNo):
+                args = car_update_args.parse_args()
+                result = CAR.query.filter_by(plateNum = plateNo).first()
+                if not result:
+                        abort(404, message="Could not find plate number")
+                if args["topSpeed"]:
+                        result.topSpeed = args['topSpeed']
+                if args["weight"]:
+                        result.weight = args['weight']
+                db.session.commit()
+                return result
 
         def delete(self, plateNo):
                 del cars[plateNo]
