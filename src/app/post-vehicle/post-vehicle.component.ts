@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatSlider} from "@angular/material/slider";
+
+
 
 @Component({
   selector: 'app-post-vehicle',
@@ -8,17 +11,15 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./post-vehicle.component.css']
 })
 export class PostVehicleComponent implements OnInit {
-
+  price = 0;
   imageChangedEvent: any = '';
   croppedImage: any = '';
-
   selectedCategory = 'none';
   isLinear = false;
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private fb: FormBuilder) {
-
+  constructor(private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -27,7 +28,16 @@ export class PostVehicleComponent implements OnInit {
     });
     this.specsFormGroup = this._formBuilder.group({
       make: ['', Validators.required],
+      seats: [0, Validators.required],
     });
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
   }
 
   imageChosen(): boolean {
@@ -42,25 +52,26 @@ export class PostVehicleComponent implements OnInit {
   allFilled(): boolean {
     // @ts-ignore
     if (this.specsFormGroup.get('make').value == '') {
-
       return false;
     }
     if(this.selectedCategory == 'none'){
-
+      return false;
+    }
+    // @ts-ignore
+    if(this.specsFormGroup.get('seats').value <= 0){
+      return false;
+    }
+    if(this.price <= 0){
       return false;
     }
     return true;
   }
 
   onSubmit(): void {
-    // @ts-ignore
-    console.log(this.specsFormGroup.get('make').value)
-    // @ts-ignore
-    if (this.specsFormGroup.get('make').value == '') {
-
-      return;
-    }
+    // Send new vehicle to api
   }
+
+
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -77,6 +88,7 @@ export class PostVehicleComponent implements OnInit {
   loadImageFailed() {
     /* show message */
   }
+
 
   checkValues(): void{
     console.log(this.selectedCategory);

@@ -30,6 +30,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSliderModule} from "@angular/material/slider";
 
 
 const routes: Routes = [
@@ -72,6 +73,7 @@ const routes: Routes = [
     MatStepperModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatSliderModule,
   ],
   exports: [RouterModule],
   providers: [AuthenticationService],

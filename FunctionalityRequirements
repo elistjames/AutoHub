@@ -1,1 +1,18 @@
 API Requirements:
+
+Front End Requirements:
+
+    User requirements:
+        - User can Sign in / Sign out.
+        - User can create account
+        - User view all vehicles on content page.
+        - User can filter the content page
+        - User can book an appointment for teh following reasons:
+            - maintenance to their own car
+            - sell their car to the dealership.
+            - buy a car from the dealership.
+        - user can post their own vehicles which will lead to them arranging an appointment with CarHub
+
+    Employee (manager) requirements:
+        - can view vehicle posts and may remove them them
+
