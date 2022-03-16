@@ -1,3 +1,11 @@
+<div *ngIf="innerWidth<400" class="grid-container">
+  <h1 class="mat-h1">Search Results:</h1>
+  <mat-grid-list cols=1 rowHeight=500px>
+    <mat-grid-tile *ngFor="let card of vehicles">
+      <app-vehicle [vehicleCard]="card"></app-vehicle>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
 <div *ngIf="innerWidth>=400&&innerWidth<450" class="grid-container">
   <h1 class="mat-h1">Search Results:</h1>
   <mat-grid-list cols=1 rowHeight=550px>

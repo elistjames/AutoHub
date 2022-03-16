@@ -1,13 +1,14 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="imageFormGroup">
+    <form [formGroup]="imageFormGroup">
       <ng-template matStepLabel>Choose your image</ng-template>
       <div class="container">
-        <div >
-          <div >
+        <div>
+          <div>
             <span class="hiddenFileInput">
               <input class="choose-file-btn" type="file" (change)="fileChangeEvent($event)" />
             </span>
+            <h4>Click icon to upload an image</h4>
             <div style="height: 50%">
               <div class="text-center">
 
@@ -31,52 +32,34 @@
           </div>
         </div>
       </div>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+      <div style="margin-top:5px">
+        <button *ngIf="imageChosen()" mat-raised-button color="primary" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="specsFormGroup">
+    <form [formGroup]="specsFormGroup">
       <ng-template matStepLabel>Specifications</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Cuisine</mat-label>
-        <mat-select [(value)]="selectedCuisine">
-          <mat-option>None</mat-option>
-          <mat-option value="indian">Indian</mat-option>
-          <mat-option value="mexican">Mexican</mat-option>
-          <mat-option value="chinese">Chinese</mat-option>
-          <mat-option value="vietnamese">Vietnamese</mat-option>
-          <mat-option value="italian">Italian</mat-option>
-          <mat-option value="american">American</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Category</mat-label>
-        <mat-select [(value)]="selectedCategory">
-          <mat-option value="breakfast">Breakfast</mat-option>
-          <mat-option value="lunch">Lunch</mat-option>
-          <mat-option value="dinner">Dinner</mat-option>
-          <mat-option value="dessert">Dessert</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <section class="example-section" [formGroup]="specs">
-        <p><mat-checkbox formControlName="vegetarian">Vegetarian</mat-checkbox></p>
-        <p><mat-checkbox formControlName="gluten_free">Gluten Free </mat-checkbox></p>
-
-      </section>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="checkValues()">Next</button>
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [(value)]="selectedCategory">
+            <mat-option value="none">None</mat-option>
+            <mat-option value="car">Car</mat-option>
+            <mat-option value="truck">Truck</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Make</mat-label>
+          <input matInput placeholder="Ex. Honda Civic" formControlName="make">
+          <mat-hint align="start"><p>Correct spelling will increase the chance of your post being seen</p> </mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+        <h3 *ngIf="!allFilled()">Must fill in all fields to continue</h3>
+        <button *ngIf="allFilled()" style="margin-left: 5px" color="primary" mat-raised-button matStepperNext (click)="onSubmit()" routerLink="/">Upload</button>
       </div>
     </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
   </mat-step>
 </mat-stepper>

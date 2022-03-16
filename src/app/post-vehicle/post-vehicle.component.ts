@@ -8,33 +8,59 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./post-vehicle.component.css']
 })
 export class PostVehicleComponent implements OnInit {
-  selectedCuisine = 'indian';
-  selectedCategory = 'breakfast';
-
-  specs!: FormGroup;
-
-  isLinear = false;
-  firstFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
-
-  constructor(private _formBuilder: FormBuilder, fb: FormBuilder) {
-    this.specs = fb.group({
-      vegetarian: false,
-      gluten_free: false
-    })
-  }
-
-  ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-  }
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
+
+  selectedCategory = 'none';
+  isLinear = false;
+  imageFormGroup!: FormGroup;
+  specsFormGroup!: FormGroup;
+
+  constructor(private _formBuilder: FormBuilder, private fb: FormBuilder) {
+
+  }
+
+  ngOnInit(): void {
+    this.imageFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.specsFormGroup = this._formBuilder.group({
+      make: ['', Validators.required],
+    });
+  }
+
+  imageChosen(): boolean {
+    if(this.croppedImage == ''){
+      this.isLinear = true;
+      return false;
+    }
+    this.isLinear = false;
+    return true;
+  }
+
+  allFilled(): boolean {
+    // @ts-ignore
+    if (this.specsFormGroup.get('make').value == '') {
+
+      return false;
+    }
+    if(this.selectedCategory == 'none'){
+
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit(): void {
+    // @ts-ignore
+    console.log(this.specsFormGroup.get('make').value)
+    // @ts-ignore
+    if (this.specsFormGroup.get('make').value == '') {
+
+      return;
+    }
+  }
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
@@ -53,7 +79,6 @@ export class PostVehicleComponent implements OnInit {
   }
 
   checkValues(): void{
-    console.log(this.selectedCuisine);
     console.log(this.selectedCategory);
     console.log(this.croppedImage);
   }

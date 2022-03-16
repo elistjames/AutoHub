@@ -76,7 +76,7 @@ export class ContentComponent {
       make: 'Subaru WRX sti',
       price: 20000,
       year: 2015,
-      image: images[0],
+      image: images[1],
     },
     {
       user: 'ehstjames@gmail.com',
@@ -86,7 +86,7 @@ export class ContentComponent {
       make: 'Honda Civic',
       price: 20000,
       year: 2015,
-      image: images[0],
+      image: images[1],
     },
   ];
 

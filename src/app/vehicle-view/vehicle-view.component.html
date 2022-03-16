@@ -1,7 +1,6 @@
-<h1 mat-dialog-actions mat-dialog-title>{{data.make}}
-  <button mat-raised-button color="accent" style="margin-left:50px" mat-dialog-close>Close</button>
-</h1>
-
+<h2 mat-dialog-actions mat-dialog-title>{{data.make}}</h2>
+<button mat-raised-button color="primary"  mat-dialog-close>Close</button>
+<hr/>
 <mat-dialog-content>
   <div fxLayout="column">
 
@@ -16,8 +15,5 @@
     <p>
       authored by : {{data?.user}}
     </p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
   </div>
 </mat-dialog-content>
