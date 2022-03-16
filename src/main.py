@@ -14,7 +14,7 @@ class CAR(db.Model):
         weight = db.Column(db.Integer, nullable = False)
 
         def __repr__(self):
-                return f"Car(plateNum = {plateNum}, topSpeed = {topSpeed}, weight = {weight})"
+                return f"Car(plateNum = {self.plateNum}, topSpeed = {self.topSpeed}, weight = {self.weight})"
 
 
 car_put_args = reqparse.RequestParser()
@@ -43,8 +43,8 @@ class CARS(Resource):
         @marshal_with(resource_fields)
         def put(self, plateNo):
                 args = car_put_args.parse_args()
-                result = CAR.query.filter_by(plateNum = plateNo)
-                if result:
+                result = CAR.query.filter_by(plateNum = plateNo).first()
+                if result != None:
                         abort(409, message="Plate Number taken...")
 
                 car = CAR(plateNum = plateNo, topSpeed = args['topSpeed'] , weight = args['weight'])
@@ -65,8 +65,11 @@ class CARS(Resource):
                 db.session.commit()
                 return result
 
+
+        @marshal_with(resource_fields)
         def delete(self, plateNo):
-                del cars[plateNo]
+                CAR.query.filter_by(plateNum = plateNo).delete()
+                db.session.commit()
                 return '', 204
 
 api.add_resource(CARS, "/car/<string:plateNo>")
