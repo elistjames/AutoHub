@@ -20,10 +20,12 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a mat-button routerLink="/">
-        <img [width]="110" [src]="'../../assets/logo.png'" alt="logo"/>
-      </a>
-      <span class="spacer">AutoHub</span>
+      
+      <span class="spacer">
+        <a mat-button routerLink="/">
+          <img [width]="110" [src]="'../../assets/logos/white_logo_transparent_background.png'" alt="logo"/>
+        </a>
+      </span>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
         <mat-icon aria-label="My Account">account_box</mat-icon>
       </button>
