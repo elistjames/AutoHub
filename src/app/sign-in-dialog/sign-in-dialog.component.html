@@ -7,7 +7,7 @@
     <div>
       <mat-form-field appearence="fill">
         <mat-label>Email</mat-label>
-        <input matInput name="email" type="text" [(ngModel)]="dat.email">
+        <input matInput name="email" placeholder="Ex. Honda Civic" [(ngModel)]="dat.email">
       </mat-form-field>
     </div>
     <div>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div>
-    <button mat-button color="primary" [mat-dialog-close]="dat" cdkFocusInitial>Sign in</button>
-    <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="dat" cdkFocusInitial>Sign in</button>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
   </div>
 </div>
