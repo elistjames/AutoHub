@@ -1,16 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Vehicle} from '../Vehicle';
 
-interface vehicleData{
-  user: string,
-  plateNum: string,
-  numSeats: number,
-  color: string,
-  make: string,
-  price: number,
-  year: number,
-  image: string,
-};
 
 @Component({
   selector: 'app-vehicle-view',
@@ -20,7 +11,7 @@ interface vehicleData{
 export class VehicleViewComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: vehicleData
+    @Inject(MAT_DIALOG_DATA) public data: Vehicle
   ) { }
 
   ngOnInit(): void {

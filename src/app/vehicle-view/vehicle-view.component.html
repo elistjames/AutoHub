@@ -1,4 +1,5 @@
 <h2 mat-dialog-actions mat-dialog-title>{{data.make}}</h2>
+<h3>Price: $ {{data.price}}</h3>
 <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
 <hr/>
 <mat-dialog-content>
@@ -8,12 +9,10 @@
     <b>Specs:</b>
 
     <p>Number of seats: {{data.numSeats}}</p>
-    <p>Make: {{data.make}}</p>
-    <p>Year: {{data.numSeats}}</p>
+    <p>Year: {{data.year}}</p>
+    <p>Color: {{data.color}}</p>
+    <p>Weight: {{data.weight}}</p>
+    <p>Top Speed: {{data.topSpeed}} km/h</p>
     <p>Plate #: {{data.numSeats}}</p>
-
-    <p>
-      authored by : {{data?.user}}
-    </p>
   </div>
 </mat-dialog-content>

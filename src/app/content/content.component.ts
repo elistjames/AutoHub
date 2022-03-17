@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import {from, Observable} from "rxjs";
 import {images} from './images';
+import {Vehicle} from "../Vehicle";
 
 @Component({
   selector: 'app-content',
@@ -37,11 +38,12 @@ export class ContentComponent {
     console.log(this.innerWidth);
   }
 
-  vehicles = [
+  vehicles: Vehicle[] = [
     {
-      user: 'ehstjames@gmail.com',
       plateNum: '',
       numSeats: 4,
+      weight: 4000,
+      topSpeed: 200,
       color: 'red',
       make: 'Honda Accord',
       price: 20000,
@@ -49,9 +51,10 @@ export class ContentComponent {
       image: images[0],
     },
     {
-      user: 'ehstjames@gmail.com',
       plateNum: '',
       numSeats: 4,
+      weight: 4000,
+      topSpeed: 200,
       color: 'red',
       make: 'Ford F-150',
       price: 20000,
@@ -59,9 +62,10 @@ export class ContentComponent {
       image: images[0],
     },
     {
-      user: 'ehstjames@gmail.com',
       plateNum: '',
       numSeats: 4,
+      weight: 4000,
+      topSpeed: 200,
       color: 'red',
       make: 'Infinity G-37x',
       price: 20000,
@@ -69,9 +73,10 @@ export class ContentComponent {
       image: images[0],
     },
     {
-      user: 'ehstjames@gmail.com',
       plateNum: '',
       numSeats: 4,
+      weight: 4000,
+      topSpeed: 200,
       color: 'red',
       make: 'Subaru WRX sti',
       price: 20000,
@@ -79,9 +84,10 @@ export class ContentComponent {
       image: images[1],
     },
     {
-      user: 'ehstjames@gmail.com',
       plateNum: '',
       numSeats: 4,
+      weight: 4000,
+      topSpeed: 200,
       color: 'red',
       make: 'Honda Civic',
       price: 20000,

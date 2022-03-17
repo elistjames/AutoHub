@@ -1,17 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {VehicleViewComponent} from "../vehicle-view/vehicle-view.component";
+import {Vehicle} from '../Vehicle';
 
-interface vehicle{
-  user: string,
-  plateNum: string,
-  numSeats: number,
-  color: string,
-  make: string,
-  price: number,
-  year: number,
-  image: string,
-};
 
 @Component({
   selector: 'app-vehicle',
@@ -20,7 +11,7 @@ interface vehicle{
 })
 export class VehicleComponent implements OnInit {
 
-  @Input() vehicleCard: vehicle | undefined;
+  @Input() vehicleCard: Vehicle | undefined;
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
