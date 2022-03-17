@@ -31,12 +31,14 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSliderModule} from "@angular/material/slider";
+import { AppointmentComponent } from './appointment/appointment.component';
 
 
 const routes: Routes = [
   {path: '', component: ContentComponent},
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'post-vehicle', component: PostVehicleComponent },
+  { path: 'appointment', component: AppointmentComponent },
 ]
 
 @NgModule({
@@ -49,7 +51,8 @@ const routes: Routes = [
     CreateAccountComponent,
     VehicleComponent,
     VehicleViewComponent,
-    PostVehicleComponent
+    PostVehicleComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule,
