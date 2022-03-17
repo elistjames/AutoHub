@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import {base64ToFile, ImageCroppedEvent} from 'ngx-image-cropper';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSlider} from "@angular/material/slider";
 
@@ -13,9 +13,13 @@ import { MatSlider} from "@angular/material/slider";
 export class PostVehicleComponent implements OnInit {
   price = 0;
   imageChangedEvent: any = '';
+
+  imageFile: any = '';
   croppedImage: any = '';
   selectedCategory = 'none';
   isLinear = false;
+
+
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
@@ -68,6 +72,9 @@ export class PostVehicleComponent implements OnInit {
   }
 
   onSubmit(): void {
+    //save uploaded image
+    let file = base64ToFile(this.croppedImage);
+    console.log(file);
     // Send new vehicle to api
   }
 
@@ -77,7 +84,9 @@ export class PostVehicleComponent implements OnInit {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
+    console.log(event);
     this.croppedImage = event.base64;
+
   }
   imageLoaded() {
     /* show cropper */
