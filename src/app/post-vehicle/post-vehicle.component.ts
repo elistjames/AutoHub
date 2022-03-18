@@ -32,7 +32,11 @@ export class PostVehicleComponent implements OnInit {
     });
     this.specsFormGroup = this._formBuilder.group({
       make: ['', Validators.required],
+      year: [0, Validators.required],
       seats: [0, Validators.required],
+      speed: [0, Validators.required],
+      weight: [0, Validators.required],
+      color: [0, Validators.required],
     });
   }
 
@@ -65,9 +69,10 @@ export class PostVehicleComponent implements OnInit {
     if(this.specsFormGroup.get('seats').value <= 0){
       return false;
     }
-    if(this.price <= 0){
+    if(this.price <= 0 || this.price > 100000){
       return false;
     }
+
     return true;
   }
 
