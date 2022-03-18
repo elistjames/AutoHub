@@ -8,9 +8,9 @@
           <mat-calendar [(selected)]="selected"></mat-calendar>
         </mat-card>
         <div style="margin-top: 30px">
-          <mat-form-field formControlName="time" appearance="outline">
+          <mat-form-field appearance="outline">
             <mat-label>Input type time</mat-label>
-            <input matInput type="time" min="09:00" max="18:00">
+            <input matInput [(ngModel)]="selectedTime" type="time" min="09:00" max="18:00" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import { DatePipe } from '@angular/common';
+import {Time} from "@angular/common";
+
 
 @Component({
   selector: 'app-appointment',
@@ -12,23 +13,19 @@ import { DatePipe } from '@angular/common';
 export class AppointmentComponent implements OnInit {
   appointmentForm = this.fb.group({
     department: [null, Validators.required],
-    time: [null, Validators.required]
   });
   selected!: Date | null;
+  selectedTime!: Time
 
-    currentDate!: Date
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) { }
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  getToday(): void {
-    this.currentDate=new Date();
-    let latest_date =this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
-    console.log(latest_date);
-  }
+
 
   onSubmit() {
-    this.getToday();
+
   }
 }

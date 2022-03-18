@@ -35,8 +35,6 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
-import {DatePipe} from "@angular/common";
 
 
 const routes: Routes = [
@@ -85,12 +83,9 @@ const routes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatMomentDateModule,
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
-    NgxMatNativeDateModule
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService, DatePipe],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
