@@ -1,1 +1,30 @@
-<p>appointment works!</p>
+<div class="appointmentForm">
+  <form [formGroup]="appointmentForm" novalidate (ngSubmit)="onSubmit()">
+    <h1 class="math-title">Make your Appointment</h1>
+
+    <div>
+      <div>
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [(selected)]="selected"></mat-calendar>
+        </mat-card>
+        <div style="margin-top: 30px">
+          <mat-form-field formControlName="time" appearance="outline">
+            <mat-label>Input type time</mat-label>
+            <input matInput type="time" min="09:00" max="18:00">
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="margin-top: 10px;">
+
+        <h3>Select the department you wish to have a  meeting with:</h3>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="department">
+            <mat-option value="car">Sales</mat-option>
+            <mat-option value="truck">Maintenance</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

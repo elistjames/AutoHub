@@ -32,6 +32,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSliderModule} from "@angular/material/slider";
 import { AppointmentComponent } from './appointment/appointment.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
+import {DatePipe} from "@angular/common";
 
 
 const routes: Routes = [
@@ -77,9 +82,15 @@ const routes: Routes = [
     MatSelectModule,
     MatCheckboxModule,
     MatSliderModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatMomentDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
