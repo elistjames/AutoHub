@@ -4,13 +4,15 @@ from flask import Flask, request;
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 
+#api setup
 app = Flask(__name__)
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
+#setup vehicle model
 class VEHICLE(db.Model):
-        plateNum = db.Column(db.String,primary_key = True)
+        plateNum = db.Column(db.String,primary_key = True) 
         numSeats = db.Column(db.Integer, nullable = False)
         colour = db.Column(db.String, nullable = True)
         make = db.Column(db.String, nullable = False)
@@ -25,6 +27,7 @@ class VEHICLE(db.Model):
                 return f"Vehicle(plateNum = {self.plateNum}, numSeats = {self.numSeats}, colour = {self.colour}, make = {self.make}, price = {self.price}, year = {self.year}, weight = {self.weight}, topSpeed = {self.topSpeed} , category = {self.category})"
 
 
+#setup post argument parser
 vehicle_post_args = reqparse.RequestParser()
 vehicle_post_args.add_argument ("numSeats", type = int, help = "numSeats is an int", required = True)
 vehicle_post_args.add_argument ("colour", type = str, help = "colour is an string", required = False)
@@ -36,6 +39,7 @@ vehicle_post_args.add_argument ("weight", type = int, help = "weight is an int",
 vehicle_post_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required = False)
 vehicle_post_args.add_argument ("category", type = str, help = "category is a string", required = True)
 
+#setup put argument parser
 vehicle_put_args = reqparse.RequestParser()
 vehicle_put_args.add_argument ("numSeats", type = int, help = "numSeats is an int", required = False)
 vehicle_put_args.add_argument ("colour", type = str, help = "colour is an string", required = False)
@@ -47,6 +51,7 @@ vehicle_put_args.add_argument ("weight", type = int, help = "weight is an int", 
 vehicle_put_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required = False)
 vehicle_put_args.add_argument ("category", type = str, help = "category is a string", required = False)
 
+#set path resource fields
 resource_fields = {
         'plateNum' : fields.String,
         'numSeats' : fields.Integer,
@@ -60,33 +65,34 @@ resource_fields = {
         'category' : fields.String
 }
 
-
+#create vehicle resource
 class VEHICLES(Resource):
-        @marshal_with(resource_fields)
+        @marshal_with(resource_fields) #marshal with resource fields
         def get(self, plateNo):
-                result = VEHICLE.query.filter_by(plateNum = plateNo).first()
+                result = VEHICLE.query.filter_by(plateNum = plateNo).first() #find vehicle
                 if not result:
-                        abort(404, message = "Could not find plate number")
+                        abort(404, message = "Could not find plate number") #give error
                 return result
 
-        @marshal_with(resource_fields)
+        @marshal_with(resource_fields) #marshal with resource fields
         def post(self, plateNo):
-                args = vehicle_post_args.parse_args()
+                args = vehicle_post_args.parse_args() #parse arguemnts
                 result = VEHICLE.query.filter_by(plateNum = plateNo).first() ##check to see if plateNum exists already
-                if result != None:
+                if result != None: #if result is not there
                         abort(409, message = "Plate Number taken...")
 
-                vehicle = VEHICLE(plateNum = plateNo, numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category'])
-                db.session.add(vehicle)
-                db.session.commit()
+                vehicle = VEHICLE(plateNum = plateNo, numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category']) #create vehicle object
+                db.session.add(vehicle) #add vehicle
+                db.session.commit() #commit changes
                 return vehicle, 201
 
-        @marshal_with(resource_fields)
+        @marshal_with(resource_fields) #marshal with resource fields
         def put(self, plateNo):
-                args = vehicle_put_args.parse_args()
-                result = VEHICLE.query.filter_by(plateNum = plateNo).first()
+                args = vehicle_put_args.parse_args() #parse arguments 
+                result = VEHICLE.query.filter_by(plateNum = plateNo).first() #find the vehicle
                 if not result:
-                        abort(404, message = "Could not find plate number")
+                        abort(404, message = "Could not find plate number") #display error message
+                #arguments are passed in, update them
                 if args["numSeats"]:
                         result.numSeats = args['numSeats']
                 if args["colour"]:
@@ -103,11 +109,11 @@ class VEHICLES(Resource):
                         result.topSpeed = args['topSpeed']                                                                   
                 if args["category"]:
                         result.category = args['category']
-                db.session.commit()
+                db.session.commit() #commit session
                 return result
 
         @marshal_with(resource_fields)
         def delete(self, plateNo):
-                VEHICLE.query.filter_by(plateNum = plateNo).delete()
-                db.session.commit()
+                VEHICLE.query.filter_by(plateNum = plateNo).delete() #find plate number
+                db.session.commit() #commit changes
                 return '', 204
