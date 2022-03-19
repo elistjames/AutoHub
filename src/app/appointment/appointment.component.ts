@@ -10,7 +10,6 @@ import {DatePipe} from "@angular/common";
   providers: [DatePipe]
 })
 
-
 export class AppointmentComponent implements OnInit {
   appointmentForm = this.fb.group({
     department: [null, Validators.required],
@@ -19,6 +18,8 @@ export class AppointmentComponent implements OnInit {
   selectedDate!: any;
   today!: Date;
   date!: any;
+
+  description: string = '';
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe) {
 
@@ -40,7 +41,8 @@ export class AppointmentComponent implements OnInit {
     if(this.selectedDate == null || this.selectedDate.valueOf() <= today.valueOf()){
       return false;
     }
-    if(this.appointmentForm.get('time') == null){
+    // @ts-ignore
+    if(this.appointmentForm.get('time').value == null){
       return false;
     }
     // @ts-ignore
@@ -51,6 +53,11 @@ export class AppointmentComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.selectedDate.format("yyyy-MM-dd"));
+    console.log(this.appointmentForm.get('time')?.value);
+    console.log(this.appointmentForm.get('department')?.value);
+    console.log(this.description);
+
     //Create Appointment Object
     // send appointment details to Appointment service
   }

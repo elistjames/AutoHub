@@ -1,5 +1,5 @@
 <div class="appointmentForm">
-  <form [formGroup]="appointmentForm" novalidate (ngSubmit)="onSubmit()">
+  <form [formGroup]="appointmentForm">
     <h1 class="math-title">Make your Appointment</h1>
     <hr>
     <div>
@@ -36,8 +36,14 @@
         </mat-form-field>
       </div>
     </div>
+    <div>
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Ex. I need an oil change" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+      </mat-form-field>
+    </div>
     <h3 *ngIf="!allFilled()">Must fill in all fields and select a date after today to continue</h3>
-    <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" routerLink="/">Submit</button>
+    <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" routerLink="/" (click)="onSubmit()">Submit</button>
     <button mat-raised-button color="accent" style="margin-left: 10px" type="button" routerLink="../">Cancel</button>
   </form>
 </div>

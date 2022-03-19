@@ -1,6 +1,7 @@
 export interface Vehicle {
   plateNum?: string,
   numSeats: number,
+  category: string,
   weight: number,
   topSpeed: number,
   color: string,
@@ -8,4 +9,5 @@ export interface Vehicle {
   price: number,
   year: number,
   image: string,
+  Dnum: number
 }

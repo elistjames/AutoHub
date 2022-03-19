@@ -42,6 +42,7 @@ export class ContentComponent {
     {
       plateNum: '',
       numSeats: 4,
+      category: 'car',
       weight: 4000,
       topSpeed: 200,
       color: 'red',
@@ -49,10 +50,13 @@ export class ContentComponent {
       price: 20000,
       year: 2015,
       image: images[0],
+      Dnum: 0
+
     },
     {
       plateNum: '',
       numSeats: 4,
+      category: 'car',
       weight: 4000,
       topSpeed: 200,
       color: 'red',
@@ -60,10 +64,13 @@ export class ContentComponent {
       price: 20000,
       year: 2015,
       image: images[0],
+      Dnum: 0
+
     },
     {
       plateNum: '',
       numSeats: 4,
+      category: 'car',
       weight: 4000,
       topSpeed: 200,
       color: 'red',
@@ -71,10 +78,12 @@ export class ContentComponent {
       price: 20000,
       year: 2015,
       image: images[0],
+      Dnum: 0
     },
     {
       plateNum: '',
       numSeats: 4,
+      category: 'car',
       weight: 4000,
       topSpeed: 200,
       color: 'red',
@@ -82,10 +91,12 @@ export class ContentComponent {
       price: 20000,
       year: 2015,
       image: images[1],
+      Dnum: 0
     },
     {
       plateNum: '',
       numSeats: 4,
+      category: 'car',
       weight: 4000,
       topSpeed: 200,
       color: 'red',
@@ -93,6 +104,7 @@ export class ContentComponent {
       price: 20000,
       year: 2015,
       image: images[1],
+      Dnum: 0
     },
   ];
 

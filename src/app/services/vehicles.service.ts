@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class VehiclesService {
   private apiUrl = 'http://localhost:5000/vehicle'
+  vehicles: Vehicle[] = [];
 
   constructor(private http: HttpClient) {}
 
