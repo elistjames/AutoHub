@@ -23,6 +23,7 @@ class VEHICLE(db.Model):
         topSpeed = db.Column(db.Integer, nullable = True)
         category = db.Column(db.String, nullable = False)
 
+        #return format
         def __repr__(self):
                 return f"Vehicle(plateNum = {self.plateNum}, numSeats = {self.numSeats}, colour = {self.colour}, make = {self.make}, price = {self.price}, year = {self.year}, weight = {self.weight}, topSpeed = {self.topSpeed} , category = {self.category})"
 
@@ -31,7 +32,7 @@ class VEHICLE(db.Model):
 vehicle_post_args = reqparse.RequestParser()
 vehicle_post_args.add_argument ("numSeats", type = int, help = "numSeats is an int", required = True)
 vehicle_post_args.add_argument ("colour", type = str, help = "colour is an string", required = False)
-vehicle_post_args.add_argument ("make", type = str, help = "make is a stringt", required = True)
+vehicle_post_args.add_argument ("make", type = str, help = "make is a string", required = True)
 vehicle_post_args.add_argument ("price", type = float, help = "price is a float", required = True)
 vehicle_post_args.add_argument ("year", type = int, help = "year is an int", required = False)
 vehicle_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
