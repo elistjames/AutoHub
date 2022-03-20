@@ -133,6 +133,8 @@ export class SearchComponent implements OnInit {
     this.updateMinYear();
     this.data.priceRanges = [{min: 0, max: 100000}];
     this.data.categoryFilter = "all"
+    this.data.minSeats = 0;
+    this.data.make = '';
   }
 
   filterPrice(range: any) {
