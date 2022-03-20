@@ -37,6 +37,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePipe } from '@angular/common';
 import { SearchComponent } from './search/search.component';
+import { VehiclesService } from './services/vehicles.service';
 
 
 
@@ -89,7 +90,7 @@ const routes: Routes = [
     MatMomentDateModule,
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService, DatePipe],
+  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

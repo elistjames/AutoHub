@@ -8,6 +8,6 @@ export interface Vehicle {
   make: string,
   price: number,
   year: number,
-  image: string,
-  Dnum: number
+  Dnum: number,
+  image: Blob,
 }

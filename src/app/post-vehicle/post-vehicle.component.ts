@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {base64ToFile, ImageCroppedEvent} from 'ngx-image-cropper';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSlider} from "@angular/material/slider";
+import { Vehicle } from '../Vehicle';
+import { VehiclesService } from '../services/vehicles.service';
+import { ContentComponent } from '../content/content.component';
 
 
 
@@ -13,17 +16,16 @@ import { MatSlider} from "@angular/material/slider";
 export class PostVehicleComponent implements OnInit {
   price = 0;
   imageChangedEvent: any = '';
-
   imageFile: any = '';
   croppedImage: any = '';
   selectedCategory = 'none';
   isLinear = false;
-
+  newVehicle!: Vehicle;
 
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent) {
   }
 
   ngOnInit(): void {
@@ -81,6 +83,22 @@ export class PostVehicleComponent implements OnInit {
     let file = base64ToFile(this.croppedImage);
     console.log(file);
     // Send new vehicle to api
+
+    this.newVehicle = {
+      plateNum: Math.random().toString(36).substr(2, 9),
+      numSeats: this.specsFormGroup.get('seats')?.value,
+      category: this.selectedCategory,
+      weight: this.specsFormGroup.get('weight')?.value,
+      topSpeed: this.specsFormGroup.get('speed')?.value,
+      color: this.specsFormGroup.get('color')?.value,
+      make: this.specsFormGroup.get('make')?.value,
+      price: this.price,
+      year: this.specsFormGroup.get('year')?.value,
+      image: file,
+      Dnum: 0
+    }
+
+    this.content.postVehicle(this.newVehicle);
   }
 
 

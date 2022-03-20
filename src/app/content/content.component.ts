@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import {from, Observable} from "rxjs";
 import {images} from './images';
 import {Vehicle} from "../Vehicle";
+import {VehiclesService} from "../services/vehicles.service"
 
 @Component({
   selector: 'app-content',
@@ -14,6 +15,7 @@ export class ContentComponent {
   public innerWidth: any;
   isHandset: boolean = false;
   contentTitle: string = "Vehicles";
+  vehicles: Vehicle[] = [];
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -26,7 +28,12 @@ export class ContentComponent {
     })
   );
 
+  constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService) {}
+
   ngOnInit(): void {
+
+    this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles));
+
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
@@ -34,80 +41,84 @@ export class ContentComponent {
     })
   }
 
+  postVehicle(vehicle: Vehicle) {
+    this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
   }
 
-  vehicles: Vehicle[] = [
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Honda Accord',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
+  // vehicles: Vehicle[] = [
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Honda Accord',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
 
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Ford F-150',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Ford F-150',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
 
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Infinity G-37x',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Subaru WRX sti',
-      price: 20000,
-      year: 2015,
-      image: images[1],
-      Dnum: 0
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Honda Civic',
-      price: 20000,
-      year: 2015,
-      image: images[1],
-      Dnum: 0
-    },
-  ];
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Infinity G-37x',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Subaru WRX sti',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[1],
+  //     Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Honda Civic',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[1],
+  //     Dnum: 0
+  //   },
+  // ];
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  
 }

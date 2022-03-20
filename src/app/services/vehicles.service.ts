@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class VehiclesService {
   private apiUrl = 'http://localhost:5000/vehicle'
+
   vehicles: Vehicle[] = [];
 
   constructor(private http: HttpClient) {}
@@ -23,6 +24,7 @@ export class VehiclesService {
     return this.http.get<Vehicle[]>(this.apiUrl)
   }
 
+  
   postVehicle(vehicle: Vehicle): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.apiUrl, vehicle, httpOptions);
   }
