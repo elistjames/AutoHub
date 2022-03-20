@@ -21,8 +21,24 @@ interface PriceRangeMap {
 export class SearchComponent implements OnInit {
   categories = ['Car', 'Truck'];
   colors = ['Red', 'Blue', 'Green', 'Black', 'Grey', 'White', 'Silver', 'Yellow', 'Orange', 'Purple', 'Other'];
-  priceMap: PriceRangeMap = {};
-  priceRangeNames: string[] = [];
+  priceMap: PriceRangeMap = {
+    ['$0 - $1,000']: {min: 0, max: 1000},
+    ['$1,000 - $5,000']: {min: 1000, max: 5000},
+    ['$5,000 - $10,000']: {min: 5000, max: 10000},
+    ['$10,000 - $20,000']: {min: 10000, max: 20000},
+    ['$20,000 - $40,000']: {min: 20000, max: 40000},
+    ['$40,000 - $60,000']: {min: 40000, max: 60000},
+    ['$60,000 - $100,000']: {min: 60000, max: 100000}
+  };
+  priceRangeNames: string[] = [
+    '$0 - $1,000',
+    '$1,000 - $5,000',
+    '$5,000 - $10,000',
+    '$10,000 - $20,000',
+    '$20,000 - $40,000',
+    '$40,000 - $60,000',
+    '$60,000 - $100,000'
+  ];
   prices: PriceRange[] = [
     {display: '$0 - $1,000', min: 0, max: 1000},
     {display: '$1,000 - $5,000', min: 1000, max: 5000},
@@ -38,7 +54,6 @@ export class SearchComponent implements OnInit {
   minYearOption!: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Filter) {
-
   }
 
   ngOnInit(): void {
@@ -47,7 +62,7 @@ export class SearchComponent implements OnInit {
     this.maxYearOption = currentYear;
     this.getYearsInRange(this.data.minYear, this. data.maxYear);
     this.getYearsInRange(this.data.minYear, this. data.maxYear);
-    this.setUpPriceMap();
+
   }
 
   getYearsInRange(min: number, max: number): void{
@@ -91,13 +106,20 @@ export class SearchComponent implements OnInit {
     console.log(this.data.colorFilter);
   }
 
-  checkState(input: any){
+  checkColorState(input: any){
+
     if(this.data.colorFilter.includes(input)){
       return true;
     }
 
-    if(this.data.priceRanges.includes(this.priceMap[input])){
-      return true;
+    return false;
+  }
+
+  checkPriceRangeState(input: any){
+    for(let i = 0; i < this.data.priceRanges.length; i++){
+      if(this.data.priceRanges[i].min==this.priceMap[input].min && this.data.priceRanges[i].max==this.priceMap[input].max){
+        return true;
+      }
     }
     return false;
   }
@@ -110,6 +132,7 @@ export class SearchComponent implements OnInit {
     this.data.maxYear = this.maxYearOption;
     this.updateMinYear();
     this.data.priceRanges = [{min: 0, max: 100000}];
+    this.data.categoryFilter = "all"
   }
 
   filterPrice(range: any) {
@@ -128,13 +151,15 @@ export class SearchComponent implements OnInit {
     console.log(this.data.priceRanges);
   }
 
-  private setUpPriceMap() {
-    for(let i = 0; i < this.prices.length; i++){
-      let newMin = this.prices[i].min;
-      let newMax = this.prices[i].max;
-      let newRangeName = this.prices[i].display;
-      this.priceMap[newRangeName] = {min: newMin, max: newMax};
-      this.priceRangeNames.push(newRangeName)
-    }
-  }
+
+
+  // private setUpPriceMap() {
+  //   for(let i = 0; i < this.prices.length; i++){
+  //     let newMin = this.prices[i].min;
+  //     let newMax = this.prices[i].max;
+  //     let newRangeName = this.prices[i].display;
+  //     this.priceMap[newRangeName] = {min: newMin, max: newMax};
+  //     this.priceRangeNames.push(newRangeName)
+  //   }
+  // }
 }

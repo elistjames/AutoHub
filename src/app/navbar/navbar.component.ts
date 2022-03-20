@@ -21,7 +21,7 @@ export class NavbarComponent {
   };
 
   @Input() contentFilter: Filter = {
-    categoryFilter: ['all'],
+    categoryFilter: "all",
     colorFilter: ['all'],
     priceRanges: [{min: 0, max: 100000}],
     make: '',
@@ -57,9 +57,12 @@ export class NavbarComponent {
   openSearch(): void {
 
     const dialogRef = this.dialog.open(SearchComponent, {
-      height: '600px',
       width: '800px',
       data: this.contentFilter,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 

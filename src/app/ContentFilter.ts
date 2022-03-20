@@ -1,5 +1,5 @@
 export interface Filter {
-  categoryFilter: string[],
+  categoryFilter: string,
   colorFilter: string[],
   priceRanges: {min: number, max: number}[],
   make: string,
