@@ -1,0 +1,47 @@
+<h1 matDialogTitle>Filter Search</h1>
+<mat-dialog-content>
+
+
+
+  <div fxLayout="column" fxLayoutAlign="space-evenly" >
+
+    <hr>
+    <h3 style="margin-top: 10px">Price:</h3>
+    <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
+      <span *ngFor="let range of priceRangeNames">
+          <mat-checkbox [checked]="checkState(range)" (change)="filterPrice($event)" style="padding: 10px; color: #fff" [value]="range">
+              {{range}}
+          </mat-checkbox>
+      </span>
+    </div>
+    <hr>
+    <h3 style="margin-top: 10px">Color:</h3>
+    <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
+      <span *ngFor="let color of colors">
+          <mat-checkbox [checked]="checkState(color.toLowerCase())" (change)="filterColor($event)" style="padding: 10px; color: #fff" [value]="color.toLowerCase()">
+              {{color}}
+          </mat-checkbox>
+      </span>
+    </div>
+    <hr>
+
+
+  </div>
+  <h3>Year:</h3>
+  <mat-form-field class="filter-select" appearance="fill">
+    <mat-label>From:</mat-label>
+    <mat-select (selectionChange)="updateMaxYear()" [(value)]="data.minYear">
+      <mat-option *ngFor="let year of minYears" [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="filter-select" appearance="fill">
+    <mat-label>To:</mat-label>
+    <mat-select (selectionChange)="updateMinYear()" [(value)]="data.maxYear">
+      <mat-option *ngFor="let year of maxYears" [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="clearFilters()">Clear</button>
+</mat-dialog-actions>
+

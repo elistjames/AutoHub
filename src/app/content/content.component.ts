@@ -13,6 +13,8 @@ import {Vehicle} from "../Vehicle";
 export class ContentComponent {
   public innerWidth: any;
   isHandset: boolean = false;
+  contentTitle: string = "Vehicles";
+
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -35,7 +37,6 @@ export class ContentComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
-    console.log(this.innerWidth);
   }
 
   vehicles: Vehicle[] = [

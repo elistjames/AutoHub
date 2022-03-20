@@ -36,6 +36,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePipe } from '@angular/common';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -57,7 +58,8 @@ const routes: Routes = [
     VehicleComponent,
     VehicleViewComponent,
     PostVehicleComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -91,3 +93,5 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+//Primary theme color: #c50061
