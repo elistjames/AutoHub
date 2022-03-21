@@ -86,7 +86,7 @@ class EMPLOYEES(Resource):
                 message = None
 
                 if not result:
-                        abort(404, message = "Could not find employee ssn") #give error
+                        abort(404, message = "Invalid passowrd") #give error
                 print(unEncode(result.password))
                 return result
 
