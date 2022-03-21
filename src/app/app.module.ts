@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule, Routes} from "@angular/router";
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -38,6 +37,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DatePipe } from '@angular/common';
 import { SearchComponent } from './search/search.component';
 import { VehiclesService } from './services/vehicles.service';
+import { ProfileComponent } from './profile/profile.component';
+import {HammerModule } from '@angular/platform-browser'
 
 
 
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'post-vehicle', component: PostVehicleComponent },
   { path: 'appointment', component: AppointmentComponent },
+  { path: 'profile', component: ProfileComponent },
 ]
 
 @NgModule({
@@ -60,7 +62,8 @@ const routes: Routes = [
     VehicleViewComponent,
     PostVehicleComponent,
     AppointmentComponent,
-    SearchComponent
+    SearchComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatMomentDateModule,
+    HammerModule
   ],
   exports: [RouterModule],
   providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent],

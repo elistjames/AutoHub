@@ -13,10 +13,16 @@ export class AuthenticationService {
   private subject = new Subject<any>();
   user: User = {
     email: '',
-    password: ''
+    password: '',
+    firstName: '',
+    lastName: '',
   };
 
   constructor(private http: HttpClient) { }
+
+  getProfile(): User {
+    return this.user;
+  }
 
   signIn(user: any): void {
     this.user.email = user.email;

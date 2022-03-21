@@ -19,14 +19,17 @@ export class PostVehicleComponent implements OnInit {
   imageFile: any = '';
   croppedImage: any = '';
   selectedCategory = 'none';
-  isLinear = false;
+  isLinear = true;
   newVehicle!: Vehicle;
 
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent) {
-  }
+
+
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent) {}
+
+
 
   ngOnInit(): void {
     this.imageFormGroup = this._formBuilder.group({
@@ -42,6 +45,8 @@ export class PostVehicleComponent implements OnInit {
     });
   }
 
+
+
   formatLabel(value: number) {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'k';
@@ -50,14 +55,20 @@ export class PostVehicleComponent implements OnInit {
     return value;
   }
 
+
+
   imageChosen(): boolean {
     if(this.croppedImage == ''){
       this.isLinear = true;
       return false;
     }
-    this.isLinear = false;
-    return true;
+    else{
+      this.isLinear = false;
+      return true;
+    }
   }
+
+
 
   allFilled(): boolean {
     // @ts-ignore
@@ -74,9 +85,10 @@ export class PostVehicleComponent implements OnInit {
     if(this.price <= 0 || this.price > 100000){
       return false;
     }
-
     return true;
   }
+
+  
 
   onSubmit(): void {
     //save uploaded image
@@ -94,7 +106,7 @@ export class PostVehicleComponent implements OnInit {
       make: this.specsFormGroup.get('make')?.value,
       price: this.price,
       year: this.specsFormGroup.get('year')?.value,
-      image: file,
+      image: this.croppedImage,
       Dnum: 0
     }
 

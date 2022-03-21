@@ -9,5 +9,5 @@ export interface Vehicle {
   price: number,
   year: number,
   Dnum: number,
-  image: Blob,
+  image: string,
 }

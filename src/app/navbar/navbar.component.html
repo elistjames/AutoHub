@@ -33,7 +33,7 @@
         <div *ngIf="!signed_in" >
           <app-sign-in></app-sign-in>
         </div>
-        <button *ngIf="signed_in"  mat-menu-item><span>View Profile</span></button>
+        <button *ngIf="signed_in"  mat-menu-item routerLink="/profile"><span>View Profile</span></button>
         <button *ngIf="signed_in"  mat-menu-item routerLink="/post-vehicle"><span>Post</span></button>
         <button *ngIf="signed_in"  mat-menu-item routerLink="/" (click)="onSignOut()"><span>Sign out</span></button>
         <button *ngIf="!signed_in" mat-menu-item routerLink="/create-account"><span>Create Account</span></button>

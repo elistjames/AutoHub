@@ -14,9 +14,8 @@ import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.componen
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  email !: string
-  password !: string
-  submit !: boolean
+  email : string = '';
+  password : string = '';
   //subscription!: Subscription;
 
 
@@ -27,12 +26,12 @@ export class SignInComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(SignInDialogComponent, {
       width: '350px',
-      data: {email: this.email, password: this.password, submit: this.submit},
+      data: {email: '', password: ''},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if(result.submit != undefined){
+      if(result.email != ''){
         console.log("user clicked sign in")
         if(result.email && result.password){
           this.email = result.email;
@@ -43,6 +42,8 @@ export class SignInComponent implements OnInit {
           const currentUser = {
             email: this.email,
             password: this.password,
+            firstName: '',
+            lastName: '',
           }
 
           //verify user

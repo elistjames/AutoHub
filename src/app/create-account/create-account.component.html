@@ -64,7 +64,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <p *ngIf="!allFilled()">Must fill in all fields to create a new account</p>
+      <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit">Submit</button>
       <button mat-raised-button color="accent" type="button" routerLink="../">Back</button>
     </mat-card-actions>
   </mat-card>

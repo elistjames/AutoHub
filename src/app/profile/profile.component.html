@@ -1,0 +1,70 @@
+<div *ngIf="!deleteMode" class="profile">
+    <h1 style="font-size: 40px">Your Profile</h1>
+    <hr>
+    <h1>
+        {{tmp_user.firstName}} {{tmp_user.lastName}}
+    </h1>
+    <div>
+        <label style="font-size: 18px; color: #c50061">Username: </label>
+    <label style="font-size: 18px">{{tmp_user.email}}</label>
+    <br/>
+    <label style="font-size: 18px; color: #c50061">Password: </label>
+    <label *ngIf="!hidePassword" style="font-size: 18px">{{tmp_user.password}}</label>
+    <label *ngIf="hidePassword" style="font-size: 18px">*****************</label>
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    </div>
+    
+    <div style="background-color:#2D2D2D; margin-top: 20px; padding: 10px; border: 3px solid #c50061; border-radius: 10px; display: center;">
+        <div *ngIf="editMode">
+            <div style="display: center;">
+                <h2 style="margin-left: 5px">Fill in fields you would like to change</h2>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>New Username</mat-label>
+                    <input matInput type="text" [(ngModel)]="newUsername" [placeholder]="tmp_user.email">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>New Password</mat-label>
+                    <input matInput type="text" [(ngModel)]="newPassword" [placeholder]="tmp_user.password">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="tmp_user.firstName">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="tmp_user.lastName">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="updateAccount()">Update</button>
+                <button style="margin-left: 5px" mat-raised-button color="accent" (click)="editMode = !editMode">Cancel</button>
+            </div>
+        </div>
+        <div *ngIf="!editMode">
+            <div>
+                <button class="btn" mat-raised-button style="background-color:#c50061; color:black" (click)="editMode = !editMode">Edit</button>
+            </div>
+            <div>
+                <button class="btn" mat-raised-button color="warn" (click)="deleteMode = !deleteMode">Delete Account</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div *ngIf="deleteMode" style="background-color:rgba(0, 0, 0, 0.5); margin:15px; border:1px solid #fff; border-radius:5px; padding:10px;">
+    <h1>Delete Account?</h1>
+    <p>
+        Are you sure you want to delete your account?
+    </p>
+    <div>
+        <button mat-raised-button color="accent" (click)="deleteAccount()">Yes</button>
+        <button style="margin-left: 5px" mat-raised-button color="primary" (click)="deleteMode=!deleteMode">No</button>
+    </div>
+</div>
+
+
+
+

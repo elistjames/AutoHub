@@ -6,7 +6,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export interface DialogData {
   email: string;
   password: string;
-  submit: boolean;
 }
 
 @Component({
@@ -22,15 +21,15 @@ export class SignInDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
     this.dat = data;
-    this.dat.submit = true;
   }
 
   ngOnInit(): void {
   }
 
-  onNoClick(): void {
-    this.dat.submit = false;
-    this.dialogRef.close();
+  allFilled(): boolean {
+    if(this.data.email == '' || this.data.password == ''){
+      return false;
+    }
+    return true;
   }
-
 }

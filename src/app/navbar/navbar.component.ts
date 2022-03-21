@@ -17,7 +17,9 @@ import {SearchComponent} from "../search/search.component";
 export class NavbarComponent {
   current: User = {
     email: '',
-    password: ''
+    password: '',
+    firstName: '',
+    lastName: '',
   };
 
   @Input() contentFilter: Filter = {
