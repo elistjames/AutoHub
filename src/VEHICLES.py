@@ -30,6 +30,7 @@ class VEHICLE(db.Model):
 
 #setup post argument parser
 vehicle_post_args = reqparse.RequestParser()
+vehicle_post_args.add_argument ("plateNum", type = str, help = "plateNum is an string", required = True)
 vehicle_post_args.add_argument ("numSeats", type = int, help = "numSeats is an int", required = True)
 vehicle_post_args.add_argument ("colour", type = str, help = "colour is an string", required = False)
 vehicle_post_args.add_argument ("make", type = str, help = "make is a string", required = True)
@@ -69,20 +70,22 @@ resource_fields = {
 #create vehicle resource
 class VEHICLES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self, plateNo):
-                result = VEHICLE.query.filter_by(plateNum = plateNo).first() #find vehicle
-                if not result:
-                        abort(404, message = "Could not find plate number") #give error
+        def get(self):
+                result = VEHICLE.query.all()
                 return result
+                #filter_by(plateNum = plateNo).first() #find vehicle
+                #if not result:
+                #        abort(404, message = "Could not find plate number") #give error
+                #return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self, plateNo):
+        def post(self):
                 args = vehicle_post_args.parse_args() #parse arguemnts
-                result = VEHICLE.query.filter_by(plateNum = plateNo).first() ##check to see if plateNum exists already
+                result = VEHICLE.query.filter_by(plateNum = args['plateNum']).first() ##check to see if plateNum exists already
                 if result != None: #if result is not there
                         abort(409, message = "Plate Number taken...")
 
-                vehicle = VEHICLE(plateNum = plateNo, numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category']) #create vehicle object
+                vehicle = VEHICLE(plateNum = args['plateNum'], numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category']) #create vehicle object
                 db.session.add(vehicle) #add vehicle
                 db.session.commit() #commit changes
                 return vehicle, 201
