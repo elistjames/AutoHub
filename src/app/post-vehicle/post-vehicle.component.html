@@ -6,7 +6,7 @@
         <div>
           <div>
             <span class="hiddenFileInput">
-              <input class="choose-file-btn" type="file" (change)="fileChangeEvent($event)" />
+              <input class="choose-file-btn" type="file" (change)="fileChangeEvent($event)" accept="image/*"/>
             </span>
             <h4>Click icon to upload an image</h4>
             <div style="height: 50%">
@@ -70,7 +70,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Colour</mat-label>
-          <mat-select [(value)]="selectedCategory" formControlName="color">
+          <mat-select [(value)]="selectedColor">
             <mat-option value="none">None</mat-option>
             <mat-option value="red">Red</mat-option>
             <mat-option value="blue">Blue</mat-option>
@@ -104,10 +104,10 @@
         <button mat-raised-button color="accent" matStepperPrevious>Back</button>
         <h3 *ngIf="!allFilled()">Must fill in all relevant fields to continue (Category, Make, Number of Seats, Price)</h3>
         <button *ngIf="allFilled()"
+                type="button"
                 style="margin-left: 5px"
                 color="primary"
                 mat-raised-button
-                matStepperNext
                 (click)="onSubmit()"
                 routerLink="/">
           Upload

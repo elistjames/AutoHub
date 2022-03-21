@@ -21,7 +21,7 @@ export class PostVehicleComponent implements OnInit {
   selectedCategory = 'none';
   isLinear = true;
   newVehicle!: Vehicle;
-
+  selectedColor: string = 'none';
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
@@ -41,7 +41,6 @@ export class PostVehicleComponent implements OnInit {
       seats: [0, Validators.required],
       speed: [0, Validators.required],
       weight: [0, Validators.required],
-      color: [0, Validators.required],
     });
   }
 
@@ -97,12 +96,12 @@ export class PostVehicleComponent implements OnInit {
     // Send new vehicle to api
 
     this.newVehicle = {
-      plateNum: Math.random().toString(36).substr(2, 9),
+      plateNum: Math.random().toString(10),
       numSeats: this.specsFormGroup.get('seats')?.value,
       category: this.selectedCategory,
       weight: this.specsFormGroup.get('weight')?.value,
       topSpeed: this.specsFormGroup.get('speed')?.value,
-      color: this.specsFormGroup.get('color')?.value,
+      color: this.selectedColor,
       make: this.specsFormGroup.get('make')?.value,
       price: this.price,
       year: this.specsFormGroup.get('year')?.value,

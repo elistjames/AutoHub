@@ -15,7 +15,7 @@ export class ContentComponent {
   public innerWidth: any;
   isHandset: boolean = false;
   contentTitle: string = "Vehicles";
-  //vehicles: Vehicle[] = [];
+  vehicles: Vehicle[] = [];
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -32,8 +32,8 @@ export class ContentComponent {
 
   ngOnInit(): void {
 
-    //this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles));
-
+    this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles));
+    console.log(this.vehicles)
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
@@ -43,6 +43,10 @@ export class ContentComponent {
 
   postVehicle(vehicle: Vehicle) {
     this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
+    this.vehicles.push(vehicle);
+    console.log("vehicle added");
+    console.log(this.vehicles);
+    //this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
   }
 
   @HostListener('window:resize', ['$event'])
@@ -50,75 +54,79 @@ export class ContentComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  vehicles: Vehicle[] = [
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Honda Accord',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
+  // vehicles: Vehicle[] = [
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Honda Accord',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
 
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Ford F-150',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Ford F-150',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
 
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Infinity G-37x',
-      price: 20000,
-      year: 2015,
-      image: images[0],
-      Dnum: 0
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Subaru WRX sti',
-      price: 20000,
-      year: 2015,
-      image: images[1],
-      Dnum: 0
-    },
-    {
-      plateNum: '',
-      numSeats: 4,
-      category: 'car',
-      weight: 4000,
-      topSpeed: 200,
-      color: 'red',
-      make: 'Honda Civic',
-      price: 20000,
-      year: 2015,
-      image: images[1],
-      Dnum: 0
-    },
-  ];
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Infinity G-37x',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[0],
+  //     Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Subaru WRX sti',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[1],
+  //     Dnum: 0
+  //   },
+  //   {
+  //     plateNum: '',
+  //     numSeats: 4,
+  //     category: 'car',
+  //     weight: 4000,
+  //     topSpeed: 200,
+  //     color: 'red',
+  //     make: 'Honda Civic',
+  //     price: 20000,
+  //     year: 2015,
+  //     image: images[1],
+  //     Dnum: 0
+  //   },
+  // ];
 
   
 }
+function subscribe(arg0: (vehicle: Vehicle) => number) {
+  throw new Error('Function not implemented.');
+}
+
