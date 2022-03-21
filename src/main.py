@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 api.add_resource(VEHICLES, "/vehicle/")
-api.add_resource(EMPLOYEES, "/employee/<int:ssn>")
+api.add_resource(EMPLOYEES, "/employee/<string:password>")
 api.add_resource(PARTS, "/part/<int:partNo>")
 
 if __name__ == "__main__":
