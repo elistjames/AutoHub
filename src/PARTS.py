@@ -27,14 +27,14 @@ part_post_args = reqparse.RequestParser()
 part_post_args.add_argument ("price", type = float, help = "l_name is an string", required = True)
 part_post_args.add_argument ("make", type = str, help = "make is a string", required = True)
 part_post_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = True)
-part_post_args.add_argument ("depNum", type = str, help = "depNum is an int", required = True)
+part_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
 
 #setup put argument parser
 part_put_args = reqparse.RequestParser()
 part_put_args.add_argument ("price", type = float, help = "l_name is an string", required = False)
 part_put_args.add_argument ("make", type = str, help = "make is a string", required = False)
 part_put_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = False)
-part_put_args.add_argument ("depNum", type = str, help = "depNum is an int", required = False)
+part_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
 
 #set path resource fields
 resource_fields = {
@@ -42,7 +42,7 @@ resource_fields = {
         'price' : fields.Float,
         'make' : fields.String,
         'plateNum' : fields.String,
-        'depNum' : fields.Integer,
+        'depNum' : fields.Integer
 }
 
 #create PART resource
