@@ -78,8 +78,7 @@ class EMPLOYEES(Resource):
                 base64_message = base64_bytes.decode('ascii')
 
                 result = EMPLOYEE.query.filter_by(password = base64_message).first() #find employee
-                print(unEncode(result.password))
-
+                
                 #reset variables
                 base64_message = None
                 base64_bytes = None
@@ -88,6 +87,7 @@ class EMPLOYEES(Resource):
 
                 if not result:
                         abort(404, message = "Could not find employee ssn") #give error
+                print(unEncode(result.password))
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
