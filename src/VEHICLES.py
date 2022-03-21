@@ -71,12 +71,8 @@ resource_fields = {
 class VEHICLES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self):
-                result = VEHICLE.query.all()
+                result = VEHICLE.query.all() #return all vehicles to front end for querying
                 return result
-                #filter_by(plateNum = plateNo).first() #find vehicle
-                #if not result:
-                #        abort(404, message = "Could not find plate number") #give error
-                #return result
 
         @marshal_with(resource_fields) #marshal with resource fields
         def post(self):
