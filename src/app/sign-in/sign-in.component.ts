@@ -36,8 +36,8 @@ export class SignInComponent implements OnInit {
         if(result.employeeMode){
           this.email = result.email;
           this.password = result.password;
-        
-
+        }
+        else{
           const currentUser = {
             email: this.email,
             password: this.password,
@@ -53,9 +53,6 @@ export class SignInComponent implements OnInit {
           //reset form
           this.email = "";
           this.password = "";
-        }
-        else{
-          alert("Please fill in all fields")
         }
       }
       else{
