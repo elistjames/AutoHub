@@ -5,9 +5,10 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item (click)="openSearch()">Search</a>
-      <a *ngIf="signed_in" mat-list-item routerLink="/appointment">Book Appointment</a>
+      <a mat-list-item [routerLink]="emp_signed_in ? '/employee-page':'/'">Home</a>
+
+      <a *ngIf="!emp_signed_in" mat-list-item (click)="openSearch()">Search</a>
+      <a *ngIf="signed_in && !emp_signed_in" mat-list-item routerLink="/appointment">Book Appointment</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,7 +23,7 @@
       </button>
 
       <span class="spacer">
-        <a mat-button routerLink="/">
+        <a mat-button [routerLink]="emp_signed_in ? '/employee-page':'/'">
           <img [width]="110" [src]="'../../assets/logos/white_logo_transparent_background.png'" alt="logo"/>
         </a>
       </span>
@@ -30,13 +31,13 @@
         <mat-icon aria-label="My Account">account_box</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <div *ngIf="!signed_in" >
+        <div *ngIf="!signed_in && !emp_signed_in" >
           <app-sign-in></app-sign-in>
         </div>
-        <button *ngIf="signed_in"  mat-menu-item routerLink="/profile"><span>View Profile</span></button>
+        <button *ngIf="signed_in || emp_signed_in"  mat-menu-item routerLink="/profile"><span>View Profile</span></button>
         <button *ngIf="signed_in"  mat-menu-item routerLink="/post-vehicle"><span>Post</span></button>
-        <button *ngIf="signed_in"  mat-menu-item routerLink="/" (click)="onSignOut()"><span>Sign out</span></button>
-        <button *ngIf="!signed_in" mat-menu-item routerLink="/create-account"><span>Create Account</span></button>
+        <button *ngIf="signed_in || emp_signed_in"  mat-menu-item routerLink="/" (click)="onSignOut()"><span>Sign out</span></button>
+        <button *ngIf="!signed_in && !emp_signed_in" mat-menu-item routerLink="/create-account"><span>Create Account</span></button>
       </mat-menu>
     </mat-toolbar>
 

@@ -60,9 +60,14 @@ export class EmployeeService {
   }
 
   signOut(): void {
-    this.signed_in = false;
+    this.employee.ssn = 0;
     this.employee.email = '';
     this.employee.password = '';
+    this.employee.l_name = '';
+    this.employee.f_name = '';
+    this.employee.depNum = 2;
+    this.employee.isManager = false;
+    this.signed_in = false;
     this.subject.next(this.signed_in);
   }
 

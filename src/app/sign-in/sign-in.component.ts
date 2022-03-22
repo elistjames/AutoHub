@@ -7,6 +7,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {EmployeeService} from '../services/employee.service';
 import { Subscription, take } from 'rxjs';
 import {Employee} from '../interfaces/Employee';
+import { Router } from '@angular/router';
 //import {Subscription} from "rxjs"
 
 
@@ -27,7 +28,8 @@ export class SignInComponent implements OnInit {
   constructor(public dialog: MatDialog, 
     public app: NavbarComponent, 
     public authService: AuthenticationService, 
-    public empService: EmployeeService){
+    public empService: EmployeeService,
+    public router: Router){
 
   }
 
@@ -64,6 +66,8 @@ export class SignInComponent implements OnInit {
               }
 
               this.empService.signIn(currentEmployee);
+              
+              this.router.navigate(['/employee-page']);
             }
             else{
               console.log('invalidLogin');

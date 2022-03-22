@@ -40,6 +40,8 @@ import { VehiclesService } from './services/vehicles.service';
 import { ProfileComponent } from './profile/profile.component';
 import {HammerModule } from '@angular/platform-browser'
 import { EmployeeService } from './services/employee.service';
+import { EmployeePageComponent } from './employee-page/employee-page.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -49,6 +51,7 @@ const routes: Routes = [
   { path: 'post-vehicle', component: PostVehicleComponent },
   { path: 'appointment', component: AppointmentComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'employee-page', component: EmployeePageComponent },
 ]
 
 @NgModule({
@@ -64,7 +67,8 @@ const routes: Routes = [
     PostVehicleComponent,
     AppointmentComponent,
     SearchComponent,
-    ProfileComponent
+    ProfileComponent,
+    EmployeePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MatFormFieldModule,
     MatMomentDateModule,
-    HammerModule
+    HammerModule,
+    MatTabsModule
   ],
   exports: [RouterModule],
   providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService],

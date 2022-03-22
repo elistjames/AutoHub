@@ -70,6 +70,9 @@ export class NavbarComponent {
     if(this.signed_in){
       this.authService.signOut();
     }
+    if(this.emp_signed_in){
+      this.empService.signOut();
+    }
   }
 
 }
