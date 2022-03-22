@@ -25,19 +25,18 @@ export class SignInComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(SignInDialogComponent, {
-      width: '350px',
-      data: {email: '', password: ''},
+      width: '300px',
+      data: {email: '', password: '', employeeMode: false},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result.email != ''){
         console.log("user clicked sign in")
-        if(result.email && result.password){
+        if(result.employeeMode){
           this.email = result.email;
           this.password = result.password;
-          console.log(this.email)
-          console.log(this.password)
+        
 
           const currentUser = {
             email: this.email,
