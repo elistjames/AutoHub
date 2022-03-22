@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VehiclesService {
-  private apiUrl = 'http://localhost:5000/vehicle'
+  private apiUrl = 'http://localhost:5000/vehicle/'
 
   vehicles: Vehicle[] = [];
 
@@ -26,7 +26,7 @@ export class VehiclesService {
 
   
   postVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    return this.http.post<Vehicle>(this.apiUrl, vehicle, httpOptions);
+    return this.http.post<Vehicle>(this.apiUrl, vehicle);
   }
 
 }

@@ -5,11 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 from VEHICLES import VEHICLES
 from EMPLOYEES import EMPLOYEES
 from PARTS import PARTS
+from flask_cors import CORS
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = '*'
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+cors = CORS(app)
 
 api.add_resource(VEHICLES, "/vehicle/")
 api.add_resource(EMPLOYEES, "/employee/<string:password>")
