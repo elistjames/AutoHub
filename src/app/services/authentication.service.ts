@@ -4,11 +4,17 @@ import {Observable, Subject} from 'rxjs';
 import {AppComponent} from '../app.component';
 import { User } from '../interfaces/User';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8008/user'
+  private apiUrl = 'http://localhost:5000/user'
   private signed_in: boolean = false;
   private subject = new Subject<any>();
   user: User = {

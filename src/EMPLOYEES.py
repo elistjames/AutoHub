@@ -67,11 +67,12 @@ def unEncode(stringPass):
         message = message_bytes.decode('ascii')
         return  message
 
+# test: use 20101010 as input password
 #create employee resource
 class EMPLOYEES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password):
-                
+                print(unEncode("MjAxMDEwMTA="))
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
@@ -85,7 +86,7 @@ class EMPLOYEES(Resource):
                 message_bytes = None
                 message = None
 
-                if not result:
+                if result == None:
                         abort(404, message = "Invalid passowrd") #give error
                 print(unEncode(result.password))
                 return result

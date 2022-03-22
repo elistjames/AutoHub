@@ -39,6 +39,7 @@ import { SearchComponent } from './search/search.component';
 import { VehiclesService } from './services/vehicles.service';
 import { ProfileComponent } from './profile/profile.component';
 import {HammerModule } from '@angular/platform-browser'
+import { EmployeeService } from './services/employee.service';
 
 
 
@@ -94,7 +95,7 @@ const routes: Routes = [
     HammerModule
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent],
+  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

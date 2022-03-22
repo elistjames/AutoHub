@@ -3,7 +3,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { AppComponent } from '../app.component';
 import { NavbarComponent} from "../navbar/navbar.component";
 import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.component';
-//import {AuthenticationService} from '../services/authentication.service';
+import {AuthenticationService} from '../services/authentication.service';
+import {EmployeeService} from '../services/employee.service';
 //import {Subscription} from "rxjs"
 
 
@@ -19,7 +20,10 @@ export class SignInComponent implements OnInit {
   //subscription!: Subscription;
 
 
-  constructor(public dialog: MatDialog, public app: NavbarComponent){
+  constructor(public dialog: MatDialog, 
+    public app: NavbarComponent, 
+    public authService: AuthenticationService, 
+    public empService: EmployeeService){
 
   }
 
@@ -36,6 +40,11 @@ export class SignInComponent implements OnInit {
         if(result.employeeMode){
           this.email = result.email;
           this.password = result.password;
+
+          // verify employee password
+          this.empService.verifyEmployee(this.password).subscribe((response) => {
+            alert(response);
+          })
         }
         else{
           const currentUser = {
@@ -48,7 +57,7 @@ export class SignInComponent implements OnInit {
           //verify user
 
           //sign user in
-          this.app.signIn(currentUser);
+          this.authService.signIn(currentUser);
 
           //reset form
           this.email = "";

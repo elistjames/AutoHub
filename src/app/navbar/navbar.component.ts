@@ -50,12 +50,6 @@ export class NavbarComponent {
 
   }
 
-  signIn(user: User): void{
-    console.log(user.email);
-    console.log(user.password);
-    this.authService.signIn(user);
-  }
-
   openSearch(): void {
 
     const dialogRef = this.dialog.open(SearchComponent, {
@@ -72,9 +66,6 @@ export class NavbarComponent {
     console.log(this.signed_in);
     if(this.signed_in){
       this.authService.signOut();
-    }
-    else{
-      alert("You are already signed out");
     }
   }
 
