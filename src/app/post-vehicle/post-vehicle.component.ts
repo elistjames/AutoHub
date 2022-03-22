@@ -101,12 +101,12 @@ export class PostVehicleComponent implements OnInit {
       category: this.selectedCategory,
       weight: this.specsFormGroup.get('weight')?.value,
       topSpeed: this.specsFormGroup.get('speed')?.value,
-      color: this.selectedColor,
+      colour: this.selectedColor,
       make: this.specsFormGroup.get('make')?.value,
       price: this.price,
       year: this.specsFormGroup.get('year')?.value,
       image: this.croppedImage,
-      Dnum: 0
+      depNum: 0
     }
 
     this.content.postVehicle(this.newVehicle);

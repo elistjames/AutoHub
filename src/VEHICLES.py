@@ -22,10 +22,11 @@ class VEHICLE(db.Model):
         weight = db.Column(db.Integer, nullable = True)
         topSpeed = db.Column(db.Integer, nullable = True)
         category = db.Column(db.String, nullable = False)
+        image = db.Column(db.String, nullable = True)
 
         #return format
         def __repr__(self):
-                return f"Vehicle(plateNum = {self.plateNum}, numSeats = {self.numSeats}, colour = {self.colour}, make = {self.make}, price = {self.price}, year = {self.year}, weight = {self.weight}, topSpeed = {self.topSpeed} , category = {self.category})"
+                return f"Vehicle(plateNum = {self.plateNum}, numSeats = {self.numSeats}, colour = {self.colour}, make = {self.make}, price = {self.price}, year = {self.year}, weight = {self.weight}, topSpeed = {self.topSpeed} , category = {self.category}, image = {self.image})"
 
 
 #setup post argument parser
@@ -40,6 +41,7 @@ vehicle_post_args.add_argument ("depNum", type = int, help = "depNum is an int",
 vehicle_post_args.add_argument ("weight", type = int, help = "weight is an int", required = False)
 vehicle_post_args.add_argument ("topSpeed", type = int, help = "topSpeed is an int", required = False)
 vehicle_post_args.add_argument ("category", type = str, help = "category is a string", required = True)
+vehicle_post_args.add_argument ("image", type = str, help = "image is a string", required = False)
 
 #setup put argument parser
 vehicle_put_args = reqparse.RequestParser()
@@ -64,7 +66,8 @@ resource_fields = {
         'depNum' : fields.Integer,
         'weight' : fields.Integer,
         'topSpeed' : fields.Integer,
-        'category' : fields.String
+        'category' : fields.String,
+        'image' : fields.String,
 }
 
 #create vehicle resource
@@ -81,7 +84,7 @@ class VEHICLES(Resource):
                 if result != None: #if result is not there
                         abort(409, message = "Plate Number taken...")
 
-                vehicle = VEHICLE(plateNum = args['plateNum'], numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category']) #create vehicle object
+                vehicle = VEHICLE(plateNum = args['plateNum'], numSeats = args['numSeats'], colour = args['colour'], make = args['make'], price = args['price'], year = args['year'], depNum = args['depNum'], weight = args['weight'], topSpeed = args['topSpeed'],  category = args['category'], image = args['image']) #create vehicle object
                 db.session.add(vehicle) #add vehicle
                 db.session.commit() #commit changes
                 return vehicle, 201

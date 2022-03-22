@@ -43,10 +43,8 @@ export class ContentComponent {
 
   postVehicle(vehicle: Vehicle) {
     this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
-    this.vehicles.push(vehicle);
     console.log("vehicle added");
     console.log(this.vehicles);
-    //this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
   }
 
   @HostListener('window:resize', ['$event'])
