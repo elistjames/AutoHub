@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import { Vehicle } from '../Vehicle';
+import { Vehicle } from '../interfaces/Vehicle';
 
 
 const httpOptions = {
@@ -24,7 +24,7 @@ export class VehiclesService {
     return this.http.get<Vehicle[]>(this.apiUrl)
   }
 
-  
+
   postVehicle(vehicle: Vehicle): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.apiUrl, vehicle);
   }

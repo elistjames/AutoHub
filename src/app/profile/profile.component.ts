@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../app.component';
+import { User } from '../interfaces/User';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     // delete current account
     //authService deleteAccount;
     this.router.navigate(['/']);
-    
+
   }
 
 }

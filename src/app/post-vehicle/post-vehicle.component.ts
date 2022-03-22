@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {base64ToFile, ImageCroppedEvent} from 'ngx-image-cropper';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSlider} from "@angular/material/slider";
-import { Vehicle } from '../Vehicle';
+import { Vehicle } from '../interfaces/Vehicle';
 import { VehiclesService } from '../services/vehicles.service';
 import { ContentComponent } from '../content/content.component';
 
@@ -87,7 +87,7 @@ export class PostVehicleComponent implements OnInit {
     return true;
   }
 
-  
+
 
   onSubmit(): void {
     //save uploaded image

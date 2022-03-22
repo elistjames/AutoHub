@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {AppComponent} from '../app.component';
-import { User } from '../app.component';
+import { User } from '../interfaces/User';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class AuthenticationService {
   };
 
   constructor(private http: HttpClient) { }
-  
+
   getProfile(): User {
     return this.user;
   }

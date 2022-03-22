@@ -3,10 +3,10 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 import {AuthenticationService} from '../services/authentication.service';
-import {User} from '../app.component';
+import {User} from '../interfaces/User';
 import {VehicleViewComponent} from "../vehicle-view/vehicle-view.component";
 import {MatDialog} from "@angular/material/dialog";
-import {Filter} from "../ContentFilter";
+import {Filter} from "../interfaces/ContentFilter";
 import {SearchComponent} from "../search/search.component";
 
 @Component({

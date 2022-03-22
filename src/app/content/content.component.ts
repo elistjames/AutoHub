@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import {from, Observable} from "rxjs";
 import {images} from './images';
-import {Vehicle} from "../Vehicle";
+import {Vehicle} from "../interfaces/Vehicle";
 import {VehiclesService} from "../services/vehicles.service"
 
 @Component({
@@ -122,7 +122,7 @@ export class ContentComponent {
   //   },
   // ];
 
-  
+
 }
 function subscribe(arg0: (vehicle: Vehicle) => number) {
   throw new Error('Function not implemented.');

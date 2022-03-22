@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {Vehicle} from '../Vehicle';
+import {Vehicle} from '../interfaces/Vehicle';
 
 
 @Component({

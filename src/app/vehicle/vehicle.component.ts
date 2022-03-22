@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {VehicleViewComponent} from "../vehicle-view/vehicle-view.component";
-import {Vehicle} from '../Vehicle';
+import {Vehicle} from '../interfaces/Vehicle';
 
 
 @Component({
