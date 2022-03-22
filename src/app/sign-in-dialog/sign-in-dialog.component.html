@@ -9,6 +9,8 @@
 </div>
 <hr>
 <div mat-dialog-content>
+
+
   <div *ngIf="!dat.employeeMode">
     <div>
       <mat-form-field appearance="fill">
@@ -23,10 +25,13 @@
         </button>
       </mat-form-field>
     </div>
+
   </div>
+
+
   <div *ngIf="dat.employeeMode">
     <div>
-      <mat-form-field appearence="fill">
+      <mat-form-field appearance="fill">
         <mat-label>Employee Email</mat-label>
         <input matInput name="email" placeholder="example@example.com" [(ngModel)]="dat.email">
       </mat-form-field>
@@ -39,6 +44,8 @@
       </mat-form-field>
     </div>
   </div>
+
+
   <div>
     <p *ngIf="!allFilled()">Fill in all fields to continue</p>
     <button *ngIf="allFilled()" mat-raised-button color="primary" [mat-dialog-close]="dat" cdkFocusInitial>Sign in</button>
