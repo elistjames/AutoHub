@@ -5,6 +5,7 @@ import { NavbarComponent} from "../navbar/navbar.component";
 import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.component';
 import {AuthenticationService} from '../services/authentication.service';
 import {EmployeeService} from '../services/employee.service';
+import { Subscription, take } from 'rxjs';
 //import {Subscription} from "rxjs"
 
 
@@ -17,6 +18,8 @@ import {EmployeeService} from '../services/employee.service';
 export class SignInComponent implements OnInit {
   email : string = '';
   password : string = '';
+  subscription!: Subscription;
+  validLogin : boolean = false;
   //subscription!: Subscription;
 
 
@@ -42,8 +45,16 @@ export class SignInComponent implements OnInit {
           this.password = result.password;
 
           // verify employee password
-          this.empService.verifyEmployee(this.password).subscribe((response) => {
-            alert(response);
+          this.empService.verifyEmployee(this.password).pipe(
+            take(1),
+          ).subscribe((response) => {
+            console.log("cool")
+            if(this.validLogin){
+              console.log("Signed In");
+            }
+            else{
+              console.log('invalidLogin');
+            }
           })
         }
         else{
@@ -71,8 +82,8 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
-
+  ngOnInit(): void {
+    this.subscription = this.empService.authenticateEmployee().subscribe((value) => (this.validLogin = value));
+  }
 
 }

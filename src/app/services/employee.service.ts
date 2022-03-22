@@ -17,6 +17,7 @@ export class EmployeeService {
   private apiUrl = 'http://localhost:5000/employee/'
   private signed_in: boolean = false;
   private subject = new Subject<any>();
+  validLogin: boolean = false;
 
   employee: Employee = {
     ssn: 0,
@@ -36,9 +37,13 @@ export class EmployeeService {
 
   verifyEmployee(password: string): Observable<any> {
     console.log('ApiURL is: '+ this.apiUrl + password);
-    return this.http.get<any>(this.apiUrl+password).pipe(catchError((err:HttpErrorResponse) => {
-      console.error(err);
-      return EMPTY
+    this.validLogin = true;
+    this.subject.next(this.validLogin);
+    return this.http.get<any>(this.apiUrl+password).pipe(catchError((error) => {
+      this.validLogin = false;
+      this.subject.next(this.validLogin);
+      console.log("hi there");
+      return error.message;
     }));
   }
 
@@ -54,6 +59,10 @@ export class EmployeeService {
     this.employee.email = '';
     this.employee.password = '';
     this.subject.next(this.signed_in);
+  }
+
+  validateLogin(): boolean {
+    return this.validLogin;
   }
 
   authenticateEmployee(): Observable<any> {
