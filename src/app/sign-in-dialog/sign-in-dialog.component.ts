@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export interface DialogData {
   email: string;
   password: string;
+  employeeMode: boolean;
 }
 
 @Component({

@@ -19,7 +19,7 @@ export class AuthenticationService {
   };
 
   constructor(private http: HttpClient) { }
-
+  
   getProfile(): User {
     return this.user;
   }

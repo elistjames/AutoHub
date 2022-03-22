@@ -1,15 +1,37 @@
-<h2 mat-dialog-title>Sign In</h2>
+<div>
+  <span class="spacer"><mat-label style="font-size:20px">Sign In</mat-label></span>
+  <button
+    style="margin-left: 40px"
+    mat-raised-button 
+    color="{{dat.employeeMode ? 'primary' : 'accent' }}" 
+    (click)="dat.employeeMode = !dat.employeeMode"
+  >{{dat.employeeMode ? 'Customer sign in' : 'Employee sign in'}}</button>
+</div>
+<hr>
 <div mat-dialog-content>
-  <div>
-    <div>
-      <mat-form-field appearence="fill">
-        <mat-label>Email</mat-label>
-        <input matInput name="email" placeholder="Ex. Honda Civic" [(ngModel)]="dat.email">
-      </mat-form-field>
-    </div>
+  <div *ngIf="!dat.employeeMode">
     <div>
       <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput name="email" placeholder="example@example.com" [(ngModel)]="dat.email">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Enter your password</mat-label>
+        <input matInput name="password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="dat.password">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div *ngIf="dat.employeeMode">
+    <div>
+      <mat-form-field appearence="fill">
+        <mat-label>Employee Email</mat-label>
+        <input matInput name="email" placeholder="example@example.com" [(ngModel)]="dat.email">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Employee password</mat-label>
         <input matInput name="password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="dat.password">
         <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
           <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
