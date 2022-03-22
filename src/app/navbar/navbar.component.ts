@@ -8,6 +8,7 @@ import {VehicleViewComponent} from "../vehicle-view/vehicle-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Filter} from "../interfaces/ContentFilter";
 import {SearchComponent} from "../search/search.component";
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-navbar',
@@ -34,6 +35,7 @@ export class NavbarComponent {
   }
 
   signed_in = false;
+  emp_signed_in = false;
   subscription!: Subscription;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -43,15 +45,16 @@ export class NavbarComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthenticationService,
-              public dialog: MatDialog) {}
+              public dialog: MatDialog, public empService: EmployeeService) {}
 
   ngOnInit(): void {
     this.subscription = this.authService.authenticateUser().subscribe((value) => (this.signed_in = value));
-
+    this.subscription = this.empService.authenticateEmployee().subscribe((value) => (this.emp_signed_in = value));
   }
 
   openSearch(): void {
-
+    console.log("employee signed in: " + this.emp_signed_in);
+    console.log("user signed in: " + this.signed_in);
     const dialogRef = this.dialog.open(SearchComponent, {
       width: '800px',
       data: this.contentFilter,

@@ -7,6 +7,9 @@
     (click)="dat.employeeMode = !dat.employeeMode"
   >{{dat.employeeMode ? 'Customer sign in' : 'Employee sign in'}}</button>
 </div>
+<div *ngIf="!dat.validLogin" style="margin-top: 10px; background-color: #c50061; border-radius:3px;">
+  <h2 style="color:#fff; text-align:center;">Access Rejected</h2>
+</div>
 <hr>
 <div mat-dialog-content>
 

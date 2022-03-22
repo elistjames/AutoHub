@@ -6,6 +6,7 @@ import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.componen
 import {AuthenticationService} from '../services/authentication.service';
 import {EmployeeService} from '../services/employee.service';
 import { Subscription, take } from 'rxjs';
+import {Employee} from '../interfaces/Employee';
 //import {Subscription} from "rxjs"
 
 
@@ -19,8 +20,8 @@ export class SignInComponent implements OnInit {
   email : string = '';
   password : string = '';
   subscription!: Subscription;
-  validLogin : boolean = false;
-  //subscription!: Subscription;
+  validLogin : boolean = true;
+
 
 
   constructor(public dialog: MatDialog, 
@@ -33,7 +34,7 @@ export class SignInComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(SignInDialogComponent, {
       width: '300px',
-      data: {email: '', password: '', employeeMode: false},
+      data: {email: '', password: '', employeeMode: false, validLogin: this.validLogin},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -49,11 +50,25 @@ export class SignInComponent implements OnInit {
             take(1),
           ).subscribe((response) => {
             console.log("cool")
+            this.validLogin = this.empService.validateLogin();
             if(this.validLogin){
               console.log("Signed In");
+              const currentEmployee: Employee = {
+                ssn: response.ssn,
+                l_name: response.l_name,
+                f_name: response.f_name,
+                email: response.email,
+                password: response.password,
+                depNum: response.depNum,
+                isManager: response.isManager
+              }
+
+              this.empService.signIn(currentEmployee);
             }
             else{
               console.log('invalidLogin');
+
+              this.openDialog();
             }
           })
         }
@@ -83,7 +98,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.empService.authenticateEmployee().subscribe((value) => (this.validLogin = value));
+    //this.subscription = this.empService.authenticateEmployee().subscribe((value) => (this.validLogin = value));
   }
 
 }

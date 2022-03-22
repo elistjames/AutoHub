@@ -48,8 +48,13 @@ export class EmployeeService {
   }
 
   signIn(employee: any): void {
+    this.employee.ssn = employee.ssn;
     this.employee.email = employee.email;
     this.employee.password = employee.password;
+    this.employee.l_name = employee.l_name;
+    this.employee.f_name = employee.f_name;
+    this.employee.depNum = employee.depNum;
+    this.employee.isManager = employee.isManager;
     this.signed_in = true;
     this.subject.next(this.signed_in);
   }
