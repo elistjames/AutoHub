@@ -24,14 +24,14 @@ class PART(db.Model):
 
 #setup post argument parser
 part_post_args = reqparse.RequestParser()
-part_post_args.add_argument ("price", type = float, help = "l_name is an string", required = True)
+part_post_args.add_argument ("price", type = float, help = "price is a float", required = True)
 part_post_args.add_argument ("make", type = str, help = "make is a string", required = True)
 part_post_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = True)
 part_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
 
 #setup put argument parser
 part_put_args = reqparse.RequestParser()
-part_put_args.add_argument ("price", type = float, help = "l_name is an string", required = False)
+part_put_args.add_argument ("price", type = float, help = "price is a float", required = False)
 part_put_args.add_argument ("make", type = str, help = "make is a string", required = False)
 part_put_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = False)
 part_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
