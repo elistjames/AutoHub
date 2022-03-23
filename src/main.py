@@ -5,6 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from VEHICLES import VEHICLES
 from EMPLOYEES import EMPLOYEES
 from PARTS import PARTS
+from SUPPLIERS import SUPPLIERS
+from INVOICES import INVOICES
+from APPOINTMENTS import APPOINTMENTS
+from CUSTOMERS import CUSTOMERS
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -17,6 +21,10 @@ cors = CORS(app)
 api.add_resource(VEHICLES, "/vehicle/")
 api.add_resource(EMPLOYEES, "/employee/<string:password>")
 api.add_resource(PARTS, "/part/<int:partNo>")
+api.add_resource(CUSTOMERS, "/customer/<string:password>")
+api.add_resource(APPOINTMENTS, "/appointment/<string:cust_email>")
+api.add_resource(SUPPLIERS, "/supplier/<int:id>")
+api.add_resource(INVOICES, "/invoice/<int:Invoice_num>")
 
 if __name__ == "__main__":
         app.run(debug = True)

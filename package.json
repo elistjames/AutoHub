@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "flask-cors": "^0.0.1",
     "hammerjs": "^2.0.8",
     "ngx-image-cropper": "^6.1.0",
     "rxjs": "~7.5.0",
