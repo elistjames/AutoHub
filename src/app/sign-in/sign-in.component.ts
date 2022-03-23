@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
           this.password = result.password;
 
           // verify employee password
-          this.empService.verifyEmployee(this.password).pipe(
+          this.empService.verifyEmployee(this.password, this.email).pipe(
             take(1),
           ).subscribe((response) => {
             console.log("cool")

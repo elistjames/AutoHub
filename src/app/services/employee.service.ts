@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:5000/employee/'
+  private apiUrl = 'http://localhost:5000/employee'
   private signed_in: boolean = false;
   private subject = new Subject<any>();
   validLogin: boolean = false;
@@ -35,11 +35,11 @@ export class EmployeeService {
     return this.employee;
   }
 
-  verifyEmployee(password: string): Observable<any> {
+  verifyEmployee(password: string, email: string): Observable<any> {
     console.log('ApiURL is: '+ this.apiUrl + password);
     this.validLogin = true;
     this.subject.next(this.validLogin);
-    return this.http.get<any>(this.apiUrl+password).pipe(catchError((error) => {
+    return this.http.get<any>(this.apiUrl+'/'+password+'/'+email).pipe(catchError((error) => {
       this.validLogin = false;
       this.subject.next(this.validLogin);
       console.log("hi there");
