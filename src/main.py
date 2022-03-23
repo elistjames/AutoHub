@@ -26,5 +26,5 @@ api.add_resource(APPOINTMENTS, "/appointment/<string:cust_email>")
 api.add_resource(SUPPLIERS, "/supplier/<int:id>")
 api.add_resource(INVOICES, "/invoice/<int:Invoice_num>")
 
-if __name__ == "__main__":
-        app.run(debug = True)
+if __name__ == '__main__':
+    app.run(host="localhost", port=8000, debug=True)

@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VehiclesService {
-  private apiUrl = 'http://localhost:5000/vehicle/'
+  private apiUrl = 'http://localhost:8000/vehicle/'
 
   vehicles: Vehicle[] = [];
 
