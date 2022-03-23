@@ -71,14 +71,14 @@ def unEncode(stringPass):
 #create employee resource
 class EMPLOYEES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self, password):
+        def get(self, password, email):
                 print(unEncode("MjAxMDEwMTA="))
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
-                result = EMPLOYEE.query.filter_by(password = base64_message).first() #find employee
+                result = EMPLOYEE.query.filter_by(password = base64_message, email = email).first() #find employee
                 
                 #reset variables
                 base64_message = None
@@ -92,7 +92,7 @@ class EMPLOYEES(Resource):
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self, password):
+        def post(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')
@@ -117,7 +117,7 @@ class EMPLOYEES(Resource):
                 return employee, 201
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def put(self, password):
+        def put(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')
@@ -147,7 +147,7 @@ class EMPLOYEES(Resource):
                 return result
 
         @marshal_with(resource_fields)
-        def delete(self, password):
+        def delete(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')

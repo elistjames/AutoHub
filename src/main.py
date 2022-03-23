@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 cors = CORS(app)
 
 api.add_resource(VEHICLES, "/vehicle/")
-api.add_resource(EMPLOYEES, "/employee/<string:password>")
+api.add_resource(EMPLOYEES, "/employee/<string:password>/<string:email>")
 api.add_resource(PARTS, "/part/<int:partNo>")
 api.add_resource(CUSTOMERS, "/customer/<string:password>")
 api.add_resource(APPOINTMENTS, "/appointment/<string:cust_email>")
