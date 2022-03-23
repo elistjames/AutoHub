@@ -26,7 +26,6 @@ class CUSTOMER(db.Model):
 
 #setup post argument parser
 customer_post_args = reqparse.RequestParser()
-customer_post_args.add_argument ("email", type = str, help = "email is a string", required = True)
 customer_post_args.add_argument ("f_name", type = str, help = "f_name is an string", required = True)
 customer_post_args.add_argument ("l_name", type = str, help = "l_name is an string", required = True)
 
@@ -56,14 +55,14 @@ def unEncode(stringPass):
 #create customer resource
 class CUSTOMERS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self, password):
+        def get(self, password, email):
                 
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
-                result = CUSTOMER.query.filter_by(password = base64_message).first() #find customer
+                result = CUSTOMER.query.filter_by(password = base64_message, email = email).first() #find customer
                 
                 #reset variables
                 base64_message = None
@@ -77,7 +76,7 @@ class CUSTOMERS(Resource):
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self, password):
+        def post(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')
@@ -85,11 +84,11 @@ class CUSTOMERS(Resource):
                 base64_message = base64_bytes.decode('ascii')
 
                 args = customer_post_args.parse_args() #parse arguemnts
-                result = CUSTOMER.query.filter_by(password = base64_message).first() ##check to see if account exists already
+                result = CUSTOMER.query.filter_by(password = base64_message, email = email).first() ##check to see if account exists already
                 if result != None: #if result is not there
                         abort(409, message = "Email taken...")
 
-                customer = CUSTOMER(email = args['email'], password = base64_message, f_name = args['f_name'], l_name = args['l_name']) #create customer object
+                customer = CUSTOMER(email = email, password = base64_message, f_name = args['f_name'], l_name = args['l_name']) #create customer object
                 
                 #reset variables
                 base64_message = None
@@ -102,7 +101,7 @@ class CUSTOMERS(Resource):
                 return customer, 201
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def put(self, password):
+        def put(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')
@@ -126,7 +125,7 @@ class CUSTOMERS(Resource):
                 return result
 
         @marshal_with(resource_fields)
-        def delete(self, password):
+        def delete(self, password, email):
 
                 #encode password
                 message_bytes = password.encode('ascii')
