@@ -7,18 +7,24 @@
     <!--is visible on for employees in sales department-->
     <div *ngIf="this.currentEmployee.depNum == 0">
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-            <mat-tab label="First"> Content 1 </mat-tab>
-            <mat-tab label="Second"> Content 2 </mat-tab>
-            <mat-tab label="Third"> Content 3 </mat-tab>
+            <mat-tab label="Profile">
+                <app-employee-profile [employee]="currentEmployee"></app-employee-profile>
+            </mat-tab>
+            <mat-tab label="Recent Sales"> Recent Sales </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Appointments </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Staff </mat-tab>
           </mat-tab-group>
     </div>
 
     <!--is visible on for employees in maintenance department-->
     <div *ngIf="this.currentEmployee.depNum == 1">
         <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-            <mat-tab label="First"> Content 1 </mat-tab>
-            <mat-tab label="Second"> Content 2 </mat-tab>
-            <mat-tab label="Third"> Content 3 </mat-tab>
+            <mat-tab label="Profile"> 
+                <app-employee-profile [employee]="currentEmployee"></app-employee-profile>
+            </mat-tab>
+            <mat-tab label="Parts"> Parts </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Appointments </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Staff </mat-tab>
           </mat-tab-group>
     </div>
 </div>

@@ -5,6 +5,7 @@ import {from, Observable} from "rxjs";
 import {images} from './images';
 import {Vehicle} from "../interfaces/Vehicle";
 import {VehiclesService} from "../services/vehicles.service"
+import { Filter } from '../interfaces/ContentFilter';
 
 @Component({
   selector: 'app-content',
@@ -17,6 +18,10 @@ export class ContentComponent {
   contentTitle: string = "Vehicles";
   vehicles: Vehicle[] = [];
 
+  // contentFilter: Filter = {
+
+  // };
+
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -28,17 +33,19 @@ export class ContentComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService) {}
-
-  ngOnInit(): void {
-
-    this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles));
-    console.log(this.vehicles)
+  constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService) {
+    this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles as Vehicle[]));
+    
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
       console.log(this.innerWidth);
     })
+  }
+
+  ngOnInit(): void {
+
+    
   }
 
   postVehicle(vehicle: Vehicle) {
@@ -50,6 +57,7 @@ export class ContentComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
+    console.log(this.vehicles)
   }
 
   // vehicles: Vehicle[] = [

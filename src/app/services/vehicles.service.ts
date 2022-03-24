@@ -16,9 +16,19 @@ const httpOptions = {
 export class VehiclesService {
   private apiUrl = 'http://localhost:8000/vehicle/'
 
-  vehicles: Vehicle[] = [];
+  allVehicles: Vehicle[] = [];
 
   constructor(private http: HttpClient) {}
+
+  verifyPlateNumber(plateNum: string): boolean {
+    //this.allVehicles = this.http.get<Vehicle[]>(this.apiUrl);
+
+    let tmp = true;
+    if(tmp){
+      return true;
+    }
+    return true;
+  }
 
   getVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(this.apiUrl)

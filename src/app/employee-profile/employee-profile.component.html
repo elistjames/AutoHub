@@ -1,0 +1,52 @@
+<div *ngIf="!deleteMode" class="profile">
+    <h1 style="font-size: 40px">Your Profile</h1>
+    <hr>
+    <h1>
+        {{employee.f_name}} {{employee.l_name}}
+    </h1>
+    <div>
+        <label style="font-size: 18px; color: #c50061">Username: </label>
+    <label style="font-size: 18px">{{employee.email}}</label>
+    <br/>
+    <label style="font-size: 18px; color: #c50061">Password: </label>
+    <label *ngIf="!hidePassword" style="font-size: 18px">{{employee.password}}</label>
+    <label *ngIf="hidePassword" style="font-size: 18px">*****************</label>
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    </div>
+    
+    <div style="background-color:#2D2D2D; margin-top: 20px; padding: 10px; border: 3px solid #c50061; border-radius: 10px; display: center;">
+        <div *ngIf="editMode">
+            <div style="display: center;">
+                <h2 style="margin-left: 5px">Fill in fields you would like to change</h2>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>New Username</mat-label>
+                    <input matInput type="text" [(ngModel)]="newUsername" [placeholder]="employee.email">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>New Password</mat-label>
+                    <input matInput type="text" [(ngModel)]="newPassword" [placeholder]="employee.password">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="employee.f_name">
+                </mat-form-field>
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="employee.l_name">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="updateAccount()">Update</button>
+                <button style="margin-left: 5px" mat-raised-button color="accent" (click)="editMode = !editMode">Cancel</button>
+            </div>
+        </div>
+        <div *ngIf="!editMode">
+            <div>
+                <button class="btn" mat-raised-button style="background-color:#c50061; color:black" (click)="editMode = !editMode">Edit</button>
+            </div>
+        </div>
+    </div>
+    
+</div>

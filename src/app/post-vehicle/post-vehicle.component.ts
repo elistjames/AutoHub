@@ -27,7 +27,7 @@ export class PostVehicleComponent implements OnInit {
 
 
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent) {}
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService) {}
 
 
 
@@ -87,6 +87,15 @@ export class PostVehicleComponent implements OnInit {
     return true;
   }
 
+  generatePlateNumber() {
+    let plateChars:string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let text = "";
+    for (let i = 0; i < 3; i++) {
+      text += plateChars.charAt(Math.floor(Math.random() * plateChars.length));
+    }
+      return text;
+  }
+
 
 
   onSubmit(): void {
@@ -94,6 +103,14 @@ export class PostVehicleComponent implements OnInit {
     let file = base64ToFile(this.croppedImage);
     console.log(file);
     // Send new vehicle to api
+
+    let validPN = false;
+
+    while(!validPN) {
+      
+      let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
+      //this.vehicleService.verifyPlateNum(possiblePlateNum)
+    }
 
     this.newVehicle = {
       plateNum: Math.random().toString(10),

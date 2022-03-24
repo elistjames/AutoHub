@@ -42,6 +42,7 @@ import {HammerModule } from '@angular/platform-browser'
 import { EmployeeService } from './services/employee.service';
 import { EmployeePageComponent } from './employee-page/employee-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
 
 
 
@@ -69,6 +70,7 @@ const routes: Routes = [
     SearchComponent,
     ProfileComponent,
     EmployeePageComponent,
+    EmployeeProfileComponent,
   ],
   imports: [
     BrowserModule,

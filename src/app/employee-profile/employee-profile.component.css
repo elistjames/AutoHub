@@ -1,0 +1,17 @@
+.profile { 
+    margin: 30px;
+}
+
+.btn { 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.input {
+    margin: 5px;
+}
