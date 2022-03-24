@@ -18,9 +18,16 @@ export class ContentComponent {
   contentTitle: string = "Vehicles";
   vehicles: Vehicle[] = [];
 
-  // contentFilter: Filter = {
-
-  // };
+  contentFilter: Filter = {
+    categoryFilter: "all",
+    colorFilter: ['all'],
+    priceRanges: [{min: 0, max: 100000}],
+    make: '',
+    minYear: (new Date().getFullYear()-30),
+    maxYear: new Date().getFullYear(),
+    minSeats: 1,
+    maxSeats: 7,
+  };
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -44,8 +51,6 @@ export class ContentComponent {
   }
 
   ngOnInit(): void {
-
-    
   }
 
   postVehicle(vehicle: Vehicle) {
@@ -58,6 +63,15 @@ export class ContentComponent {
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
     console.log(this.vehicles)
+  }
+
+  filterContent(): void{
+    if(this.contentFilter.categoryFilter != "all"){
+      
+    }
+    this.vehicles = this.vehicles.filter((vehicle) => {
+      vehicle.category == this.contentFilter.categoryFilter
+    })
   }
 
   // vehicles: Vehicle[] = [
