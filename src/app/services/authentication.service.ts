@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8000/user'
+  private apiUrl = 'http://localhost:8000/customer'
   private signed_in: boolean = false;
   private subject = new Subject<any>();
   validLogin: boolean = false;

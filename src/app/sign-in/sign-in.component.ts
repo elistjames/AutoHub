@@ -90,10 +90,10 @@ export class SignInComponent implements OnInit {
             if(this.validLogin){
               console.log("Signed In");
               const currentUser: User = {
-                email: result.email,
-                password: result.password,
-                f_name: result.f_name,
-                l_name: result.l_name
+                email: response.email,
+                password: response.password,
+                f_name: response.f_name,
+                l_name: response.l_name
               }
 
               this.authService.signIn(currentUser);
