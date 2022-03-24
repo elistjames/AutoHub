@@ -15,6 +15,19 @@
   background-image: url("assets/images.png");
 }
 
+.main-app-container {
+  background-color: #2D2D2D;
+
+}
+
+.main-app-container::before {
+  
+  height:800px; background-size:cover; width:auto;
+  background-image: url("assets/logos/dark_logo_transparent_background.png");
+  background-position:50% 50%;
+  opacity: 0.5;
+}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
