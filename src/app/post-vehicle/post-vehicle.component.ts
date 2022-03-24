@@ -24,10 +24,16 @@ export class PostVehicleComponent implements OnInit {
   selectedColor: string = 'none';
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
+  yearOptions: number[] = [];
+  numSeatsOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  selectedSeats: number = 1;
+  selectedYear: number = new Date().getFullYear() - 10;
 
 
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService) {
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService) {}
+    this.setupYears();
+  }
 
 
 
@@ -38,7 +44,6 @@ export class PostVehicleComponent implements OnInit {
     this.specsFormGroup = this._formBuilder.group({
       make: ['', Validators.required],
       year: [0, Validators.required],
-      seats: [0, Validators.required],
       speed: [0, Validators.required],
       weight: [0, Validators.required],
     });
@@ -54,7 +59,14 @@ export class PostVehicleComponent implements OnInit {
     return value;
   }
 
+  setupYears():void {
+    let currentYear = new Date().getFullYear();
+    let minYear = currentYear - 30;
 
+    for(let y = minYear; y <= currentYear; y++){
+      this.yearOptions.push(y);
+    }
+  }
 
   imageChosen(): boolean {
     if(this.croppedImage == ''){
@@ -67,18 +79,12 @@ export class PostVehicleComponent implements OnInit {
     }
   }
 
-
-
   allFilled(): boolean {
     // @ts-ignore
     if (this.specsFormGroup.get('make').value == '') {
       return false;
     }
     if(this.selectedCategory == 'none'){
-      return false;
-    }
-    // @ts-ignore
-    if(this.specsFormGroup.get('seats').value <= 0){
       return false;
     }
     if(this.price <= 0 || this.price > 100000){
@@ -106,27 +112,26 @@ export class PostVehicleComponent implements OnInit {
 
     let validPN = false;
 
-    while(!validPN) {
-      
-      let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
-      //this.vehicleService.verifyPlateNum(possiblePlateNum)
-    }
+    let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
+    //this.vehicleService.verifyPlateNum(possiblePlateNum)
+    
 
     this.newVehicle = {
-      plateNum: Math.random().toString(10),
-      numSeats: this.specsFormGroup.get('seats')?.value,
+      plateNum: possiblePlateNum,
+      numSeats: this.selectedSeats,
       category: this.selectedCategory,
       weight: this.specsFormGroup.get('weight')?.value,
       topSpeed: this.specsFormGroup.get('speed')?.value,
       colour: this.selectedColor,
       make: this.specsFormGroup.get('make')?.value,
       price: this.price,
-      year: this.specsFormGroup.get('year')?.value,
+      year: this.selectedYear,
       image: this.croppedImage,
       depNum: 0
     }
 
     this.content.postVehicle(this.newVehicle);
+    
   }
 
 

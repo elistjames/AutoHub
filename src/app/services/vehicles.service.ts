@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import { Vehicle } from '../interfaces/Vehicle';
+import { Filter } from '../interfaces/ContentFilter';
 
 
 const httpOptions = {
@@ -15,6 +16,20 @@ const httpOptions = {
 })
 export class VehiclesService {
   private apiUrl = 'http://localhost:8000/vehicle/'
+
+  vehicleFilter: Filter = {
+    categoryFilter: "all",
+    colorFilter: ['all'],
+    priceRanges: [{min: 0, max: 100000}],
+    make: '',
+    minYear: (new Date().getFullYear()-30),
+    maxYear: new Date().getFullYear(),
+    seats: 0
+  };
+
+  getFilters(): Filter { return this.vehicleFilter; }
+
+  setFilter(newFilter: Filter){this.vehicleFilter = newFilter;}
 
   allVehicles: Vehicle[] = [];
 

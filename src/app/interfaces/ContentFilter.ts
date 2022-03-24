@@ -5,6 +5,5 @@ export interface Filter {
   make: string,
   minYear: number,
   maxYear: number,
-  minSeats: number,
-  maxSeats: number,
+  seats: number,
 }

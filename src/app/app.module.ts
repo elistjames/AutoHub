@@ -43,6 +43,8 @@ import { EmployeeService } from './services/employee.service';
 import { EmployeePageComponent } from './employee-page/employee-page.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
+import { LoadingPageComponent } from './visuals/loading-page/loading-page.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -53,6 +55,7 @@ const routes: Routes = [
   { path: 'appointment', component: AppointmentComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'employee-page', component: EmployeePageComponent },
+  { path: 'loading-page', component: LoadingPageComponent },
 ]
 
 @NgModule({
@@ -71,9 +74,11 @@ const routes: Routes = [
     ProfileComponent,
     EmployeePageComponent,
     EmployeeProfileComponent,
+    LoadingPageComponent,
   ],
   imports: [
     BrowserModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     LayoutModule,
@@ -99,7 +104,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatMomentDateModule,
     HammerModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   exports: [RouterModule],
   providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService],

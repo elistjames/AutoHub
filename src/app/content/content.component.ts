@@ -1,11 +1,12 @@
 import {Component, HostListener} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import {from, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {images} from './images';
 import {Vehicle} from "../interfaces/Vehicle";
 import {VehiclesService} from "../services/vehicles.service"
 import { Filter } from '../interfaces/ContentFilter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -25,8 +26,7 @@ export class ContentComponent {
     make: '',
     minYear: (new Date().getFullYear()-30),
     maxYear: new Date().getFullYear(),
-    minSeats: 1,
-    maxSeats: 7,
+    seats: 0
   };
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -40,8 +40,21 @@ export class ContentComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService) {
-    this.vehiclesService.getVehicles().subscribe((vehicles) => (this.vehicles = vehicles as Vehicle[]));
+  constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService, private router: Router) {
+    this.contentFilter = this.vehiclesService.getFilters();
+    console.log(this.contentFilter);
+    this.vehiclesService.getVehicles().subscribe((vehicles) => {
+      this.vehicles = vehicles as Vehicle[];
+      console.log(this.vehicles);
+      this.vehicles = this.filterContent(this.vehicles);
+      
+    });
+    
+    //this.filterContent();
+    
+  }
+
+  ngOnInit(): void {
     
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
@@ -50,103 +63,80 @@ export class ContentComponent {
     })
   }
 
-  ngOnInit(): void {
-  }
-
   postVehicle(vehicle: Vehicle) {
     this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
     console.log("vehicle added");
     console.log(this.vehicles);
+    this.router.navigate(['/loading-page'])
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
-    console.log(this.vehicles)
   }
 
-  filterContent(): void{
+  filterContent(filteredVehicles: Vehicle[]): Vehicle[] {
+    let maxPrice = 0;
+    let minPrice = 100000
+    for(let i = 0; i < this.contentFilter.priceRanges.length; i++){
+      let possibleMax = this.contentFilter.priceRanges[i].max;
+      let possibleMin = this.contentFilter.priceRanges[i].min;
+
+      if(possibleMin < minPrice){
+        minPrice = possibleMin;
+      }
+      if(possibleMax > maxPrice){
+        maxPrice = possibleMax;
+      }
+    }
+
+    console.log(maxPrice);
+    console.log(minPrice);
+
+    console.log(filteredVehicles);
     if(this.contentFilter.categoryFilter != "all"){
+      filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.category == this.contentFilter.categoryFilter);
+    }
+    console.log(filteredVehicles);
+    if(this.contentFilter.colorFilter[0] != "all"){
+      filteredVehicles = filteredVehicles.filter((vehicle) => this.contentFilter.colorFilter.includes(vehicle.colour));
+    }
+    console.log(filteredVehicles);
+    if(this.contentFilter.seats != 0){
+      filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.numSeats == this.contentFilter.seats);
+    }
+    console.log(filteredVehicles);
+    if(this.contentFilter.make != ''){
+      filteredVehicles = filteredVehicles.filter((vehicle) => this.isSubstring(this.contentFilter.make.toLowerCase().replace(/\s/g, ''), vehicle.make.toLowerCase().replace(/\s/g, '')));
+    }
+    console.log(filteredVehicles);
+    filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.price >= minPrice && vehicle.price <= maxPrice);
+    console.log(filteredVehicles);
+    filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.year >= this.contentFilter.minYear && vehicle.year <= this.contentFilter.maxYear);
+    console.log(filteredVehicles);
+
+    return filteredVehicles;
+  }
+
+  isSubstring(str1: string, str2: string): boolean {
+    let m = str1.length;
+    let n = str2.length;
+
+    for(let i = 0; i < (n-m)+1; i++){
+      var j;
+      for(j = 0; j < m; j++){
+        if(str2[i+j] != str1[j]){
+          break;
+        }
+      }
+      if(j == m){
+        return true;
+      }
       
     }
-    this.vehicles = this.vehicles.filter((vehicle) => {
-      vehicle.category == this.contentFilter.categoryFilter
-    })
+    return false;
   }
 
-  // vehicles: Vehicle[] = [
-  //   {
-  //     plateNum: '',
-  //     numSeats: 4,
-  //     category: 'car',
-  //     weight: 4000,
-  //     topSpeed: 200,
-  //     color: 'red',
-  //     make: 'Honda Accord',
-  //     price: 20000,
-  //     year: 2015,
-  //     image: images[0],
-  //     Dnum: 0
 
-  //   },
-  //   {
-  //     plateNum: '',
-  //     numSeats: 4,
-  //     category: 'car',
-  //     weight: 4000,
-  //     topSpeed: 200,
-  //     color: 'red',
-  //     make: 'Ford F-150',
-  //     price: 20000,
-  //     year: 2015,
-  //     image: images[0],
-  //     Dnum: 0
-
-  //   },
-  //   {
-  //     plateNum: '',
-  //     numSeats: 4,
-  //     category: 'car',
-  //     weight: 4000,
-  //     topSpeed: 200,
-  //     color: 'red',
-  //     make: 'Infinity G-37x',
-  //     price: 20000,
-  //     year: 2015,
-  //     image: images[0],
-  //     Dnum: 0
-  //   },
-  //   {
-  //     plateNum: '',
-  //     numSeats: 4,
-  //     category: 'car',
-  //     weight: 4000,
-  //     topSpeed: 200,
-  //     color: 'red',
-  //     make: 'Subaru WRX sti',
-  //     price: 20000,
-  //     year: 2015,
-  //     image: images[1],
-  //     Dnum: 0
-  //   },
-  //   {
-  //     plateNum: '',
-  //     numSeats: 4,
-  //     category: 'car',
-  //     weight: 4000,
-  //     topSpeed: 200,
-  //     color: 'red',
-  //     make: 'Honda Civic',
-  //     price: 20000,
-  //     year: 2015,
-  //     image: images[1],
-  //     Dnum: 0
-  //   },
-  // ];
-
-
-}
-function subscribe(arg0: (vehicle: Vehicle) => number) {
-  throw new Error('Function not implemented.');
 }
 

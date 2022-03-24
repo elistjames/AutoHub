@@ -51,12 +51,19 @@
         </mat-form-field>
         <mat-form-field class="full-width" appearance="fill">
           <mat-label>Year</mat-label>
-          <input matInput type="number" placeholder="Ex. 2015" formControlName="year">
+          <mat-select [(value)]="selectedYear">
+            <mat-option *ngFor="let year of yearOptions" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Number of Seats</mat-label>
-          <input matInput type="number"  formControlName="seats">
-          <mat-hint align="start"><p>Cannot be 0</p> </mat-hint>
+          <mat-select [(value)]="selectedSeats">
+            <mat-option *ngFor="let numSeats of numSeatsOptions" [value]="numSeats">
+              {{numSeats}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Top Speed</mat-label>
