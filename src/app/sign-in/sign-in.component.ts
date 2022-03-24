@@ -8,6 +8,7 @@ import {EmployeeService} from '../services/employee.service';
 import { Subscription, take } from 'rxjs';
 import {Employee} from '../interfaces/Employee';
 import { Router } from '@angular/router';
+import { User } from '../interfaces/User';
 //import {Subscription} from "rxjs"
 
 
@@ -47,7 +48,7 @@ export class SignInComponent implements OnInit {
           this.email = result.email;
           this.password = result.password;
 
-          // verify employee password
+          // verify employee login
           this.empService.verifyEmployee(this.password, this.email).pipe(
             take(1),
           ).subscribe((response) => {
@@ -77,19 +78,34 @@ export class SignInComponent implements OnInit {
           })
         }
         else{
-          const currentUser = {
-            email: this.email,
-            password: this.password,
-            firstName: '',
-            lastName: '',
-          }
+          this.email = result.email;
+          this.password = result.password;
 
-          //verify user
+          // verify employee login
+          this.authService.verifyUser(this.password, this.email).pipe(
+            take(1),
+          ).subscribe((response) => {
+            console.log("cool")
+            this.validLogin = this.authService.validateLogin();
+            if(this.validLogin){
+              console.log("Signed In");
+              const currentUser: User = {
+                email: result.email,
+                password: result.password,
+                f_name: result.f_name,
+                l_name: result.l_name
+              }
 
-          //sign user in
-          this.authService.signIn(currentUser);
+              this.authService.signIn(currentUser);
+              
+              this.router.navigate(['/loading-page']);
+            }
+            else{
+              console.log('invalidLogin');
 
-          //reset form
+              this.openDialog();
+            }
+          });
           this.email = "";
           this.password = "";
         }

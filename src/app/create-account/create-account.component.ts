@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map} from "rxjs/operators";
+import { User } from '../interfaces/User';
 
 @Component({
   selector: 'app-create-account',
@@ -11,6 +12,13 @@ import {map} from "rxjs/operators";
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent {
+  newUser: User = {
+    email: '',
+    password: '',
+    f_name: '',
+    l_name: ''
+  }
+
   accountForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -70,6 +78,12 @@ export class CreateAccountComponent {
 
   onSubmit(): void {
     // Add new user
+    this.newUser.email = this.accountForm.get('email')?.value;
+    this.newUser.password = this.accountForm.get('password')?.value;
+    this.newUser.f_name = this.accountForm.get('firstName')?.value;
+    this.newUser.l_name = this.accountForm.get('lastName')?.value;
+
+
     this.router.navigate(['/']);
 
   }

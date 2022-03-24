@@ -2,7 +2,7 @@
     <h1 style="font-size: 40px">Your Profile</h1>
     <hr>
     <h1>
-        {{tmp_user.firstName}} {{tmp_user.lastName}}
+        {{tmp_user.f_name}} {{tmp_user.l_name}}
     </h1>
     <div>
         <label style="font-size: 18px; color: #c50061">Username: </label>
@@ -30,11 +30,11 @@
                 </mat-form-field>
                 <mat-form-field class="input" appearance="fill">
                     <mat-label>First Name</mat-label>
-                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="tmp_user.firstName">
+                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="tmp_user.f_name">
                 </mat-form-field>
                 <mat-form-field class="input" appearance="fill">
                     <mat-label>Last Name</mat-label>
-                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="tmp_user.lastName">
+                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="tmp_user.l_name">
                 </mat-form-field>
             </div>
             <div>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError, Observable, Subject, of, throwError, EMPTY} from 'rxjs';
-import {AppComponent} from '../app.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, Observable, Subject} from 'rxjs';
 import { Employee } from '../interfaces/Employee';
 
 const httpOptions = {

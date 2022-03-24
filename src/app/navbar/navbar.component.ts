@@ -21,8 +21,8 @@ export class NavbarComponent {
   current: User = {
     email: '',
     password: '',
-    firstName: '',
-    lastName: '',
+    f_name: '',
+    l_name: '',
   };
 
   @Input() contentFilter: Filter = {

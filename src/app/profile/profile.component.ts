@@ -21,15 +21,15 @@ export class ProfileComponent implements OnInit {
   user: User = {
     email: '',
     password: '',
-    firstName: '',
-    lastName: ''
+    f_name: '',
+    l_name: ''
   };
 
   tmp_user: User = {
     email: 'test@gmail.com',
     password: 'thisIsATestPassword',
-    firstName: 'Eli',
-    lastName: 'St. James'
+    f_name: 'Eli',
+    l_name: 'St. James'
   };
 
 
