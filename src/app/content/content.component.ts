@@ -107,7 +107,7 @@ export class ContentComponent {
     }
     console.log(filteredVehicles);
     if(this.contentFilter.make != ''){
-      filteredVehicles = filteredVehicles.filter((vehicle) => this.isSubstring(this.contentFilter.make.toLowerCase().replace(/\s/g, ''), vehicle.make.toLowerCase().replace(/\s/g, '')));
+      filteredVehicles = filteredVehicles.filter((vehicle) => this.isSubstring(this.contentFilter.make.toLowerCase().replace(/[^a-z0-9]+/gi, ''), vehicle.make.toLowerCase().replace(/[^a-z0-9]+/gi, '')));
     }
     console.log(filteredVehicles);
     filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.price >= minPrice && vehicle.price <= maxPrice);

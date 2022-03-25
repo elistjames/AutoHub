@@ -60,6 +60,7 @@ export class NavbarComponent {
     const dialogRef = this.dialog.open(SearchComponent, {
       width: '800px',
       data: this.contentFilter,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

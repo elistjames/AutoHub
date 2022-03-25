@@ -18,3 +18,17 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+.none-found {
+  width: auto;
+  height: 85%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  
+}
+
+.none-found.icon {
+  vertical-align: middle;
+}

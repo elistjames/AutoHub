@@ -1,4 +1,8 @@
-<div>
+<div *ngIf="vehicles.length == 0" class="none-found">
+  <mat-icon style="width: 100px">sentiment_very_dissatisfied</mat-icon>
+  <h1>No vehicles found</h1>
+</div>
+<div *ngIf="vehicles.length > 0">
   <div *ngIf="innerWidth<400" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols=1 rowHeight=500px>

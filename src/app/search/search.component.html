@@ -1,8 +1,15 @@
 <h1 mat-dialog-title mat-dialog-actions>Filter Search</h1>
 <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Apply</button>
 <button style="margin-left: 10px" mat-raised-button color="accent" (click)="clearFilters()">Clear</button>
+  <div style="margin-top: 10px">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Search by Name</mat-label>
+      <input matInput name="make" placeholder="Ex. Honda Civic" [(ngModel)]="data.make">
+    </mat-form-field>
+  </div>
 <hr/>
 <mat-dialog-content>
+  <h3>General:</h3>
   <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
     <mat-select [(value)]="data.categoryFilter">
@@ -11,11 +18,8 @@
       <mat-option value="truck">Truck</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field style="margin-left: 10px" class="full-width" appearance="fill">
-    <mat-label>Make</mat-label>
-    <input matInput name="make" placeholder="Ex. Honda Civic" [(ngModel)]="data.make">
-  </mat-form-field>
-  <mat-form-field style="margin-left: 10px" class="full-width" appearance="fill">
+  
+  <mat-form-field style="margin-left: 10px" appearance="fill">
     <mat-label>Number of Seats</mat-label>
     <mat-select [(value)]="data.seats">
       <mat-option value=0>Any Number</mat-option>
