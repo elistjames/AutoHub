@@ -45,6 +45,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
 import { LoadingPageComponent } from './visuals/loading-page/loading-page.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PartsComponent } from './parts/parts.component';
+import { PartComponent } from './part/part.component';
+import { PartViewComponent } from './part-view/part-view.component';
 
 
 
@@ -75,6 +78,9 @@ const routes: Routes = [
     EmployeePageComponent,
     EmployeeProfileComponent,
     LoadingPageComponent,
+    PartsComponent,
+    PartComponent,
+    PartViewComponent,
   ],
   imports: [
     BrowserModule,

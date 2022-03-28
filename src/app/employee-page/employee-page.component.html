@@ -12,7 +12,7 @@
             </mat-tab>
             <mat-tab label="Recent Sales"> Recent Sales </mat-tab>
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Appointments </mat-tab>
-            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Staff </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Staff"> Staff </mat-tab>
           </mat-tab-group>
     </div>
 
@@ -22,9 +22,24 @@
             <mat-tab label="Profile"> 
                 <app-employee-profile [employee]="currentEmployee"></app-employee-profile>
             </mat-tab>
-            <mat-tab label="Parts"> Parts </mat-tab>
-            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Appointments </mat-tab>
-            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments"> Staff </mat-tab>
+            <mat-tab label="Parts">
+
+                <!--Parts page-->
+                <app-parts></app-parts>
+
+            </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments">
+                 
+                <!--Appointments Page-->
+                Appointments
+                 
+                 
+            </mat-tab>
+            <mat-tab *ngIf="this.currentEmployee.isManager" label="Staff">
+
+                <!--Staff Page-->
+
+            </mat-tab>
           </mat-tab-group>
     </div>
 </div>
