@@ -36,6 +36,7 @@
         </div>
         <button *ngIf="signed_in"  mat-menu-item routerLink="/profile"><span>View Profile</span></button>
         <button *ngIf="signed_in"  mat-menu-item routerLink="/post-vehicle"><span>Post</span></button>
+        <button *ngIf="emp_signed_in && empService.getEmployeeProfile().depNum == 1"  mat-menu-item routerLink="/post-part"><span>Post Part</span></button>
         <button *ngIf="signed_in || emp_signed_in"  mat-menu-item routerLink="/" (click)="onSignOut()"><span>Sign out</span></button>
         <button *ngIf="!signed_in && !emp_signed_in" mat-menu-item routerLink="/create-account"><span>Create Account</span></button>
       </mat-menu>

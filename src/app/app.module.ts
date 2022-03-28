@@ -48,6 +48,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PartsComponent } from './parts/parts.component';
 import { PartComponent } from './part/part.component';
 import { PartViewComponent } from './part-view/part-view.component';
+import { PostPartComponent } from './post-part/post-part.component';
 
 
 
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'employee-page', component: EmployeePageComponent },
   { path: 'loading-page', component: LoadingPageComponent },
+  { path: 'post-part', component: PostPartComponent },
 ]
 
 @NgModule({
@@ -81,6 +83,7 @@ const routes: Routes = [
     PartsComponent,
     PartComponent,
     PartViewComponent,
+    PostPartComponent,
   ],
   imports: [
     BrowserModule,

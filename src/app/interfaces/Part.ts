@@ -2,6 +2,6 @@ export interface Part {
     partNo?: string;
     price: number;
     make: string;
-    plateNum?: number;
+    plateNum?: string;
     depNum: number;
 }

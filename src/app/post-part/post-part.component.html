@@ -1,0 +1,82 @@
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="imageFormGroup">
+      <form [formGroup]="imageFormGroup">
+        <ng-template matStepLabel>Choose your image</ng-template>
+        <div class="container">
+          <div>
+            <div>
+              <span class="hiddenFileInput">
+                <input class="choose-file-btn" type="file" (change)="fileChangeEvent($event)" accept="image/*"/>
+              </span>
+              <h4>Click icon to upload an image</h4>
+              <div style="height: 50%">
+                <div class="text-center">
+  
+                  <image-cropper style="width: 300px"
+                                 [imageChangedEvent]="imageChangedEvent"
+                                 [maintainAspectRatio]="true"
+                                 [aspectRatio]="4 / 4"
+                                 [resizeToWidth]="256"
+                                 format="png"
+                                 (imageCropped)="imageCropped($event)"
+                                 (imageLoaded)="imageLoaded()"
+                                 (cropperReady)="cropperReady()"
+                                 (loadImageFailed)="loadImageFailed()"></image-cropper>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:5px">
+          <button *ngIf="imageChosen()" mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="specsFormGroup">
+      <form [formGroup]="specsFormGroup">
+        <ng-template matStepLabel>Specifications</ng-template>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select [(value)]="selectedCategory">
+              <mat-option value="all">All</mat-option>
+              <mat-option value="car">Car</mat-option>
+              <mat-option value="truck">Truck</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Ex. Steering Wheel" formControlName="make">
+            <mat-hint align="start"><p>Correct spelling will increase the chance of your post being seen</p> </mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="margin-top:20px">
+          <mat-form-field appearance="fill">
+            <mat-label>Price (CAD)</mat-label>
+            <input matInput type="number" [(ngModel)]="price" placeholder="Price" [ngModelOptions]="{standalone: true}">
+            <mat-hint align="start"><p>Cannot be 0 and the most you can post a vehicle for is $100,000</p> </mat-hint>
+          </mat-form-field>
+          <mat-slider
+            [(ngModel)]="price"
+            thumbLabel
+            [displayWith]="formatLabel"
+            [max]="100000"
+            [min]="0"
+            aria-label="units" [ngModelOptions]="{standalone: true}"></mat-slider>
+        </div>
+        <div style="margin-top: 10px">
+          <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+          <h3 *ngIf="!allFilled()">Must fill in all fields to continue</h3>
+          <button *ngIf="allFilled()"
+                  type="button"
+                  style="margin-left: 5px"
+                  color="primary"
+                  mat-raised-button
+                  (click)="onSubmit()"
+                  routerLink="/">
+            Upload
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>

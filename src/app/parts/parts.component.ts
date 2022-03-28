@@ -14,7 +14,7 @@ export class PartsComponent implements OnInit {
   public innerWidth: any;
   isHandset: boolean = false;
   contentTitle: string = "Parts";
-  parts: Part[] = [];
+  //parts: Part[] = [];
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -46,5 +46,31 @@ export class PartsComponent implements OnInit {
       console.log(this.innerWidth);
     })
   }
+
+  parts:Part[] = [
+    { 
+      partNo: 'AHP-5HJ-HJ8',
+      price: 300,
+      make: 'Steering Wheel',
+      plateNum: 'CAT',
+      depNum: 1
+    },
+    { 
+      partNo: 'AHP-56H-JS9',
+      price: 550,
+      make: 'exaust pipe',
+      plateNum: 'CAT',
+      depNum: 1
+    },
+    { 
+      partNo: 'AHP-NBC-878',
+      price: 1000,
+      make: 'Turbo',
+      plateNum: 'CAT',
+      depNum: 1
+    },
+
+
+  ]
 
 }
