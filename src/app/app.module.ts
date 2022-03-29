@@ -116,7 +116,7 @@ const routes: Routes = [
     MatTabsModule,
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService],
+  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService, PartsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

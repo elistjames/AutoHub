@@ -47,6 +47,10 @@ export class PartsComponent implements OnInit {
     })
   }
 
+  postPart(part: Part){
+    this.partService.postPart(part).subscribe((part: Part) => {this.parts.push(part)});
+  }
+
   parts:Part[] = [
     { 
       partNo: 'AHP-5HJ-HJ8',

@@ -5,6 +5,7 @@ import { MatSlider} from "@angular/material/slider";
 import { ContentComponent } from '../content/content.component';
 import { Part } from '../interfaces/Part';
 import { PartService } from '../services/part.service';
+import { PartsComponent } from '../parts/parts.component';
 
 @Component({
   selector: 'app-post-part',
@@ -22,7 +23,7 @@ export class PostPartComponent implements OnInit {
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private partService: PartService) {
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private partService: PartService, private parts:PartsComponent) {
 
   }
 
@@ -91,10 +92,18 @@ export class PostPartComponent implements OnInit {
 
     let validPN = false;
 
-    let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
-    //this.vehicleService.verifyPlateNum(possiblePlateNum)
+    let possiblePartNum = "AHP-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
+    //this.partService.verifyPlateNum(possiblePlateNum)
     
-    
+    let newPart: Part = {
+      partNo: possiblePartNum,
+      price: this.price,
+      make: this.specsFormGroup.get('make')?.value,
+      plateNum: this.selectedCategory,
+      depNum: 1
+    }
+
+    this.parts.postPart(newPart);
   }
 
 
