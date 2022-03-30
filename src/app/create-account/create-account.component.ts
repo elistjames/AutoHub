@@ -27,6 +27,18 @@ export class CreateAccountComponent {
   });
   isHandset: boolean = false;
   public innerWidth: any;
+  employeeAccount = false;
+  manager = false;
+  employeeKeyInput = '';
+  employeeKey = 'emp'; //set to whatever you want to set the employee key
+  managerKeyInput = '';
+  salesManagerKey = 'smgr' //set to whatever you want to set the manager key
+  maintenanceManagerKey = 'mmgr'
+  validEmployeeKey = false;
+  invalidEmployeeKey = false;
+  selectedDepartment = 'sales';
+  invalidManagerKey = false;
+  ssn?: number;
 
   constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private router: Router) {}
 
@@ -52,7 +64,10 @@ export class CreateAccountComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  allFilled(): boolean { 
+  allFilled(): boolean {
+    if(this.employeeAccount){
+      if(this.ssn == 0){return false}
+    }
     // @ts-ignore
     if(this.accountForm.get('firstName').value == ''){
     
@@ -76,12 +91,61 @@ export class CreateAccountComponent {
     return true;
   }
 
+  checkEmployeeKey(): void {
+    if(this.employeeKeyInput == this.employeeKey){
+      this.invalidEmployeeKey = false;
+      this.validEmployeeKey = true;
+    }
+    else{
+      this.invalidEmployeeKey = true;
+    }
+  }
+
+  checkManagerKey(): boolean {
+    if(this.selectedDepartment == 'sales'){
+      if(this.managerKeyInput == this.salesManagerKey){
+        return true;
+      }
+    }
+    else{
+      if(this.managerKeyInput == this.maintenanceManagerKey){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  managerKeyInputEmpty(): boolean{
+    if(this.managerKeyInput != ''){
+      return false;
+    }
+    return true
+  }
+
   onSubmit(): void {
     // Add new user
-    this.newUser.email = this.accountForm.get('email')?.value;
+    if(this.employeeAccount){
+
+      if(this.manager){
+        if(!this.checkManagerKey()){
+          this.invalidManagerKey = true;
+          this.managerKeyInput = '';
+          return;
+        }
+        this.invalidManagerKey = false;
+      }
+
+      console.log('creating account')
+
+
+    }
+    else{
+      this.newUser.email = this.accountForm.get('email')?.value;
     this.newUser.password = this.accountForm.get('password')?.value;
     this.newUser.f_name = this.accountForm.get('firstName')?.value;
     this.newUser.l_name = this.accountForm.get('lastName')?.value;
+    }
+    
 
 
     this.router.navigate(['/']);

@@ -1,75 +1,145 @@
 <div class="main-app-container">
-  <form [formGroup]="accountForm" novalidate (ngSubmit)="onSubmit()">
+  <form [formGroup]="accountForm">
     <mat-card class="center">
       <mat-card-header>
         <mat-card-title>Create an Account</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        
-        <div class="full-width">
-          <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
-            <input matInput placeholder="First name" formControlName="firstName">
-            <mat-error *ngIf="accountForm.controls['firstName'].hasError('required')">
-              First name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+      <div style="margin:10px">
+        <button *ngIf="!employeeAccount" mat-raised-button color="primary" (click)="employeeAccount = !employeeAccount">User</button>
+        <button *ngIf="employeeAccount" mat-button color="primary" (click)="employeeAccount = !employeeAccount">User</button>
+        <button *ngIf="employeeAccount" mat-raised-button color="primary" style="margin-left:10px" (click)="employeeAccount = !employeeAccount">Employee</button>
+        <button *ngIf="!employeeAccount" mat-button color="primary" style="margin-left:10px" (click)="employeeAccount = !employeeAccount">Employee</button>
+      </div>
+      <div *ngIf="!employeeAccount">
+        <mat-card-content>
+          <div class="full-width">
+            <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
+              <input matInput placeholder="First name" formControlName="firstName">
+              <mat-error *ngIf="accountForm.controls['firstName'].hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
+              <input matInput placeholder="First name" formControlName="firstName">
+              <mat-error *ngIf="accountForm.controls['firstName'].hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
+              <input matInput placeholder="Last name" formControlName="lastName">
+              <mat-error *ngIf="accountForm.controls['lastName'].hasError('required')">
+                Last name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
+              <input matInput placeholder="Last name" formControlName="lastName">
+              <mat-error *ngIf="accountForm.controls['lastName'].hasError('required')">
+                Last name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="accountForm.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="accountForm.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
+              <input matInput placeholder="Password" formControlName="password">
+              <mat-error *ngIf="accountForm.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
+              <input matInput placeholder="Password" formControlName="password">
+              <mat-error *ngIf="accountForm.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <p *ngIf="!allFilled()">Must fill in all fields to create a new account</p>
+          <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="accent" type="button" routerLink="../">Back</button>
+        </mat-card-actions>
+      </div>
+      <div *ngIf="employeeAccount">
+        <mat-card-content>
+          <div *ngIf="!validEmployeeKey">
+            <mat-form-field appearance="fill">
+              <input matInput type="password" appearance="fill" placeholder="Employee key code" [(ngModel)]="employeeKeyInput" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="margin-left: 10px" (click)="checkEmployeeKey()">Enter</button>
+          </div>
+          
+          <div *ngIf="invalidEmployeeKey">
+            <h4 style="color:red">Invalid Employee Key</h4>
+          </div>
+
+          <div *ngIf="validEmployeeKey">
+            <div>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>Department</mat-label>
+                <mat-select [(value)]="selectedDepartment" >
+                  <mat-option value='sales'>Sales</mat-option>
+                  <mat-option value='maintenance'>Maintenance</mat-option>
+                </mat-select>
+              </mat-form-field>
   
-          <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
-            <input matInput placeholder="First name" formControlName="firstName">
-            <mat-error *ngIf="accountForm.controls['firstName'].hasError('required')">
-              First name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>Social Insurance Number</mat-label>
+                <input matInput type="number" placeholder="SIN" [(ngModel)]="ssn" [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
   
-          <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
-            <input matInput placeholder="Last name" formControlName="lastName">
-            <mat-error *ngIf="accountForm.controls['lastName'].hasError('required')">
-              Last name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First name" formControlName="firstName">
+              </mat-form-field>
   
-          <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
-            <input matInput placeholder="Last name" formControlName="lastName">
-            <mat-error *ngIf="accountForm.controls['lastName'].hasError('required')">
-              Last name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
-            <input matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="accountForm.controls['email'].hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>last Name</mat-label>
+                <input matInput placeholder="Last name" formControlName="lastName">
+              </mat-form-field>
   
-          <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
-            <input matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="accountForm.controls['email'].hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
   
-          <mat-form-field *ngIf="innerWidth>=712" class="large" appearance="fill">
-            <input matInput placeholder="Password" formControlName="password">
-            <mat-error *ngIf="accountForm.controls['password'].hasError('required')">
-              Password is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-  
-          <mat-form-field *ngIf="innerWidth<712" class="small" appearance="fill">
-            <input matInput placeholder="Password" formControlName="password">
-            <mat-error *ngIf="accountForm.controls['password'].hasError('required')">
-              Password is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <p *ngIf="!allFilled()">Must fill in all fields to create a new account</p>
-        <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit">Submit</button>
-        <button mat-raised-button color="accent" type="button" routerLink="../">Back</button>
-      </mat-card-actions>
+              <mat-form-field class="employee-accout-input" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" formControlName="password">
+              </mat-form-field>
+              <div class="employee-accout-input">
+                <mat-checkbox [checked]="manager" (change)="manager = !manager">Manager</mat-checkbox>
+                <mat-form-field *ngIf="manager" class="employee-accout-input" appearance="fill">
+                  <mat-label>Manager Key</mat-label>
+                  <input matInput type="password" placeholder="Manager key" [(ngModel)]="managerKeyInput" [ngModelOptions]="{standalone: true}">
+                  <mat-hint *ngIf="invalidManagerKey && managerKeyInputEmpty()" align="start"><p style="font-size:14px; color:red">Invalid Manager Key</p></mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+            <div style="margin-top: 10px">
+              <button *ngIf="allFilled()" mat-raised-button color="primary" (click)="onSubmit()">Create</button>
+              <button style="margin-left: 10px" mat-raised-button color="accent" routerLink="/">Back</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </div>
     </mat-card>
   </form>
 </div>

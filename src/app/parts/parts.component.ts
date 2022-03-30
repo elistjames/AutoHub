@@ -41,6 +41,7 @@ export class PartsComponent implements OnInit {
   ngOnInit(): void {
     
     this.innerWidth = window.innerWidth;
+    
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
       console.log(this.innerWidth);

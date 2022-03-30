@@ -11,9 +11,9 @@
     </mat-card-header>
     <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
     <mat-card-content class="dashboard-card-content">
-      <p>
+      <h3>
         Price: $ {{partCard?.price}}
-      </p>
+      </h3>
       <div>
         <button mat-raised-button color="primary" (click)="onPurchase()">Purchase</button>
       </div>
