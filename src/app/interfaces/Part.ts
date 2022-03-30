@@ -4,4 +4,5 @@ export interface Part {
     make: string;
     plateNum?: string;
     depNum: number;
+    image: string;
 }

@@ -100,7 +100,8 @@ export class PostPartComponent implements OnInit {
       price: this.price,
       make: this.specsFormGroup.get('make')?.value,
       plateNum: this.selectedCategory,
-      depNum: 1
+      depNum: 1,
+      image: this.croppedImage
     }
 
     this.parts.postPart(newPart);

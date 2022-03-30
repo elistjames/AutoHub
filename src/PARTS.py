@@ -15,7 +15,7 @@ cors = CORS(app)
 
 #setup PART model
 class PART(db.Model):
-        partNo = db.Column(db.Integer,primary_key = True) 
+        partNo = db.Column(db.String,primary_key = True) 
         price = db.Column(db.Float, nullable = False)
         make = db.Column(db.String, nullable = False)
         plateNum = db.Column(db.String, nullable = False)
@@ -28,6 +28,7 @@ class PART(db.Model):
 
 #setup post argument parser
 part_post_args = reqparse.RequestParser()
+part_post_args.add_argument ("partNo", type = str, help = "part is a string", required = True)
 part_post_args.add_argument ("price", type = float, help = "price is a float", required = True)
 part_post_args.add_argument ("make", type = str, help = "make is a string", required = True)
 part_post_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = True)
@@ -43,7 +44,7 @@ part_put_args.add_argument ("depNum", type = int, help = "depNum is an int", req
 
 #set path resource fields
 resource_fields = {
-        'partNo' : fields.Integer,
+        'partNo' : fields.String,
         'price' : fields.Float,
         'make' : fields.String,
         'plateNum' : fields.String,
@@ -65,7 +66,7 @@ class PARTS(Resource):
                 if result != None: #if result is not there
                         abort(409, message = "Part number taken...")
 
-                part = PART(partNo = partNo, price = args['price'], make = args['make'], plateNum = args['plateNum'], depNum = args['depNum'], image = args['image']) #create PART object
+                part = PART(partNo = args['partNo'], price = args['price'], make = args['make'], plateNum = args['plateNum'], depNum = args['depNum'], image = args['image']) #create PART object
     
                 db.session.add(part) #add PART
                 db.session.commit() #commit changes

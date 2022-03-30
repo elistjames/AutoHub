@@ -14,7 +14,7 @@ export class PartsComponent implements OnInit {
   public innerWidth: any;
   isHandset: boolean = false;
   contentTitle: string = "Parts";
-  //parts: Part[] = [];
+  parts: Part[] = [];
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -29,7 +29,7 @@ export class PartsComponent implements OnInit {
   
 
   constructor(private breakpointObserver: BreakpointObserver, private partService: PartService, private router: Router) {
-
+    this.partService.getParts().subscribe((parts) => {this.parts = parts as Part[]});
     
   }
 
@@ -51,30 +51,30 @@ export class PartsComponent implements OnInit {
     this.partService.postPart(part).subscribe((part: Part) => {this.parts.push(part)});
   }
 
-  parts:Part[] = [
-    { 
-      partNo: 'AHP-5HJ-HJ8',
-      price: 300,
-      make: 'Steering Wheel',
-      plateNum: 'CAT',
-      depNum: 1
-    },
-    { 
-      partNo: 'AHP-56H-JS9',
-      price: 550,
-      make: 'exaust pipe',
-      plateNum: 'CAT',
-      depNum: 1
-    },
-    { 
-      partNo: 'AHP-NBC-878',
-      price: 1000,
-      make: 'Turbo',
-      plateNum: 'CAT',
-      depNum: 1
-    },
+  // parts:Part[] = [
+  //   { 
+  //     partNo: 'AHP-5HJ-HJ8',
+  //     price: 300,
+  //     make: 'Steering Wheel',
+  //     plateNum: 'CAT',
+  //     depNum: 1
+  //   },
+  //   { 
+  //     partNo: 'AHP-56H-JS9',
+  //     price: 550,
+  //     make: 'exaust pipe',
+  //     plateNum: 'CAT',
+  //     depNum: 1
+  //   },
+  //   { 
+  //     partNo: 'AHP-NBC-878',
+  //     price: 1000,
+  //     make: 'Turbo',
+  //     plateNum: 'CAT',
+  //     depNum: 1
+  //   },
 
 
-  ]
+  // ]
 
 }

@@ -1,1 +1,9 @@
-<p>part-view works!</p>
+<h2 mat-dialog-actions mat-dialog-title>{{data.make}}</h2>
+<h3>Price: $ {{data.price}}</h3>
+<button mat-raised-button color="primary"  mat-dialog-close>Close</button>
+<hr/>
+<mat-dialog-content>
+  <div fxLayout="column">
+    <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
+  </div>
+</mat-dialog-content>

@@ -22,4 +22,8 @@ export class PartComponent implements OnInit {
     });
   }
 
+  onPurchase(): void{
+    console.log('Purchase Part')
+  }
+
 }

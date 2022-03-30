@@ -49,6 +49,7 @@ import { PartsComponent } from './parts/parts.component';
 import { PartComponent } from './part/part.component';
 import { PartViewComponent } from './part-view/part-view.component';
 import { PostPartComponent } from './post-part/post-part.component';
+import { EmployeeLoadingPageComponent } from './visuals/employee-loading-page/employee-loading-page.component';
 
 
 
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'employee-page', component: EmployeePageComponent },
   { path: 'loading-page', component: LoadingPageComponent },
   { path: 'post-part', component: PostPartComponent },
+  { path: 'employee-loading-page', component: EmployeeLoadingPageComponent },
 ]
 
 @NgModule({
@@ -84,6 +86,7 @@ const routes: Routes = [
     PartComponent,
     PartViewComponent,
     PostPartComponent,
+    EmployeeLoadingPageComponent,
   ],
   imports: [
     BrowserModule,
