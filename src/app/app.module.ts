@@ -62,6 +62,7 @@ const routes: Routes = [
   { path: 'employee-page', component: EmployeePageComponent },
   { path: 'loading-page', component: LoadingPageComponent },
   { path: 'post-part', component: PostPartComponent },
+  { path: 'parts', component: PartsComponent },
   { path: 'employee-loading-page', component: EmployeeLoadingPageComponent },
 ]
 

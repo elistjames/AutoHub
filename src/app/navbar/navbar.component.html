@@ -5,8 +5,9 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="emp_signed_in ? '/employee-page':'/'">Home</a>
-
+      <a *ngIf="emp_signed_in" mat-list-item routerLink="/employee-page">Home</a>
+      <a *ngIf="!emp_signed_in" mat-list-item routerLink="/">Vehicles</a>
+      <a *ngIf="!emp_signed_in" mat-list-item routerLink="/parts">Parts</a>
       <a *ngIf="!emp_signed_in" mat-list-item (click)="openSearch()">Search</a>
       <a *ngIf="signed_in && !emp_signed_in" mat-list-item routerLink="/appointment">Book Appointment</a>
     </mat-nav-list>
