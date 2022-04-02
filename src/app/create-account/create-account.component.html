@@ -70,10 +70,12 @@
               </mat-error>
             </mat-form-field>
           </div>
+          <div *ngIf="!emailAvailable" style="margin-top: 10px; background-color:red; border-radius:5px;"><h3>Email taken</h3></div>
         </mat-card-content>
+        
         <mat-card-actions>
           <p *ngIf="!allFilled()">Must fill in all fields to create a new account</p>
-          <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit">Submit</button>
+          <button *ngIf="allFilled()" mat-raised-button color="primary" (click)="onSubmit()">Create</button>
           <button mat-raised-button color="accent" type="button" routerLink="../">Back</button>
         </mat-card-actions>
       </div>

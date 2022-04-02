@@ -3,8 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
 import { User } from '../interfaces/User';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-create-account',
@@ -39,8 +40,9 @@ export class CreateAccountComponent {
   selectedDepartment = 'sales';
   invalidManagerKey = false;
   ssn?: number;
+  emailAvailable:boolean = true;
 
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private router: Router, private authService:AuthenticationService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -123,6 +125,7 @@ export class CreateAccountComponent {
   }
 
   onSubmit(): void {
+    console.log('creating account');
     // Add new user
     if(this.employeeAccount){
 
@@ -141,14 +144,22 @@ export class CreateAccountComponent {
     }
     else{
       this.newUser.email = this.accountForm.get('email')?.value;
-    this.newUser.password = this.accountForm.get('password')?.value;
-    this.newUser.f_name = this.accountForm.get('firstName')?.value;
-    this.newUser.l_name = this.accountForm.get('lastName')?.value;
+      this.newUser.password = this.accountForm.get('password')?.value;
+      this.newUser.f_name = this.accountForm.get('firstName')?.value;
+      this.newUser.l_name = this.accountForm.get('lastName')?.value;
+
+      this.authService.createUser(this.newUser).pipe(
+        take(1),
+      ).subscribe((response) => {
+        this.emailAvailable = this.authService.validateEmail();
+        console.log(this.emailAvailable);
+        if(this.emailAvailable){
+          this.router.navigate(['loading-page']);
+        }
+        else{
+          
+        }
+      })
     }
-    
-
-
-    this.router.navigate(['/']);
-
   }
 }

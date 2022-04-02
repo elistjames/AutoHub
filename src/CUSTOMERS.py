@@ -6,12 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 import base64
 import uuid
 import hashlib
+from flask_cors import CORS
 
 #api setup
 app = Flask(__name__)
 api = Api(app)
+app.config['CORS_HEADERS'] = '*'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+cors = CORS(app)
 
 #setup customer model
 class CUSTOMER(db.Model):
