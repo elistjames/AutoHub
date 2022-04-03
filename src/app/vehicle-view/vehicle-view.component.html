@@ -1,18 +1,22 @@
-<h2 mat-dialog-actions mat-dialog-title>{{data.make}}</h2>
-<h3>Price: $ {{data.price}}</h3>
-<button mat-raised-button color="primary"  mat-dialog-close>Close</button>
-<hr/>
-<mat-dialog-content>
-  <div fxLayout="column">
+<div>
+  <h2>{{data.make}}</h2>
+  <h3>Price: $ {{data.price}}</h3>
+  <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
+  <button style="margin-left: 10px" mat-raised-button color="primary" (click)="bookTestDrive()">Book test Drive</button>
+  <label *ngIf="signInMessage" style="margin-left: 10px; font-size: 11px;">View only - Sign in to book a test drive</label>
+  <hr/>
+  <mat-dialog-content>
+    <div fxLayout="column">
 
-    <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
-    <b>Specs:</b>
+      <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
+      <b>Specs:</b>
 
-    <p>Number of seats: {{data.numSeats}}</p>
-    <p>Year: {{data.year}}</p>
-    <p>Color: {{data.colour}}</p>
-    <p>Weight: {{data.weight}}</p>
-    <p>Top Speed: {{data.topSpeed}} km/h</p>
-    <p>Plate #: {{data.numSeats}}</p>
-  </div>
-</mat-dialog-content>
+      <p>Number of seats: {{data.numSeats}}</p>
+      <p>Year: {{data.year}}</p>
+      <p>Color: {{data.colour}}</p>
+      <p>Weight: {{data.weight}}</p>
+      <p>Top Speed: {{data.topSpeed}} km/h</p>
+      <p>Plate #: {{data.numSeats}}</p>
+    </div>
+  </mat-dialog-content>
+</div>

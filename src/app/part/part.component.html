@@ -14,7 +14,10 @@
       <h3>
         Price: $ {{partCard?.price}}
       </h3>
-      <div>
+      <div *ngIf="!signed_in">
+        <h3>View Only - Sign in to purchase</h3>
+      </div>
+      <div *ngIf="signed_in">
         <button mat-raised-button color="primary" (click)="onPurchase()">Purchase</button>
       </div>
     </mat-card-content>

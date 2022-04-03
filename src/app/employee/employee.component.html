@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z4" class="dashboard-card" fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="column">
+        <mat-card-title fxLayout="row">{{employeeCard?.f_name}} {{employeeCard?.l_name}}</mat-card-title>
+        <mat-card-subtitle>{{employeeCard?.email}}</mat-card-subtitle>
+    </div>
+    <div fxLayout="column">
+        <mat-card-title fxLayout="row">{{employeeCard?.depNum ? 'Maintenance' : 'Sales'}}</mat-card-title>
+        <mat-card-subtitle>{{employeeCard?.isManager ? 'Manager' : 'Employee'}}</mat-card-subtitle>
+    </div>
+    <button *ngIf="!employeeCard?.isManager" mat-raised-button color="accent" (click)="terminateEmployee()">Terminate</button>
+    <div style="margin-top: 10px">
+        <!-- Add Promote funtion if you have time -->
+        <button *ngIf="!employeeCard?.isManager" mat-raised-button color="primary" (click)="promoteEmployee()">Promote</button>
+    </div>
+</mat-card>

@@ -35,6 +35,10 @@ export class EmployeeService {
     return this.employee;
   }
 
+  getAllEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl + '/all/all')
+  }
+
   verifyEmployee(password: string, email: string): Observable<any> {
     console.log('ApiURL is: '+ this.apiUrl + password);
     this.validLogin = true;
@@ -55,6 +59,22 @@ export class EmployeeService {
       console.log("Email taken");
       return error.message;
     }));
+  }
+
+  deleteEmployee(email?:string, password?:string): Observable<Employee[]>{
+    return this.http.delete<Employee[]>(this.apiUrl+'/'+password+'/'+email)
+  }
+
+  updateEmployee(emp?:Employee): Observable<Employee>{
+    let updated = {
+      ssn: emp?.ssn,
+      l_name: emp?.l_name,
+      f_name: emp?.f_name,
+      password: emp?.password,
+      depNum: emp?.depNum,
+      isManager: true
+    }
+    return this.http.put<Employee>(this.apiUrl+'/'+emp?.password+'/'+emp?.email, updated);
   }
 
   signIn(employee: any): void {

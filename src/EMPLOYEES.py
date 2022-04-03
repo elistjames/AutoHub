@@ -43,7 +43,7 @@ employee_put_args = reqparse.RequestParser()
 employee_put_args.add_argument ("ssn", type = int, help = "ssn is a integer", required = False)
 employee_put_args.add_argument ("l_name", type = str, help = "l_name is an string", required = False)
 employee_put_args.add_argument ("f_name", type = str, help = "f_name is an string", required = False)
-employee_put_args.add_argument ("email", type = str, help = "email is a string", required = False)
+employee_put_args.add_argument ("password", type = str, help = "password is a string", required = False)
 employee_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
 employee_put_args.add_argument ("isManager", type = bool, help = "isManager is a bool", required = False)
 
@@ -73,23 +73,29 @@ class EMPLOYEES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password, email):
                 print(unEncode("cmFjZWNhcg=="))
-                #decode password
-                message_bytes = password.encode('ascii')
-                base64_bytes = base64.b64encode(message_bytes)
-                base64_message = base64_bytes.decode('ascii')
 
-                result = EMPLOYEE.query.filter_by(password = base64_message, email = email).first() #find employee
-                
-                #reset variables
-                base64_message = None
-                base64_bytes = None
-                message_bytes = None
-                message = None
+                if email == "all" and password == "all":
+                        # get all
+                        return EMPLOYEE.query.all()
 
-                if result == None:
-                        abort(404, message = "Invalid passowrd") #give error
-                print(unEncode(result.password))
-                return result
+                else:
+                        #decode password
+                        message_bytes = password.encode('ascii')
+                        base64_bytes = base64.b64encode(message_bytes)
+                        base64_message = base64_bytes.decode('ascii')
+
+                        result = EMPLOYEE.query.filter_by(password = base64_message, email = email).first() #find employee
+                        
+                        #reset variables
+                        base64_message = None
+                        base64_bytes = None
+                        message_bytes = None
+                        message = None
+
+                        if result == None:
+                                abort(404, message = "Invalid passowrd") #give error
+                        print(unEncode(result.password))
+                        return result
 
         @marshal_with(resource_fields) #marshal with resource fields
         def post(self, password, email):
@@ -125,7 +131,7 @@ class EMPLOYEES(Resource):
                 base64_message = base64_bytes.decode('ascii')
 
                 args = employee_put_args.parse_args() #parse arguments 
-                result = EMPLOYEE.query.filter_by(password = base64_message).first() ##check to see if ssn exists already
+                result = EMPLOYEE.query.filter_by(email = email).first() ##check to see if ssn exists already
                 if not result:
                         abort(404, message = "Could not find ssn number") #display error message
 
@@ -136,8 +142,8 @@ class EMPLOYEES(Resource):
                         result.l_name = args['l_name']
                 if args["f_name"]:
                         result.f_name = args['f_name']        
-                if args["email"]:
-                        result.email = args['email']              
+                if args["password"]:
+                        result.password = args['password']              
                 if args["depNum"]:
                         result.depNum = args['depNum']      
                 if args["isManager"]:
@@ -154,7 +160,7 @@ class EMPLOYEES(Resource):
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
-                EMPLOYEE.query.filter_by(password = email).delete() ##delete this tuple
+                EMPLOYEE.query.filter_by(email = email).delete() ##delete this tuple
                 db.session.commit() #commit changes
-                return '', 204
+                return EMPLOYEE.query.all()
         

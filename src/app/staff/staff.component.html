@@ -1,0 +1,17 @@
+<div style="margin: 10px;">
+    <div *ngIf="innerWidth<=800">
+        <mat-grid-list cols="1" rowHeight="300">
+            <mat-grid-tile *ngFor="let employee of staff">
+                <app-employee [employeeCard]="employee"></app-employee>
+              </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div *ngIf="innerWidth>800">
+        <mat-grid-list cols="2" rowHeight="300">
+            <mat-grid-tile *ngFor="let employee of staff">
+                <app-employee [employeeCard]="employee"></app-employee>
+              </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
+

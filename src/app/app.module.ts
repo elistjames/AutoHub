@@ -50,6 +50,8 @@ import { PartComponent } from './part/part.component';
 import { PartViewComponent } from './part-view/part-view.component';
 import { PostPartComponent } from './post-part/post-part.component';
 import { EmployeeLoadingPageComponent } from './visuals/employee-loading-page/employee-loading-page.component';
+import { StaffComponent } from './staff/staff.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 
@@ -88,6 +90,8 @@ const routes: Routes = [
     PartViewComponent,
     PostPartComponent,
     EmployeeLoadingPageComponent,
+    StaffComponent,
+    EmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +124,15 @@ const routes: Routes = [
     MatTabsModule,
   ],
   exports: [RouterModule],
-  providers: [AuthenticationService, DatePipe, VehiclesService, ContentComponent, EmployeeService, PartsComponent],
+  providers: [
+    AuthenticationService,
+    DatePipe,
+    VehiclesService,
+    ContentComponent,
+    EmployeeService,
+    PartsComponent,
+    StaffComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
