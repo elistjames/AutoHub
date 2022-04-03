@@ -1,49 +1,55 @@
 <div class="appointmentForm">
-  <form [formGroup]="appointmentForm">
-    <h1 class="math-title">Make your Appointment</h1>
-    <hr>
-    <div>
+  <div *ngIf="!this.appointmentService.alreadyHasAppointment()">
+    <form [formGroup]="appointmentForm">
+      <h1 class="math-title">Make your Appointment</h1>
+      <hr>
       <div>
-        <mat-card class="demo-inline-calendar-card">
-          <mat-calendar [(selected)]="selectedDate"></mat-calendar>
-        </mat-card>
-        <div style="margin-top: 30px">
+        <div>
+          <mat-card class="demo-inline-calendar-card">
+            <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+          </mat-card>
+          <div style="margin-top: 30px">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Time</mat-label>
+              <mat-select formControlName="time">
+                <mat-option value="9">9:00 AM</mat-option>
+                <mat-option value="10">10:00 AM</mat-option>
+                <mat-option value="11">11:00 AM</mat-option>
+                <mat-option value="12">12:00 AM</mat-option>
+                <mat-option value="13">1:00 PM</mat-option>
+                <mat-option value="14">2:00 PM</mat-option>
+                <mat-option value="15">3:00 PM</mat-option>
+                <mat-option value="16">4:00 PM</mat-option>
+                <mat-option value="17">5:00 PM</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <hr>
+          <h3>Select the department you wish to have a  meeting with:</h3>
           <mat-form-field class="full-width" appearance="fill">
-            <mat-label>Time</mat-label>
-            <mat-select formControlName="time">
-              <mat-option value="9">9:00 AM</mat-option>
-              <mat-option value="10">10:00 AM</mat-option>
-              <mat-option value="11">11:00 AM</mat-option>
-              <mat-option value="12">12:00 AM</mat-option>
-              <mat-option value="13">1:00 PM</mat-option>
-              <mat-option value="14">2:00 PM</mat-option>
-              <mat-option value="15">3:00 PM</mat-option>
-              <mat-option value="16">4:00 PM</mat-option>
-              <mat-option value="17">5:00 PM</mat-option>
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department">
+              <mat-option value="s">Sales</mat-option>
+              <mat-option value="m">Maintenance</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
-      <div style="margin-top: 10px;">
-        <hr>
-        <h3>Select the department you wish to have a  meeting with:</h3>
-        <mat-form-field class="full-width" appearance="fill">
-          <mat-label>Department</mat-label>
-          <mat-select formControlName="department">
-            <mat-option value="car">Sales</mat-option>
-            <mat-option value="truck">Maintenance</mat-option>
-          </mat-select>
+      <div>
+        <mat-form-field style="width: 100%" appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Ex. I need an oil change" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
         </mat-form-field>
       </div>
-    </div>
-    <div>
-      <mat-form-field style="width: 100%" appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Ex. I need an oil change" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
-      </mat-form-field>
-    </div>
-    <h3 *ngIf="!allFilled()">Must fill in all fields and select a date after today to continue</h3>
-    <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" routerLink="/" (click)="onSubmit()">Submit</button>
-    <button mat-raised-button color="accent" style="margin-left: 10px" type="button" routerLink="../">Cancel</button>
-  </form>
+      <h3 *ngIf="!allFilled()">Must fill in all fields and select a date after today to continue</h3>
+      <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+      <button mat-raised-button color="accent" style="margin-left: 10px" type="button" routerLink="../">Cancel</button>
+    </form>
+  </div>
+  <div *ngIf="preExistingAppointment">
+    <h3>It looks like you already have an appointment booked so we added these appointment details to the existing one.</h3>
+    <button mat-raised-button color="primary" routerLink="/">Ok</button>
+  </div>
 </div>
