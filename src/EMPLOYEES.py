@@ -18,8 +18,8 @@ class EMPLOYEE(db.Model):
         ssn = db.Column(db.Integer, nullable = False) 
         l_name = db.Column(db.String, nullable = False)
         f_name = db.Column(db.String, nullable = False)
-        email = db.Column(db.String, nullable = False)
-        password = db.Column(db.String, primary_key = True)
+        email = db.Column(db.String, primary_key = True)
+        password = db.Column(db.String, nullable = False)
         depNum = db.Column(db.Integer, nullable = False)
         isManager = db.Column(db.Boolean, nullable = False)
 
@@ -100,11 +100,11 @@ class EMPLOYEES(Resource):
                 base64_message = base64_bytes.decode('ascii')
 
                 args = employee_post_args.parse_args() #parse arguemnts
-                result = EMPLOYEE.query.filter_by(password = base64_message).first() ##check to see if ssn exists already
+                result = EMPLOYEE.query.filter_by(email = email).first() ##check to see if ssn exists already
                 if result != None: #if result is not there
                         abort(409, message = "Ssn number taken...")
 
-                employee = EMPLOYEE(ssn = args['ssn'], l_name = args['l_name'], f_name = args['f_name'], email = args['email'], password = base64_message, depNum = args['depNum'], isManager = args['isManager']) #create employee object
+                employee = EMPLOYEE(ssn = args['ssn'], l_name = args['l_name'], f_name = args['f_name'], email = email, password = base64_message, depNum = args['depNum'], isManager = args['isManager']) #create employee object
                 
                 #reset variables
                 base64_message = None
@@ -154,7 +154,7 @@ class EMPLOYEES(Resource):
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
-                EMPLOYEE.query.filter_by(password = base64_message).delete() ##delete this tuple
+                EMPLOYEE.query.filter_by(password = email).delete() ##delete this tuple
                 db.session.commit() #commit changes
                 return '', 204
         

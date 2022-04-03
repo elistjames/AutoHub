@@ -1,5 +1,5 @@
 export interface Employee {
-    ssn:number;
+    ssn?:number;
     l_name:string;
     f_name:string;
     email:string;

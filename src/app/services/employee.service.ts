@@ -17,6 +17,7 @@ export class EmployeeService {
   private signed_in: boolean = false;
   private subject = new Subject<any>();
   validLogin: boolean = false;
+  emailAvailable: boolean = false;
 
   employee: Employee = {
     ssn: 0,
@@ -42,6 +43,16 @@ export class EmployeeService {
       this.validLogin = false;
       this.subject.next(this.validLogin);
       console.log("hi there");
+      return error.message;
+    }));
+  }
+
+  createEmployee(employee: Employee): Observable<any>{
+    this.emailAvailable = true;
+    
+    return this.http.post<any>(this.apiUrl+'/'+employee.password+'/'+employee.email, employee).pipe(catchError((error) => {
+      this.emailAvailable = false;
+      console.log("Email taken");
       return error.message;
     }));
   }
@@ -76,5 +87,9 @@ export class EmployeeService {
 
   authenticateEmployee(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  validateEmail(): boolean {
+    return this.emailAvailable;
   }
 }

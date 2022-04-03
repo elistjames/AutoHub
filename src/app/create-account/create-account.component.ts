@@ -6,6 +6,8 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, take} from "rxjs/operators";
 import { User } from '../interfaces/User';
 import { AuthenticationService } from '../services/authentication.service';
+import { Employee } from '../interfaces/Employee';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-create-account',
@@ -42,7 +44,10 @@ export class CreateAccountComponent {
   ssn?: number;
   emailAvailable:boolean = true;
 
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private router: Router, private authService:AuthenticationService) {}
+  constructor(private breakpointObserver: BreakpointObserver, 
+    private fb: FormBuilder, private router: Router, 
+    private authService:AuthenticationService,
+     private empService: EmployeeService) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -129,6 +134,21 @@ export class CreateAccountComponent {
     // Add new user
     if(this.employeeAccount){
 
+
+      let newEmployee:Employee = {
+        ssn: this.ssn,
+        l_name: this.accountForm.get('lastName')?.value,
+        f_name: this.accountForm.get('firstName')?.value,
+        email: this.accountForm.get('email')?.value,
+        password: this.accountForm.get('password')?.value,
+        depNum: 0,
+        isManager: false
+      }
+
+      if(this.selectedDepartment == 'maintenance'){
+        newEmployee.depNum = 1;
+      }
+
       if(this.manager){
         if(!this.checkManagerKey()){
           this.invalidManagerKey = true;
@@ -136,7 +156,22 @@ export class CreateAccountComponent {
           return;
         }
         this.invalidManagerKey = false;
+        newEmployee.isManager = true;
       }
+
+      this.empService.createEmployee(newEmployee).pipe(
+        take(1),
+      ).subscribe((response) => {
+        this.emailAvailable = this.empService.validateEmail();
+        console.log(this.emailAvailable);
+        if(this.emailAvailable){
+          this.emailAvailable = true;
+          this.router.navigate(['loading-page']);
+        }
+        else{
+          // not available
+        }
+      })
 
       console.log('creating account')
 
@@ -157,7 +192,7 @@ export class CreateAccountComponent {
           this.router.navigate(['loading-page']);
         }
         else{
-          
+          // not available
         }
       })
     }
