@@ -95,6 +95,7 @@ class EMPLOYEES(Resource):
                         if result == None:
                                 abort(404, message = "Invalid passowrd") #give error
                         print(unEncode(result.password))
+                        
                         return result
 
         @marshal_with(resource_fields) #marshal with resource fields
@@ -143,7 +144,10 @@ class EMPLOYEES(Resource):
                 if args["f_name"]:
                         result.f_name = args['f_name']        
                 if args["password"]:
-                        result.password = args['password']              
+                        message_bytes = password.encode('ascii')
+                        base64_bytes = base64.b64encode(message_bytes)
+                        base64_message = base64_bytes.decode('ascii')
+                        result.password = base64_message             
                 if args["depNum"]:
                         result.depNum = args['depNum']      
                 if args["isManager"]:

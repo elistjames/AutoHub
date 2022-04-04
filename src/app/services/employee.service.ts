@@ -65,7 +65,7 @@ export class EmployeeService {
     return this.http.delete<Employee[]>(this.apiUrl+'/'+password+'/'+email)
   }
 
-  updateEmployee(emp?:Employee): Observable<Employee>{
+  updateEmployee(emp: any): Observable<any>{
     let updated = {
       ssn: emp?.ssn,
       l_name: emp?.l_name,
@@ -74,7 +74,7 @@ export class EmployeeService {
       depNum: emp?.depNum,
       isManager: true
     }
-    return this.http.put<Employee>(this.apiUrl+'/'+emp?.password+'/'+emp?.email, updated);
+    return this.http.put<any>(this.apiUrl+'/'+emp?.password+'/'+emp?.email, updated);
   }
 
   signIn(employee: any): void {

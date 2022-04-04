@@ -77,6 +77,7 @@ class CUSTOMERS(Resource):
                 if not result:
                         abort(404, message = "Invalid password") #give error
                 print(unEncode(result.password))
+                
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
