@@ -13,10 +13,12 @@ export class ProfileComponent implements OnInit {
   editMode = false;
   deleteMode = false;
 
-  newUsername?: string;
-  newPassword?: string;
-  newFirst?: string;
-  newLast?: string;
+  unhashedPassword = '';
+  unhashedEmail = '';
+
+  newPassword: string = '';
+  newFirst: string = '';
+  newLast: string = '';
 
   user: User = {
     email: '',
@@ -26,8 +28,8 @@ export class ProfileComponent implements OnInit {
   };
 
   tmp_user: User = {
-    email: 'test@gmail.com',
-    password: 'thisIsATestPassword',
+    email: '',
+    password: '',
     f_name: 'Eli',
     l_name: 'St. James'
   };
@@ -37,12 +39,32 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-    //this.user = this.authService.getProfile();
+    this.user = this.authService.getProfile();
+    this.unhashedEmail = this.authService.getUnHashedEmail();
+    this.unhashedPassword = this.authService.getUnHashedPassword();
   }
 
   updateAccount(): void{
     this.editMode = !this.editMode;
-
+    let updated:User = {
+      l_name: this.user.l_name,
+      f_name: this.user.f_name,
+      email: this.user.email,
+      password: this.user.password
+    }
+    if(this.newPassword?.replace(/\s/g, "") != ''){
+      updated.password = this.newPassword;
+    }
+    if(this.newFirst?.replace(/\s/g, "") != ''){
+      updated.f_name = this.newFirst;
+    }
+    if(this.newLast?.replace(/\s/g, "") != ''){
+      updated.l_name = this.newLast;
+    }
+    this.authService.updateUser(updated).subscribe((user) => {
+      this.user = user;
+    })
+    // call employeeService to send PUT request to api with the new account details
     // call authService to put new account details
   }
 

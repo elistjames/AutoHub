@@ -20,8 +20,8 @@ cors = CORS(app)
 #setup customer model
 class CUSTOMER(db.Model):
         email = db.Column(db.String, nullable = False)
-        password = db.Column(db.String, primary_key = True)
-        f_name = db.Column(db.String, nullable = False)
+        password = db.Column(db.String, nullable = False)
+        f_name = db.Column(db.String, primary_key = True)
         l_name = db.Column(db.String, nullable = False)
 
         #return format
@@ -35,7 +35,7 @@ customer_post_args.add_argument ("l_name", type = str, help = "l_name is an stri
 
 #setup put argument parser
 customer_put_args = reqparse.RequestParser()
-customer_put_args.add_argument ("email", type = str, help = "email is a string", required = False)
+customer_put_args.add_argument ("password", type = str, help = "password is a string", required = False)
 customer_put_args.add_argument ("f_name", type = str, help = "f_name is an string", required = False)
 customer_put_args.add_argument ("l_name", type = str, help = "l_name is an string", required = False)
 
@@ -60,7 +60,7 @@ def unEncode(stringPass):
 class CUSTOMERS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password, email):
-                print(unEncode("SEBja2V5MDA="))
+                print(unEncode("U3QuIEphbWVz"))
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
@@ -107,26 +107,31 @@ class CUSTOMERS(Resource):
 
         @marshal_with(resource_fields) #marshal with resource fields
         def put(self, password, email):
-
+                
                 #encode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
                 args = customer_put_args.parse_args() #parse arguments 
-                result = CUSTOMER.query.filter_by(password = base64_message).first() #check to see if account exists already
+                result = CUSTOMER.query.filter_by(email = email).first() #check to see if account exists already
                 if not result:
                         abort(404, message = "Could not find account") #display error message
 
                 #arguments are passed in, update them
-                if args["email"]:
-                        result.email = args['email']    
+                if args["password"]:
+                        message_bytes = password.encode('ascii')
+                        base64_bytes = base64.b64encode(message_bytes)
+                        base64_message = base64_bytes.decode('ascii')
+                        result.password = base64_message
+                           
                 if args["f_name"]:
                         result.f_name = args['f_name']  
                 if args["l_name"]:
                         result.l_name = args['l_name']                  
 
                 db.session.commit() #commit session
+                print(unEncode(result.password))
                 return result
 
         @marshal_with(resource_fields)

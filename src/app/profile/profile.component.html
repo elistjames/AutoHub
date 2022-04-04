@@ -2,14 +2,14 @@
     <h1 style="font-size: 40px">Your Profile</h1>
     <hr>
     <h1>
-        {{tmp_user.f_name}} {{tmp_user.l_name}}
+        {{user.f_name}} {{user.l_name}}
     </h1>
     <div>
         <label style="font-size: 18px; color: #c50061">Username: </label>
-    <label style="font-size: 18px">{{tmp_user.email}}</label>
+    <label style="font-size: 18px">{{unhashedEmail}}</label>
     <br/>
     <label style="font-size: 18px; color: #c50061">Password: </label>
-    <label *ngIf="!hidePassword" style="font-size: 18px">{{tmp_user.password}}</label>
+    <label *ngIf="!hidePassword" style="font-size: 18px">{{unhashedPassword}}</label>
     <label *ngIf="hidePassword" style="font-size: 18px">*****************</label>
     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
         <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -21,20 +21,16 @@
             <div style="display: center;">
                 <h2 style="margin-left: 5px">Fill in fields you would like to change</h2>
                 <mat-form-field class="input" appearance="fill">
-                    <mat-label>New Username</mat-label>
-                    <input matInput type="text" [(ngModel)]="newUsername" [placeholder]="tmp_user.email">
-                </mat-form-field>
-                <mat-form-field class="input" appearance="fill">
                     <mat-label>New Password</mat-label>
-                    <input matInput type="text" [(ngModel)]="newPassword" [placeholder]="tmp_user.password">
+                    <input matInput type="text" [(ngModel)]="newPassword" [placeholder]="user.password">
                 </mat-form-field>
                 <mat-form-field class="input" appearance="fill">
                     <mat-label>First Name</mat-label>
-                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="tmp_user.f_name">
+                    <input matInput type="text" [(ngModel)]="newFirst" [placeholder]="user.f_name">
                 </mat-form-field>
                 <mat-form-field class="input" appearance="fill">
                     <mat-label>Last Name</mat-label>
-                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="tmp_user.l_name">
+                    <input matInput type="text" [(ngModel)]="newLast" [placeholder]="user.l_name">
                 </mat-form-field>
             </div>
             <div>
@@ -47,7 +43,7 @@
                 <button class="btn" mat-raised-button style="background-color:#c50061; color:black" (click)="editMode = !editMode">Edit</button>
             </div>
             <div>
-                <button class="btn" mat-raised-button color="warn" (click)="deleteMode = !deleteMode">Delete Account</button>
+                <button class="btn" mat-raised-button color="accent" (click)="deleteMode = !deleteMode">Delete Account</button>
             </div>
         </div>
     </div>

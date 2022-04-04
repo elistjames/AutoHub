@@ -18,6 +18,8 @@ export class AuthenticationService {
   private subject = new Subject<any>();
   validLogin: boolean = false;
   emailAvailable: boolean = false;
+  currentEmail = '';
+  currentPassword = '';
   user: User = {
     email: '',
     password: '',
@@ -55,6 +57,15 @@ export class AuthenticationService {
     }));
   }
 
+  updateUser(user: any): Observable<any>{
+    let updated = {
+      l_name: <string>user?.l_name,
+      f_name: <string>user?.f_name,
+      password: <string>user?.password,
+    }
+    return this.http.put<any>(this.apiUrl+'/'+user?.password+'/'+user?.email, updated);
+  }
+
   signIn(user: any): void {
     this.user.email = user.email;
     this.user.password = user.password;
@@ -71,6 +82,7 @@ export class AuthenticationService {
     this.user.f_name = '';
     this.user.l_name = '';
     this.subject.next(this.signed_in);
+    
   }
 
   validateLogin(): boolean {
@@ -83,5 +95,18 @@ export class AuthenticationService {
 
   authenticateUser(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  setCurrent(emailPass: any){
+    this.currentEmail = emailPass.email;
+    this.currentPassword = emailPass.password;
+  }
+
+  getUnHashedEmail(){
+    return this.currentEmail;
+  }
+
+  getUnHashedPassword(){
+    return this.currentPassword;
   }
 }

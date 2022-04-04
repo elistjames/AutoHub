@@ -96,6 +96,13 @@ export class SignInComponent implements OnInit {
                 l_name: response.l_name
               }
 
+              let emailPass = {
+                email: result.email,
+                password: result.password
+              }
+
+              this.authService.setCurrent(emailPass);
+
               this.authService.signIn(currentUser);
               
               this.router.navigate(['/loading-page']);
