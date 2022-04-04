@@ -71,6 +71,8 @@ export class ProfileComponent implements OnInit {
   deleteAccount(): void {
     // delete current account
     //authService deleteAccount;
+
+    this.authService.deleteAccount(this.user.email, this.user.password).subscribe(() => {});
     this.router.navigate(['/']);
 
   }

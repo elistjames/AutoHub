@@ -66,6 +66,10 @@ export class AuthenticationService {
     return this.http.put<any>(this.apiUrl+'/'+user?.password+'/'+user?.email, updated);
   }
 
+  deleteAccount(email?:string, password?:string): Observable<User>{
+    return this.http.delete<User>(this.apiUrl+'/'+password+'/'+email)
+  }
+
   signIn(user: any): void {
     this.user.email = user.email;
     this.user.password = user.password;
