@@ -135,7 +135,8 @@ const routes: Routes = [
     ContentComponent,
     EmployeeService,
     PartsComponent,
-    StaffComponent
+    StaffComponent,
+    AppointmentsComponent
   ],
   bootstrap: [AppComponent]
 })

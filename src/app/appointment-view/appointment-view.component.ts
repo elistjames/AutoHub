@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppointmentsComponent } from '../appointments/appointments.component';
 import { Appointment } from '../interfaces/Appointment';
 import { AppointmentService } from '../services/appointment.service';
 
@@ -39,7 +40,7 @@ export class AppointmentViewComponent implements OnInit {
 
   time = 9;
 
-  constructor(private appointmentService: AppointmentService, private router: Router) {
+  constructor(private appointmentService: AppointmentService, private router: Router, private appointments: AppointmentsComponent) {
     this.time = this.appointmentCard?.time;
   }
 
@@ -48,6 +49,14 @@ export class AppointmentViewComponent implements OnInit {
 
   timeDisplay(time: number): string {
     return this.timeMap[time];
+  }
+
+  markAppointment(){
+    this.appointments.markAppointment(this.appointmentCard);
+  }
+
+  viewDetails(){
+    this.appointments.viewDetails(this.appointmentCard);
   }
 
 }

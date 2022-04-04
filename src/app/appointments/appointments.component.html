@@ -1,16 +1,36 @@
 <div style="margin: 10px;">
-    <div *ngIf="innerWidth<=800">
-        <mat-grid-list cols="1" rowHeight="100">
-            <mat-grid-tile *ngFor="let appointment of appointments">
-                <app-appointment-view [appointmentCard]="appointment" [mobile]="true"></app-appointment-view>
-              </mat-grid-tile>
-        </mat-grid-list>
+    <div *ngIf="!details">
+        <div *ngIf="innerWidth<=800">
+            <mat-grid-list cols="1" rowHeight="100">
+                <mat-grid-tile *ngFor="let appointment of appointments">
+                    
+                    <app-appointment-view [appointmentCard]="appointment" [mobile]="true"></app-appointment-view>
+                    
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div *ngIf="innerWidth>800">
+            <mat-grid-list cols="1" rowHeight="80">
+                <mat-grid-tile *ngFor="let appointment of appointments">
+                    
+                    <app-appointment-view [appointmentCard]="appointment" [mobile]="false"></app-appointment-view>
+                    
+                    
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
     </div>
-    <div *ngIf="innerWidth>800">
-        <mat-grid-list cols="1" rowHeight="80">
-            <mat-grid-tile *ngFor="let appointment of appointments">
-                <app-appointment-view [appointmentCard]="appointment" [mobile]="false"></app-appointment-view>
-              </mat-grid-tile>
-        </mat-grid-list>
+    <div *ngIf="details">
+        <mat-card (click)="details = !details">
+            <mat-card-header>
+                {{appointment_clicked.cust_email}}
+            </mat-card-header>
+            <hr/>
+            <mat-card-content>
+                <div>
+                    <p>{{appointment_clicked.description}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

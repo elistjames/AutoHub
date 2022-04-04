@@ -14,14 +14,18 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
 
   getAppointments(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(this.apiUrl);
+    return this.http.get<Appointment[]>(this.apiUrl+'all');
   }
 
   postAppointment(appointment: Appointment): Observable<any> {
-    return this.http.post<any>(this.apiUrl, appointment).pipe(catchError((error) => {
+    return this.http.post<any>(this.apiUrl+'post', appointment).pipe(catchError((error) => {
       this.preExistingAppointment = true;
       return error.message;
     }));
+  }
+
+  deleteAppointment(appointment: Appointment): Observable<Appointment[]>{
+    return this.http.delete<Appointment[]>(this.apiUrl+appointment.cust_email);
   }
 
   updateAppointment(appointment: Appointment): Observable<any> {

@@ -53,12 +53,12 @@ resource_fields = {
 #create APPOINTMENT resource
 class APPOINTMENTS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self):
+        def get(self, cust_email):
                 result = APPOINTMENT.query.all() #return all vehicles to front end for querying
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self):
+        def post(self, cust_email):
                 args = appointment_post_args.parse_args() #parse arguemnts
                 result = APPOINTMENT.query.filter_by(cust_email = args['cust_email']).first() ##check to see if cust_email exists already
                 if result != None: #if result is not there
@@ -71,7 +71,7 @@ class APPOINTMENTS(Resource):
                 return appointment, 201
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def put(self):
+        def put(self, cust_email):
                 args = appointment_put_args.parse_args() #parse arguments 
                 result = APPOINTMENT.query.filter_by(cust_email = args['cust_email']).first() #find the APPOINTMENT
                 if not result:
@@ -93,5 +93,5 @@ class APPOINTMENTS(Resource):
         def delete(self, cust_email):
                 APPOINTMENT.query.filter_by(cust_email = cust_email).delete() #find appointment
                 db.session.commit() #commit changes
-                return '', 204
+                return APPOINTMENT.query.all()
         
