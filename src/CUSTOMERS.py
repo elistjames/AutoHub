@@ -7,6 +7,7 @@ import base64
 import uuid
 import hashlib
 from flask_cors import CORS
+from APPOINTMENTS import APPOINTMENT, APPOINTMENTS
 
 #api setup
 app = Flask(__name__)
@@ -60,7 +61,7 @@ def unEncode(stringPass):
 class CUSTOMERS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password, email):
-                print(unEncode("U3QuIEphbWVz"))
+
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)
@@ -144,5 +145,9 @@ class CUSTOMERS(Resource):
 
                 CUSTOMER.query.filter_by(password = base64_message).delete() ##delete this tuple
                 db.session.commit() #commit changes
+
+                #delete their appointments
+                APPOINTMENTS.delete(self,email)
+
                 return '', 204
         
