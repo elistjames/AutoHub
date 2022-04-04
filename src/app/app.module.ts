@@ -52,6 +52,8 @@ import { PostPartComponent } from './post-part/post-part.component';
 import { EmployeeLoadingPageComponent } from './visuals/employee-loading-page/employee-loading-page.component';
 import { StaffComponent } from './staff/staff.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { AppointmentViewComponent } from './appointment-view/appointment-view.component';
 
 
 
@@ -92,6 +94,8 @@ const routes: Routes = [
     EmployeeLoadingPageComponent,
     StaffComponent,
     EmployeeComponent,
+    AppointmentsComponent,
+    AppointmentViewComponent,
   ],
   imports: [
     BrowserModule,

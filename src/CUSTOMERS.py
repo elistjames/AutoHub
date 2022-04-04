@@ -60,7 +60,7 @@ def unEncode(stringPass):
 class CUSTOMERS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password, email):
-                print(unEncode("U3QuIEphbWVz"))
+                print(unEncode("U0VCamEyVjVNREE9"))
                 #decode password
                 message_bytes = password.encode('ascii')
                 base64_bytes = base64.b64encode(message_bytes)

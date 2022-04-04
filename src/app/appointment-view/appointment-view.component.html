@@ -1,0 +1,17 @@
+
+<mat-card class="mat-elevation-z4" class="dashboard-card">
+    <div *ngIf="mobile">
+        <mat-grid-list cols="1" rowHeight="20px">
+            <mat-grid-tile>{{appointmentCard?.cust_email}}</mat-grid-tile>
+            <mat-grid-tile>{{appointmentCard?.date}}</mat-grid-tile>
+            <mat-grid-tile>{{timeDisplay(appointmentCard.time)}}</mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div *ngIf="!mobile">
+        <mat-grid-list cols="3" rowHeight="30px">
+            <mat-grid-tile>{{appointmentCard?.cust_email}}</mat-grid-tile>
+            <mat-grid-tile>{{appointmentCard?.date}}</mat-grid-tile>
+            <mat-grid-tile>{{appointmentCard?.time}}</mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</mat-card>

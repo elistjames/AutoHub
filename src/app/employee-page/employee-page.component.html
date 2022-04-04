@@ -19,7 +19,7 @@
             </mat-tab>
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments">
 
-                Appointments
+                <app-appointments [depNum]="this.currentEmployee.depNum"></app-appointments>
 
             </mat-tab>
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Staff">
@@ -45,7 +45,7 @@
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments">
                  
                 <!--Appointments Page-->
-                Appointments
+                <app-appointments [depNum]="this.currentEmployee.depNum"></app-appointments>
                  
                  
             </mat-tab>
