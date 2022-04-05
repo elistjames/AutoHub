@@ -16,7 +16,7 @@ api = Api(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-cors = CORS(app)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 #setup customer model
 class CUSTOMER(db.Model):

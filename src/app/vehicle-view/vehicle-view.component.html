@@ -1,22 +1,58 @@
 <div>
-  <h2>{{data.make}}</h2>
-  <h3>Price: $ {{data.price}}</h3>
-  <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
-  <button style="margin-left: 10px" mat-raised-button color="primary" (click)="bookTestDrive()">Book test Drive</button>
-  <label *ngIf="signInMessage" style="margin-left: 10px; font-size: 11px;">View only - Sign in to book a test drive</label>
-  <hr/>
-  <mat-dialog-content>
-    <div fxLayout="column">
-
-      <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
-      <b>Specs:</b>
-
-      <p>Number of seats: {{data.numSeats}}</p>
-      <p>Year: {{data.year}}</p>
-      <p *ngIf="!noColour">Color: {{data.colour}}</p>
-      <p *ngIf="!noWeight">Weight: {{data.weight}}</p>
-      <p *ngIf="!noSpeed">Top Speed: {{data.topSpeed}} km/h</p>
-      <p>Plate #: {{data.numSeats}}</p>
+  <div *ngIf="!confirmationMessage">
+    <h2>{{data.make}}</h2>
+    <h3>Price: $ {{data.price}}</h3>
+    <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
+    <button style="margin-left: 10px" mat-raised-button color="primary" (click)="bookDrive = !bookDrive">{{bookDrive?'Cancel':'Book test drive'}}</button>
+    <label *ngIf="signInMessage" style="margin-left: 10px; font-size: 11px;">View only - Sign in to book a test drive</label>
+    <hr/>
+    <div *ngIf="!bookDrive">
+      <mat-dialog-content>
+        <div fxLayout="column">
+    
+          <img mat-card-image src='{{data?.image}}' alt="Photo of dish">
+          <b>Specs:</b>
+    
+          <p>Number of seats: {{data.numSeats}}</p>
+          <p>Year: {{data.year}}</p>
+          <p *ngIf="!noColour">Color: {{data.colour}}</p>
+          <p *ngIf="!noWeight">Weight: {{data.weight}}</p>
+          <p *ngIf="!noSpeed">Top Speed: {{data.topSpeed}} km/h</p>
+          <p>Plate #: {{data.numSeats}}</p>
+        </div>
+      </mat-dialog-content>
     </div>
-  </mat-dialog-content>
+    <div *ngIf="bookDrive">
+      <div>
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+        </mat-card>
+        <div style="margin-top: 30px">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Time</mat-label>
+            <mat-select [(value)]="time">
+              <mat-option value="9">9:00 AM</mat-option>
+              <mat-option value="10">10:00 AM</mat-option>
+              <mat-option value="11">11:00 AM</mat-option>
+              <mat-option value="12">12:00 AM</mat-option>
+              <mat-option value="13">1:00 PM</mat-option>
+              <mat-option value="14">2:00 PM</mat-option>
+              <mat-option value="15">3:00 PM</mat-option>
+              <mat-option value="16">4:00 PM</mat-option>
+              <mat-option value="17">5:00 PM</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <h3 *ngIf="!allFilled()">Must fill in all fields and select a date at least a week after today</h3>
+        <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" (click)="confirmationMessage = true">Submit</button>
+        
+      </div>
+    </div>
+  </div>
+  <div *ngIf="confirmationMessage">
+    <h2>One appointment at a time</h2>
+    <h4>If you already have a schedualed appointment, this test drive will replace it</h4>
+    <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Ok</button>
+    <button *ngIf="allFilled()" style="margin-left: 10px" mat-raised-button color="accent" type="submit" (click)="confirmationMessage = false; bookDrive=false;">Cancel</button>
+  </div>
 </div>

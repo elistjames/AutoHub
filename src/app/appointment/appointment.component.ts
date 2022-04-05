@@ -110,7 +110,7 @@ export class AppointmentComponent implements OnInit {
       this.appointmentService.updateAppointment(updated).subscribe((appointment:any) => {});
       console.log('appointment updated');
       
-    })
+    });
     return;
   }
 }

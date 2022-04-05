@@ -85,13 +85,21 @@
   </div>
   <div *ngIf="innerWidth>=860&&innerWidth<900" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="2" rowHeight="600">
+    <mat-grid-list cols="2" rowHeight="500">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card"></app-vehicle>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <div *ngIf="innerWidth>=900&&innerWidth<960" class="grid-container">
+  <div *ngIf="innerWidth>=900&&innerWidth<920" class="grid-container">
+    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <mat-grid-list cols="2" rowHeight="500">
+      <mat-grid-tile *ngFor="let card of vehicles">
+        <app-vehicle [vehicleCard]="card"></app-vehicle>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div *ngIf="innerWidth>=920&&innerWidth<960" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="600">
       <mat-grid-tile *ngFor="let card of vehicles">

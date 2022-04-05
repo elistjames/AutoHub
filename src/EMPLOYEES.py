@@ -6,12 +6,16 @@ from flask_sqlalchemy import SQLAlchemy
 import base64
 import uuid
 import hashlib
+from flask_cors import CORS
+
 
 #api setup
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = '*'
 api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 #setup employee model
 class EMPLOYEE(db.Model):

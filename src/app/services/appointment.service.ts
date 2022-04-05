@@ -29,7 +29,7 @@ export class AppointmentService {
   }
 
   updateAppointment(appointment: Appointment): Observable<any> {
-    return this.http.put<any>(this.apiUrl, appointment);
+    return this.http.put<any>(this.apiUrl+appointment.cust_email, appointment);
   }
 
   alreadyHasAppointment(): boolean {
