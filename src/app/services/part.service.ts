@@ -41,5 +41,10 @@ export class PartService {
     return this.http.post<Part>(this.apiUrl, part)
   }
 
+  verifyPartNumber(): Observable<Part[]> {
+    return this.http.get<Part[]>(this.apiUrl);
+
+  }
+
   
 }

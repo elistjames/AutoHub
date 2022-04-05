@@ -25,6 +25,8 @@ export class VehicleViewComponent implements OnInit {
   }
 
   bookTestDrive(){
+
+    // TODO: Make Book Test drive functionality
     if(this.signed_in){
 
     }

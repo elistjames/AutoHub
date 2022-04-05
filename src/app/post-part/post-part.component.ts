@@ -73,7 +73,7 @@ export class PostPartComponent implements OnInit {
     return true;
   }
 
-  generatePlateNumber() {
+  generatePartNumber() {
     let plateChars:string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     let text = "";
     for (let i = 0; i < 3; i++) {
@@ -90,21 +90,40 @@ export class PostPartComponent implements OnInit {
     console.log(file);
     // Send new vehicle to api
 
-    let validPN = false;
+    this.partService.verifyPartNumber().subscribe((partNums) => {
+      let validPN = false;
+      let possiblePartNum = "AHP-"+this.generatePartNumber()+"-"+this.generatePartNumber();
+      while(!validPN) {
+        
+        possiblePartNum = "AHP-"+this.generatePartNumber()+"-"+this.generatePartNumber();
+        let existingPartNum = partNums.filter((partNum) => partNum.partNo ==  possiblePartNum);
+        console.log(existingPartNum.length);
+        if(existingPartNum.length == 0){
 
-    let possiblePartNum = "AHP-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
-    //this.partService.verifyPlateNum(possiblePlateNum)
+          console.log("Valid plate number found: "+ possiblePartNum);
+          validPN = true;
+        }
+        else{
+          console.log("Plate number taken: "+ possiblePartNum);
+           
+        }
+      }
+      
+
+      let newPart: Part = {
+        partNo: possiblePartNum,
+        price: this.price,
+        make: this.specsFormGroup.get('make')?.value,
+        plateNum: this.selectedCategory,
+        depNum: 1,
+        image: this.croppedImage
+      }
+  
+      this.parts.postPart(newPart);
+      return;
+    });
     
-    let newPart: Part = {
-      partNo: possiblePartNum,
-      price: this.price,
-      make: this.specsFormGroup.get('make')?.value,
-      plateNum: this.selectedCategory,
-      depNum: 1,
-      image: this.croppedImage
-    }
-
-    this.parts.postPart(newPart);
+    
   }
 
 
