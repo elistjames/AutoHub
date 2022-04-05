@@ -28,6 +28,9 @@ export class PostVehicleComponent implements OnInit {
   numSeatsOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   selectedSeats: number = 1;
   selectedYear: number = new Date().getFullYear() - 10;
+  plateNum = '';
+
+  
 
 
   constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService) {
@@ -110,28 +113,44 @@ export class PostVehicleComponent implements OnInit {
     console.log(file);
     // Send new vehicle to api
 
-    let validPN = false;
-
-    let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
-    //this.vehicleService.verifyPlateNum(possiblePlateNum)
     
+    this.vehicleService.verifyPlateNumber().subscribe((plateNums) => {
+      let validPN = false;
+      let possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
+      while(!validPN) {
+        
+        possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
+        let existingPlateNum = plateNums.filter((plateNum) => plateNum.plateNum ==  possiblePlateNum);
+        console.log(existingPlateNum.length);
+        if(existingPlateNum.length == 0){
 
-    this.newVehicle = {
-      plateNum: possiblePlateNum,
-      numSeats: this.selectedSeats,
-      category: this.selectedCategory,
-      weight: this.specsFormGroup.get('weight')?.value,
-      topSpeed: this.specsFormGroup.get('speed')?.value,
-      colour: this.selectedColor,
-      make: this.specsFormGroup.get('make')?.value,
-      price: this.price,
-      year: this.selectedYear,
-      image: this.croppedImage,
-      depNum: 0
-    }
+          console.log("Valid plate number found: "+ possiblePlateNum);
+          validPN = true;
+        }
+        else{
+          console.log("Plate number taken: "+ possiblePlateNum);
+           
+        }
+      }
+      
 
-    this.content.postVehicle(this.newVehicle);
-    
+      this.newVehicle = {
+        plateNum: possiblePlateNum,
+        numSeats: this.selectedSeats,
+        category: this.selectedCategory,
+        weight: this.specsFormGroup.get('weight')?.value,
+        topSpeed: this.specsFormGroup.get('speed')?.value,
+        colour: this.selectedColor,
+        make: this.specsFormGroup.get('make')?.value,
+        price: this.price,
+        year: this.selectedYear,
+        image: this.croppedImage,
+        depNum: 0
+      }
+  
+      this.content.postVehicle(this.newVehicle);
+      return;
+    });
   }
 
 
