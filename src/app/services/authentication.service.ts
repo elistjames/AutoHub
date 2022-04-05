@@ -67,6 +67,7 @@ export class AuthenticationService {
   }
 
   deleteAccount(email?:string, password?:string): Observable<User>{
+    this.signOut();
     return this.http.delete<User>(this.apiUrl+'/'+password+'/'+email)
   }
 

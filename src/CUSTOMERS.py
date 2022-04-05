@@ -143,7 +143,7 @@ class CUSTOMERS(Resource):
                 base64_bytes = base64.b64encode(message_bytes)
                 base64_message = base64_bytes.decode('ascii')
 
-                CUSTOMER.query.filter_by(password = base64_message).delete() ##delete this tuple
+                CUSTOMER.query.filter_by(email = email).delete() ##delete this tuple
                 db.session.commit() #commit changes
 
                 #delete their appointments
