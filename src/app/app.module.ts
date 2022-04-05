@@ -54,6 +54,7 @@ import { StaffComponent } from './staff/staff.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { AppointmentViewComponent } from './appointment-view/appointment-view.component';
+import { PartsLoadingPageComponent } from './visuals/parts-loading-page/parts-loading-page.component';
 
 
 
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'post-part', component: PostPartComponent },
   { path: 'parts', component: PartsComponent },
   { path: 'employee-loading-page', component: EmployeeLoadingPageComponent },
+  { path: 'parts-loading-page', component: PartsLoadingPageComponent },
 ]
 
 @NgModule({
@@ -96,6 +98,7 @@ const routes: Routes = [
     EmployeeComponent,
     AppointmentsComponent,
     AppointmentViewComponent,
+    PartsLoadingPageComponent,
   ],
   imports: [
     BrowserModule,

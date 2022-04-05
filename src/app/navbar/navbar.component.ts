@@ -11,6 +11,7 @@ import {SearchComponent} from "../search/search.component";
 import { EmployeeService } from '../services/employee.service';
 import {VehiclesService} from '../services/vehicles.service';
 import { Router } from '@angular/router';
+import { PartService } from '../services/part.service';
 
 @Component({
   selector: 'app-navbar',
@@ -32,7 +33,8 @@ export class NavbarComponent {
     make: '',
     minYear: (new Date().getFullYear()-30),
     maxYear: new Date().getFullYear(),
-    seats: 0
+    seats: 0,
+    parts: false
   }
 
   signed_in = false;
@@ -47,6 +49,7 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthenticationService,
               public dialog: MatDialog, public empService: EmployeeService, public vehiclesService: VehiclesService,
+              private partService: PartService,
               private router: Router) {}
 
   ngOnInit(): void {
@@ -64,8 +67,14 @@ export class NavbarComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.vehiclesService.setFilter(result);
-      this.router.navigate(['/loading-page']);
+      if(result.parts){
+        this.partService.setFilter(result);
+        this.router.navigate(['/parts-loading-page']);
+      }
+      else{
+        this.vehiclesService.setFilter(result);
+        this.router.navigate(['/loading-page']);
+      }
     });
   }
 

@@ -6,4 +6,5 @@ export interface Filter {
   minYear: number,
   maxYear: number,
   seats: number,
+  parts: boolean
 }

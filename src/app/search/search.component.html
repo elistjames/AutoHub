@@ -1,71 +1,106 @@
-<h1 mat-dialog-actions>Filter Search</h1>
+<h1>{{data.parts?'Search Parts':'Search Vehicles'}}</h1>
 <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Apply</button>
 <button style="margin-left: 10px" mat-raised-button color="accent" (click)="clearFilters()">Clear</button>
+<mat-checkbox style="margin:10px" [checked]="data.parts" (change)="data.parts = !data.parts">Search Parts</mat-checkbox>
 <hr/>
 <mat-dialog-content>
-  <div>
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Search by Name</mat-label>
-      <input matInput name="make" placeholder="Ex. Honda Civic" [(ngModel)]="data.make">
+  <div *ngIf="!data.parts">
+    <div>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Search by Name</mat-label>
+        <input matInput name="make" placeholder="Ex. Honda Civic" [(ngModel)]="data.make">
+      </mat-form-field>
+    </div>
+    <h3>General:</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select [(value)]="data.categoryFilter">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="car">Car</mat-option>
+        <mat-option value="truck">Truck</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field style="margin-left: 10px" appearance="fill">
+      <mat-label>Number of Seats</mat-label>
+      <mat-select [(value)]="data.seats">
+        <mat-option value=0>Any Number</mat-option>
+        <mat-option value=1>1</mat-option>
+        <mat-option value=2>2</mat-option>
+        <mat-option value=3>3</mat-option>
+        <mat-option value=4>4</mat-option>
+        <mat-option value=5>5</mat-option>
+        <mat-option value=6>6</mat-option>
+        <mat-option value=7>7</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutAlign="space-evenly" >
+      <hr>
+      <h3 style="margin-top: 10px">Price:</h3>
+      <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
+        <span *ngFor="let range of priceRangeNames">
+            <mat-checkbox [checked]="checkPriceRangeState(range)" (change)="filterPrice($event)" style="padding: 10px; color: #fff" [value]="range">
+                {{range}}
+            </mat-checkbox>
+        </span>
+      </div>
+      <hr>
+      <h3 style="margin-top: 10px">Color:</h3>
+      <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
+        <span *ngFor="let color of colors">
+            <mat-checkbox [checked]="checkColorState(color.toLowerCase())" (change)="filterColor($event)" style="padding: 10px; color: #fff" [value]="color.toLowerCase()">
+                {{color}}
+            </mat-checkbox>
+        </span>
+      </div>
+      <hr>
+    </div>
+    <h3>Year:</h3>
+    <mat-form-field class="filter-select" appearance="fill">
+      <mat-label>From:</mat-label>
+      <mat-select (selectionChange)="updateMaxYear()" [(value)]="data.minYear">
+        <mat-option *ngFor="let year of minYears" [value]="year">{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="filter-select" appearance="fill">
+      <mat-label>To:</mat-label>
+      <mat-select (selectionChange)="updateMinYear()" [(value)]="data.maxYear">
+        <mat-option *ngFor="let year of maxYears" [value]="year">{{year}}</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
-  <h3>General:</h3>
-  <mat-form-field appearance="fill">
-    <mat-label>Category</mat-label>
-    <mat-select [(value)]="data.categoryFilter">
-      <mat-option value="all">All</mat-option>
-      <mat-option value="car">Car</mat-option>
-      <mat-option value="truck">Truck</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-  <mat-form-field style="margin-left: 10px" appearance="fill">
-    <mat-label>Number of Seats</mat-label>
-    <mat-select [(value)]="data.seats">
-      <mat-option value=0>Any Number</mat-option>
-      <mat-option value=1>1</mat-option>
-      <mat-option value=2>2</mat-option>
-      <mat-option value=3>3</mat-option>
-      <mat-option value=4>4</mat-option>
-      <mat-option value=5>5</mat-option>
-      <mat-option value=6>6</mat-option>
-      <mat-option value=7>7</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div fxLayout="column" fxLayoutAlign="space-evenly" >
-    <hr>
-    <h3 style="margin-top: 10px">Price:</h3>
-    <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
-      <span *ngFor="let range of priceRangeNames">
-          <mat-checkbox [checked]="checkPriceRangeState(range)" (change)="filterPrice($event)" style="padding: 10px; color: #fff" [value]="range">
-              {{range}}
-          </mat-checkbox>
-      </span>
+
+
+
+  <div *ngIf="data.parts">
+    <div>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Search by Name</mat-label>
+        <input matInput name="make" placeholder="Ex. Turbo" [(ngModel)]="data.make">
+      </mat-form-field>
     </div>
-    <hr>
-    <h3 style="margin-top: 10px">Color:</h3>
-    <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
-      <span *ngFor="let color of colors">
-          <mat-checkbox [checked]="checkColorState(color.toLowerCase())" (change)="filterColor($event)" style="padding: 10px; color: #fff" [value]="color.toLowerCase()">
-              {{color}}
-          </mat-checkbox>
-      </span>
+    <h3>General:</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Part Type</mat-label>
+      <mat-select [(value)]="data.categoryFilter">
+        <mat-option value="CAT">All</mat-option>
+        <mat-option value="OC">Car</mat-option>
+        <mat-option value="OT">Truck</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutAlign="space-evenly" >
+      <hr>
+      <h3 style="margin-top: 10px">Price:</h3>
+      <div fxLayout="row" class="checkbox-container" style="align-items: center; background-color: #c50061; border-radius: 10px;">
+        <span *ngFor="let range of partPriceRangeNames">
+            <mat-checkbox [checked]="checkPartPriceRangeState(range)" (change)="filterPartPrice($event)" style="padding: 10px; color: #fff" [value]="range">
+                {{range}}
+            </mat-checkbox>
+        </span>
+      </div>
+      <hr>
     </div>
-    <hr>
   </div>
-  <h3>Year:</h3>
-  <mat-form-field class="filter-select" appearance="fill">
-    <mat-label>From:</mat-label>
-    <mat-select (selectionChange)="updateMaxYear()" [(value)]="data.minYear">
-      <mat-option *ngFor="let year of minYears" [value]="year">{{year}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="filter-select" appearance="fill">
-    <mat-label>To:</mat-label>
-    <mat-select (selectionChange)="updateMinYear()" [(value)]="data.maxYear">
-      <mat-option *ngFor="let year of maxYears" [value]="year">{{year}}</mat-option>
-    </mat-select>
-  </mat-form-field>
 </mat-dialog-content>
 
 

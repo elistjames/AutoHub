@@ -26,7 +26,8 @@ export class ContentComponent {
     make: '',
     minYear: (new Date().getFullYear()-30),
     maxYear: new Date().getFullYear(),
-    seats: 0
+    seats: 0,
+    parts: false
   };
 
   /** Based on the screen size, switch from standard to one column per row */

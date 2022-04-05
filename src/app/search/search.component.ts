@@ -19,6 +19,7 @@ interface PriceRangeMap {
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  partSearch = false;
   categories = ['Car', 'Truck'];
   colors = ['Red', 'Blue', 'Green', 'Black', 'Grey', 'White', 'Silver', 'Yellow', 'Orange', 'Purple', 'Other'];
   priceMap: PriceRangeMap = {
@@ -48,6 +49,36 @@ export class SearchComponent implements OnInit {
     {display: '$40,000 - $60,000', min: 40000, max: 60000},
     {display: '$60,000 - $100,000', min: 60000, max: 100000},
   ];
+
+  partPriceMap: PriceRangeMap = {
+    ['$0 - $100']: {min: 0, max: 100},
+    ['$100 - $500']: {min: 100, max: 500},
+    ['$500 - $1,000']: {min: 5000, max: 10000},
+    ['$1,000 - $2,000']: {min: 1000, max: 2000},
+    ['$2,000 - $4,000']: {min: 2000, max: 4000},
+    ['$4,000 - $6,000']: {min: 4000, max: 6000},
+    ['$6,000 - $10,000']: {min: 6000, max: 10000}
+  };
+  partPriceRangeNames: string[] = [
+    '$0 - $100',
+    '$100 - $500',
+    '$500 - $1,000',
+    '$1,000 - $2,000',
+    '$2,000 - $4,000',
+    '$4,000 - $6,000',
+    '$6,000 - $10,000'
+  ];
+  partPrices: PriceRange[] = [
+    {display: '$0 - $100', min: 0, max: 100},
+    {display: '$100 - $500', min: 100, max: 500},
+    {display: '$500 - $1,000', min: 500, max: 1000},
+    {display: '$1,000 - $2,000', min: 1000, max: 2000},
+    {display: '$2,000 - $4,000', min: 2000, max: 4000},
+    {display: '$4,000 - $6,000', min: 4000, max: 6000},
+    {display: '$6,000 - $10,000', min: 6000, max: 10000},
+  ];
+
+  
   minYears: number[] = [];
   maxYears: number[] = [];
   maxYearOption!: number;
@@ -124,6 +155,15 @@ export class SearchComponent implements OnInit {
     return false;
   }
 
+  checkPartPriceRangeState(input: any){
+    for(let i = 0; i < this.data.priceRanges.length; i++){
+      if(this.data.priceRanges[i].min==this.partPriceMap[input].min && this.data.priceRanges[i].max==this.partPriceMap[input].max){
+        return true;
+      }
+    }
+    return false;
+  }
+
   clearFilters() {
     console.log("clearing filters");
     this.data.colorFilter = ['all'];
@@ -146,6 +186,22 @@ export class SearchComponent implements OnInit {
     }
     else{
       this.data.priceRanges = this.data.priceRanges.filter((r) => (r.min != this.priceMap[range.source.value].min));
+      if(this.data.priceRanges.length == 0){
+        this.data.priceRanges.push({min: 0, max: 100000});
+      }
+    }
+    console.log(this.data.priceRanges);
+  }
+
+  filterPartPrice(range: any) {
+    if (range.checked) {
+      if(this.data.priceRanges[0].min == 0 && this.data.priceRanges[0].max == 100000){
+        this.data.priceRanges = [];
+      }
+      this.data.priceRanges.push(this.partPriceMap[range.source.value]);
+    }
+    else{
+      this.data.priceRanges = this.data.priceRanges.filter((r) => (r.min != this.partPriceMap[range.source.value].min));
       if(this.data.priceRanges.length == 0){
         this.data.priceRanges.push({min: 0, max: 100000});
       }

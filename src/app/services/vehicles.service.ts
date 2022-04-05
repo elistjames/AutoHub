@@ -24,7 +24,8 @@ export class VehiclesService {
     make: '',
     minYear: (new Date().getFullYear()-30),
     maxYear: new Date().getFullYear(),
-    seats: 0
+    seats: 0,
+    parts: false
   };
 
   getFilters(): Filter { return this.vehicleFilter; }
