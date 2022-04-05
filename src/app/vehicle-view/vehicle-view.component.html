@@ -13,9 +13,9 @@
 
       <p>Number of seats: {{data.numSeats}}</p>
       <p>Year: {{data.year}}</p>
-      <p>Color: {{data.colour}}</p>
-      <p>Weight: {{data.weight}}</p>
-      <p>Top Speed: {{data.topSpeed}} km/h</p>
+      <p *ngIf="!noColour">Color: {{data.colour}}</p>
+      <p *ngIf="!noWeight">Weight: {{data.weight}}</p>
+      <p *ngIf="!noSpeed">Top Speed: {{data.topSpeed}} km/h</p>
       <p>Plate #: {{data.numSeats}}</p>
     </div>
   </mat-dialog-content>

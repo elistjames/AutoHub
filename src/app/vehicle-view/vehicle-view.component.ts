@@ -15,10 +15,24 @@ export class VehicleViewComponent implements OnInit {
   subscription!: Subscription;
   signInMessage = false;
 
+  noWeight = false;
+  noColour = false;
+  noSpeed = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Vehicle,
     public authService: AuthenticationService
-  ) { }
+  ) {
+    if(data.colour == 'none'){
+      this.noColour = true;
+    }
+    if(data.topSpeed == 0){
+      this.noSpeed = true;
+    }
+    if(data.weight == 0){
+      this.noWeight = true;
+    }
+  }
 
   ngOnInit(): void {
     this.subscription = this.authService.authenticateUser().subscribe((value) => (this.signed_in = value));
