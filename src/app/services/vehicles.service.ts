@@ -50,4 +50,8 @@ export class VehiclesService {
     return this.http.post<Vehicle>(this.apiUrl, vehicle);
   }
 
+  updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
+    return this.http.put<Vehicle>(this.apiUrl, vehicle);
+  }
+
 }

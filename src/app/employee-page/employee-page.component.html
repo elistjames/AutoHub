@@ -13,8 +13,8 @@
             </mat-tab>
 
             <mat-tab label="Vehicles">
-
-                Veicles
+                
+                <app-content [employee]="true"></app-content>
 
             </mat-tab>
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Appointments">
@@ -25,6 +25,11 @@
             <mat-tab *ngIf="this.currentEmployee.isManager" label="Staff">
 
                 <app-staff [depNum]="this.currentEmployee.depNum"></app-staff>
+                
+            </mat-tab>
+            <mat-tab label="Invoices">
+
+                
                 
             </mat-tab>
           </mat-tab-group>

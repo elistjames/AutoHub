@@ -93,9 +93,9 @@ class VEHICLES(Resource):
                 return vehicle, 201
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def put(self, plateNo):
+        def put(self):
                 args = vehicle_put_args.parse_args() #parse arguments 
-                result = VEHICLE.query.filter_by(plateNum = plateNo).first() #find the vehicle
+                result = VEHICLE.query.filter_by(plateNum = args['plateNum']).first() #find the vehicle
                 if not result:
                         abort(404, message = "Could not find plate number") #display error message
                 #arguments are passed in, update them

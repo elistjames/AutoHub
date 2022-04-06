@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import {Observable} from "rxjs";
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent {
+  @Input() employee: boolean = false;
   public innerWidth: any;
   isHandset: boolean = false;
   contentTitle: string = "Vehicles";

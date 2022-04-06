@@ -1,18 +1,63 @@
-<mat-card class="mat-elevation-z4" class="dashboard-card" (click)="openVehicle()">
-  <mat-card-header>
-    <mat-card-title>
-      <div>
-        {{vehicleCard?.make}}
-        <button mat-icon-button (click)="openVehicle()">
-          <mat-icon>time_to_leave</mat-icon>
+<mat-card class="mat-elevation-z4" class="dashboard-card">
+  <div *ngIf="!editMode">
+    <mat-card-header>
+      <mat-card-title>
+        <div>
+          {{vehicleCard?.make}}
+          <button *ngIf="!employee" mat-icon-button (click)="openVehicle()">
+            <mat-icon>time_to_leave</mat-icon>
+          </button>
+          
+  
+          <button *ngIf="employee && !editMode" mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+            <mat-icon aria-label="options">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editMode = true"><span>Edit vehicle</span></button>
+            <button mat-menu-item><span>Mark as sold</span></button>
+          </mat-menu>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+    
+    <img width="300" mat-card-image src='{{vehicleCard?.image}}' alt="Photo of Vehicle" (click)="openVehicle()">
+    <mat-card-content class="dashboard-card-content" (click)="openVehicle()">
+      <p>
+        Price: $ {{vehicleCard?.price}}
+      </p>
+    </mat-card-content>
+  </div>
+  
+  <div *ngIf="editMode">
+    <mat-card-header>
+      <mat-card-title>
+        Edit Vehicle
+        <button mat-icon-button (click)="editMode = false">
+          <mat-icon>close</mat-icon>
         </button>
+      </mat-card-title>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="vehicleCard.make" [ngModelOptions]="{standalone: true}">
+        
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" [(ngModel)]="vehicleCard.price" [ngModelOptions]="{standalone: true}">
+        <mat-hint *ngIf="vehicleCard.price > 100000" style="color:red; font-size:15px">Can't be more than $100,000</mat-hint>
+      </mat-form-field>
+      <div *ngIf="allFilled()" style="margin-top:10px;">
+        <button class="full-width" mat-raised-button color="primary" (click)="updateVehicle();">Save</button>
       </div>
-    </mat-card-title>
-  </mat-card-header>
-  <img width="300" mat-card-image src='{{vehicleCard?.image}}' alt="Photo of Vehicle">
-  <mat-card-content class="dashboard-card-content">
-    <p>
-      Price: $ {{vehicleCard?.price}}
-    </p>
-  </mat-card-content>
+      <div *ngIf="filledMessage">
+        <h3 style="color:red;">Fill all fields</h3>
+      </div>
+      <div *ngIf="!allFilled()" style="margin-top:10px;">
+        <button class="full-width" mat-button color="accent" (click)="filledMessage = true;">Save</button>
+      </div>
+    </mat-card-content>
+  </div>
 </mat-card>
