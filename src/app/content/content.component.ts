@@ -72,6 +72,19 @@ export class ContentComponent {
     this.router.navigate(['/loading-page'])
   }
 
+  markVehicle(plateNum?: string){
+    this.vehiclesService.deleteVehicle(plateNum).subscribe(() => {
+      console.log('vehicle maked as sold');
+      this.vehiclesService.getVehicles().subscribe((vehicles) => {
+        this.vehicles = vehicles as Vehicle[];
+        return;
+      });
+      return;
+    });
+    
+    
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;

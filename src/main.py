@@ -18,7 +18,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 cors = CORS(app)
 
-api.add_resource(VEHICLES, "/vehicle/")
+api.add_resource(VEHICLES, "/vehicle/<string:plateNum>")
 api.add_resource(EMPLOYEES, "/employee/<string:password>/<string:email>")
 api.add_resource(PARTS, "/part/")
 api.add_resource(CUSTOMERS, "/customer/<string:password>/<string:email>")

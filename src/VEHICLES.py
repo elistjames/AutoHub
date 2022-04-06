@@ -48,6 +48,7 @@ vehicle_post_args.add_argument ("image", type = str, help = "image is a string",
 
 #setup put argument parser
 vehicle_put_args = reqparse.RequestParser()
+vehicle_put_args.add_argument ("plateNum", type = str, help = "plateNum is an string", required = True)
 vehicle_put_args.add_argument ("numSeats", type = int, help = "numSeats is an int", required = False)
 vehicle_put_args.add_argument ("colour", type = str, help = "colour is an string", required = False)
 vehicle_put_args.add_argument ("make", type = str, help = "make is a stringt", required = False)
@@ -76,12 +77,12 @@ resource_fields = {
 #create vehicle resource
 class VEHICLES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self):
+        def get(self, plateNum):
                 result = VEHICLE.query.all() #return all vehicles to front end for querying
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self):
+        def post(self, plateNum):
                 args = vehicle_post_args.parse_args() #parse arguemnts
                 result = VEHICLE.query.filter_by(plateNum = args['plateNum']).first() ##check to see if plateNum exists already
                 if result != None: #if result is not there
@@ -93,7 +94,7 @@ class VEHICLES(Resource):
                 return vehicle, 201
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def put(self):
+        def put(self, plateNum):
                 args = vehicle_put_args.parse_args() #parse arguments 
                 result = VEHICLE.query.filter_by(plateNum = args['plateNum']).first() #find the vehicle
                 if not result:
@@ -119,7 +120,7 @@ class VEHICLES(Resource):
                 return result
 
         @marshal_with(resource_fields)
-        def delete(self, plateNo):
-                VEHICLE.query.filter_by(plateNum = plateNo).delete() #find plate number
+        def delete(self, plateNum):
+                VEHICLE.query.filter_by(plateNum = plateNum).delete() #find plate number
                 db.session.commit() #commit changes
                 return '', 204

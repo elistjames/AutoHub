@@ -37,21 +37,25 @@ export class VehiclesService {
   constructor(private http: HttpClient) {}
 
   verifyPlateNumber(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(this.apiUrl);
+    return this.http.get<Vehicle[]>(this.apiUrl+'all');
 
   }
 
   getVehicles(): Observable<Vehicle[]> {
-    return this.http.get<Vehicle[]>(this.apiUrl)
+    return this.http.get<Vehicle[]>(this.apiUrl+'all')
   }
 
 
   postVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    return this.http.post<Vehicle>(this.apiUrl, vehicle);
+    return this.http.post<Vehicle>(this.apiUrl+'post', vehicle);
   }
 
   updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    return this.http.put<Vehicle>(this.apiUrl, vehicle);
+    return this.http.put<Vehicle>(this.apiUrl+'put', vehicle);
+  }
+
+  deleteVehicle(plateNum?: string): Observable<any>{
+    return this.http.delete<any>(this.apiUrl+plateNum);
   }
 
 }

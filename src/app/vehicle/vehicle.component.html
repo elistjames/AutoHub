@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z4" class="dashboard-card">
-  <div *ngIf="!editMode">
+  <div *ngIf="!editMode && !markAsSold">
     <mat-card-header>
       <mat-card-title>
         <div>
@@ -14,7 +14,7 @@
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="editMode = true"><span>Edit vehicle</span></button>
-            <button mat-menu-item><span>Mark as sold</span></button>
+            <button mat-menu-item (click)="markAsSold = true;"><span>Mark as sold</span></button>
           </mat-menu>
         </div>
       </mat-card-title>
@@ -28,7 +28,7 @@
     </mat-card-content>
   </div>
   
-  <div *ngIf="editMode">
+  <div *ngIf="editMode && !markAsSold">
     <mat-card-header>
       <mat-card-title>
         Edit Vehicle
@@ -41,12 +41,12 @@
     <mat-card-content>
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="vehicleCard.make" [ngModelOptions]="{standalone: true}">
+        <input matInput [(ngModel)]="newMake" [ngModelOptions]="{standalone: true}">
         
       </mat-form-field>
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Price</mat-label>
-        <input matInput type="number" [(ngModel)]="vehicleCard.price" [ngModelOptions]="{standalone: true}">
+        <input matInput type="number" [(ngModel)]="newPrice" [ngModelOptions]="{standalone: true}">
         <mat-hint *ngIf="vehicleCard.price > 100000" style="color:red; font-size:15px">Can't be more than $100,000</mat-hint>
       </mat-form-field>
       <div *ngIf="allFilled()" style="margin-top:10px;">
@@ -57,6 +57,27 @@
       </div>
       <div *ngIf="!allFilled()" style="margin-top:10px;">
         <button class="full-width" mat-button color="accent" (click)="filledMessage = true;">Save</button>
+      </div>
+    </mat-card-content>
+  </div>
+
+  <!-- Mark As Sold -->
+  <div *ngIf="markAsSold && !editMode">
+    <mat-card-header>
+      <mat-card-title>
+        Mark as sold
+      </mat-card-title>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Confirmation to mark vehicle as sold</h3>
+      <div>
+        <button mat-icon-button (click)="markVehicle()">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button (click)="markAsSold = false">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </mat-card-content>
   </div>
