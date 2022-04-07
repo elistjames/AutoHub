@@ -3,8 +3,8 @@
     <h2>{{data.make}}</h2>
     <h3>Price: $ {{data.price}}</h3>
     <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
-    <button style="margin-left: 10px" mat-raised-button color="primary" (click)="bookDrive = !bookDrive">{{bookDrive?'Cancel':'Book test drive'}}</button>
-    <label *ngIf="signInMessage" style="margin-left: 10px; font-size: 11px;">View only - Sign in to book a test drive</label>
+    <button *ngIf="signed_in" style="margin-left: 10px" mat-raised-button color="primary" (click)="bookDrive = !bookDrive">{{bookDrive?'Cancel':'Book test drive'}}</button>
+    <label *ngIf="!signed_in" style="margin-left: 10px; font-size: 11px;">Sign in for more options</label>
     <hr/>
     <div *ngIf="!bookDrive">
       <mat-dialog-content>

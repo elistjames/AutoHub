@@ -55,6 +55,11 @@ import { EmployeeComponent } from './employee/employee.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { AppointmentViewComponent } from './appointment-view/appointment-view.component';
 import { PartsLoadingPageComponent } from './visuals/parts-loading-page/parts-loading-page.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
+import { InvoiceService } from './services/invoice.service';
+import { AppointmentService } from './services/appointment.service';
+import { PartService } from './services/part.service';
 
 
 
@@ -99,6 +104,8 @@ const routes: Routes = [
     AppointmentsComponent,
     AppointmentViewComponent,
     PartsLoadingPageComponent,
+    InvoicesComponent,
+    InvoiceViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,7 +146,10 @@ const routes: Routes = [
     EmployeeService,
     PartsComponent,
     StaffComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    InvoiceService,
+    AppointmentService,
+    PartService
   ],
   bootstrap: [AppComponent]
 })

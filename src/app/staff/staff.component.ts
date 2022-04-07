@@ -27,10 +27,11 @@ export class StaffComponent implements OnInit {
   );
   
 
-  constructor(private breakpointObserver: BreakpointObserver, private empService: EmployeeService) {
+  constructor(private breakpointObserver: BreakpointObserver, private empService: EmployeeService, private employeeService: EmployeeService) {
     this.empService.getAllEmployees().subscribe((employees) => {
       this.staff = employees as Employee[];
-      this.staff = this.staff.filter((employee) => (employee.depNum == this.depNum))
+      this.staff = this.staff.filter((employee) => (employee.depNum == this.depNum));
+      this.staff = this.staff.filter((employee) => (employee.email !== this.employeeService.getEmployeeProfile().email));
     });
   }
 

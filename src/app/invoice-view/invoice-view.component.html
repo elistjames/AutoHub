@@ -1,0 +1,17 @@
+
+<mat-card class="mat-elevation-z4" class="dashboard-card">
+    <div *ngIf="mobile">
+        <mat-grid-list cols="1" rowHeight="20px">
+            <mat-grid-tile (click)="viewDetails()">{{invoiceCard?.Invoice_num}}</mat-grid-tile>
+            <mat-grid-tile (click)="viewDetails()">{{invoiceCard?.custEmail}}</mat-grid-tile>
+            <mat-grid-tile (click)="viewDetails()">Amount: ${{invoiceCard?.Amount}}</mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div *ngIf="!mobile">
+        <mat-grid-list cols="3" rowHeight="30px">
+            <mat-grid-tile (click)="viewDetails()">{{invoiceCard?.Invoice_num}}</mat-grid-tile>
+            <mat-grid-tile (click)="viewDetails()">{{invoiceCard?.custEmail}}</mat-grid-tile>
+            <mat-grid-tile (click)="viewDetails()">Amount: ${{invoiceCard?.Amount}}</mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</mat-card>
