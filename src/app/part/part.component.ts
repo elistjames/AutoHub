@@ -11,14 +11,27 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./part.component.css']
 })
 export class PartComponent implements OnInit {
-  @Input() partCard: Part | undefined;
+  @Input() partCard: Part = {
+    partNo: '',
+    price: 0,
+    make: '',
+    plateNum: '',
+    depNum: 1,
+    image: '',
+    supplierID: 0,
+    qty: 0
+  };
+
   signed_in = false;
   subscription!: Subscription;
 
-  constructor(public dialog: MatDialog, public authService: AuthenticationService) {}
-
+  constructor(public dialog: MatDialog, public authService: AuthenticationService) {
+    
+    
+  }
   ngOnInit(): void {
-    this.subscription = this.authService.authenticateUser().subscribe((value) => (this.signed_in = value));
+    this.signed_in = this.authService.signedIn();
+    console.log(this.signed_in);
   }
 
   openPart(): void {
@@ -30,6 +43,11 @@ export class PartComponent implements OnInit {
 
   onPurchase(): void{
     console.log('Purchase Part')
+  }
+
+  inStock(): boolean{
+    if(this.partCard.qty > 0){return true;}
+    return false;
   }
 
 }

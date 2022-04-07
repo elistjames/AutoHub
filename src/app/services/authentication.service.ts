@@ -15,7 +15,7 @@ const httpOptions = {
 export class AuthenticationService {
   private apiUrl = 'http://localhost:8000/customer'
   private signed_in: boolean = false;
-  private subject = new Subject<any>();
+  private subject = new Subject<boolean>();
   validLogin: boolean = false;
   emailAvailable: boolean = false;
   currentEmail = '';
@@ -27,7 +27,9 @@ export class AuthenticationService {
     l_name: '',
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.subject.next(this.signed_in);
+  }
 
   getProfile(): User {
     return this.user;
@@ -90,6 +92,8 @@ export class AuthenticationService {
     
   }
 
+  signedIn(): boolean { return this.signed_in;}
+
   validateLogin(): boolean {
     return this.validLogin;
   }
@@ -98,7 +102,7 @@ export class AuthenticationService {
     return this.emailAvailable;
   }
 
-  authenticateUser(): Observable<any> {
+  authenticateUser(): Observable<boolean> {
     return this.subject.asObservable();
   }
 

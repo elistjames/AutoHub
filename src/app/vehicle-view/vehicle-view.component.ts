@@ -51,7 +51,9 @@ export class VehicleViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.authService.authenticateUser().subscribe((value) => (this.signed_in = value));
+    this.signed_in = this.authService.signedIn();
+    console.log(this.signed_in);
+    
   }
 
   bookTestDrive(){

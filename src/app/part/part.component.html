@@ -6,11 +6,16 @@
           <button mat-icon-button (click)="openPart()">
             <mat-icon>build</mat-icon>
           </button>
+          
+        </div>
+        <div style>
+          <span style="font-size:14px; text-align:right;">In stock</span>
         </div>
       </mat-card-title>
     </mat-card-header>
     <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
     <mat-card-content class="dashboard-card-content">
+      <p>{{inStock()?'In stock: ':'Out of stock'}}{{inStock()?partCard.qty:''}}</p>
       <p>
         Price: $ {{partCard?.price}}
       </p>
