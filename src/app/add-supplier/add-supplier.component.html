@@ -1,0 +1,29 @@
+<div style="margin:30px">
+    <mat-card>
+        <h2>Suppliers</h2>
+        <hr>
+        
+        <div>
+            <div *ngIf="innerWidth<=800">
+                <mat-grid-list cols="1" rowHeight="100">
+                    <mat-grid-tile *ngFor="let supplier of suppliers">
+                        
+                        <app-supplier [supplierCard]="supplier" [mobile]="true"></app-supplier>
+                        
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <div *ngIf="innerWidth>800">
+                <mat-grid-list cols="1" rowHeight="80">
+                    <mat-grid-tile *ngFor="let supplier of suppliers">
+                        
+                        <app-supplier [supplierCard]="supplier" [mobile]="false"></app-supplier>
+                        
+                        
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </mat-card>
+    
+</div>

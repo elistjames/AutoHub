@@ -60,6 +60,9 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { InvoiceService } from './services/invoice.service';
 import { AppointmentService } from './services/appointment.service';
 import { PartService } from './services/part.service';
+import { AddSupplierComponent } from './add-supplier/add-supplier.component';
+import { SupplierService } from './services/supplier.service';
+import { SupplierComponent } from './supplier/supplier.component';
 
 
 
@@ -75,6 +78,7 @@ const routes: Routes = [
   { path: 'parts', component: PartsComponent },
   { path: 'employee-loading-page', component: EmployeeLoadingPageComponent },
   { path: 'parts-loading-page', component: PartsLoadingPageComponent },
+  { path: 'add-supplier', component: AddSupplierComponent },
 ]
 
 @NgModule({
@@ -106,6 +110,8 @@ const routes: Routes = [
     PartsLoadingPageComponent,
     InvoicesComponent,
     InvoiceViewComponent,
+    AddSupplierComponent,
+    SupplierComponent,
   ],
   imports: [
     BrowserModule,
@@ -149,7 +155,8 @@ const routes: Routes = [
     AppointmentsComponent,
     InvoiceService,
     AppointmentService,
-    PartService
+    PartService,
+    SupplierService
   ],
   bootstrap: [AppComponent]
 })
