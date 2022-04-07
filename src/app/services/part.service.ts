@@ -34,16 +34,20 @@ export class PartService {
   setFilter(newFilter: Filter){this.partFilter = newFilter;}
 
   getParts(): Observable<Part[]> {
-    return this.http.get<Part[]>(this.apiUrl);
+    return this.http.get<Part[]>(this.apiUrl+'get');
   }
 
   postPart(part: Part): Observable<Part>{
-    return this.http.post<Part>(this.apiUrl, part)
+    return this.http.post<Part>(this.apiUrl+'post', part)
   }
 
   verifyPartNumber(): Observable<Part[]> {
-    return this.http.get<Part[]>(this.apiUrl);
+    return this.http.get<Part[]>(this.apiUrl+'verify');
 
+  }
+
+  deletePart(partNo?: string): Observable<any>{
+    return this.http.delete<any>(this.apiUrl+partNo);
   }
 
   

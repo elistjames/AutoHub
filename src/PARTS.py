@@ -62,12 +62,12 @@ resource_fields = {
 #create PART resource
 class PARTS(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
-        def get(self):
+        def get(self, partNo):
                 result = PART.query.all() #return all parts to front end for querying
                 return result
 
         @marshal_with(resource_fields) #marshal with resource fields
-        def post(self):
+        def post(self, partNo):
                 args = part_post_args.parse_args() #parse arguemnts
                 result = PART.query.filter_by(partNo = args['partNo']).first() ##check to see if partNo exists already
                 if result != None: #if result is not there

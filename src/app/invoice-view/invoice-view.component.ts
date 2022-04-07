@@ -15,10 +15,11 @@ export class InvoiceViewComponent implements OnInit {
     Amount: 0,
     custEmail: '',
     depNum: 0,
-    notes: ''
-  }
+    notes: '',
+    date: ''
+  };
 
-  @Input() mobile: boolean = false;
+  @Input() innerWidth: number = 0;
 
   constructor(private invoiceService: InvoiceService, private router: Router, private invoices: InvoicesComponent) {
     

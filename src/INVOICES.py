@@ -25,7 +25,7 @@ class INVOICE(db.Model):
 
         #return format
         def __repr__(self):           
-                return f"Invoice(Invoice_num = {self.Invoice_num}, Amount = {self.Amount}, custEmail = {self.custEmail}, depNum = {self.depNum}, notes = {self.notes})"
+                return f"Invoice(Invoice_num = {self.Invoice_num}, Amount = {self.Amount}, custEmail = {self.custEmail}, depNum = {self.depNum}, notes = {self.notes}, date = {self.date})"
 
 #setup post argument parser
 invoice_post_args = reqparse.RequestParser()

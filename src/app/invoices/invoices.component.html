@@ -1,19 +1,29 @@
 <div style="margin: 10px;">
     <div *ngIf="!details">
         <div *ngIf="innerWidth<=800">
-            <mat-grid-list cols="1" rowHeight="100">
+            <mat-grid-list cols="1" rowHeight="120">
                 <mat-grid-tile *ngFor="let invoice of invoices">
                     
-                    <app-invoice-view [invoiceCard]="invoice" [mobile]="true"></app-invoice-view>
+                    <app-invoice-view [invoiceCard]="invoice" [innerWidth]="innerWidth"></app-invoice-view>
                     
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
-        <div *ngIf="innerWidth>800">
+        <div *ngIf="innerWidth>800&&innerWidth<=919">
+            <mat-grid-list cols="1" rowHeight="100">
+                <mat-grid-tile *ngFor="let invoice of invoices">
+                    
+                    <app-invoice-view [invoiceCard]="invoice" [innerWidth]="innerWidth"></app-invoice-view>
+                    
+                    
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div *ngIf="innerWidth>920">
             <mat-grid-list cols="1" rowHeight="80">
                 <mat-grid-tile *ngFor="let invoice of invoices">
                     
-                    <app-invoice-view [invoiceCard]="invoice" [mobile]="false"></app-invoice-view>
+                    <app-invoice-view [invoiceCard]="invoice" [innerWidth]="innerWidth"></app-invoice-view>
                     
                     
                 </mat-grid-tile>

@@ -1,31 +1,49 @@
-<mat-card class="mat-elevation-z4" class="dashboard-card" (click)="openPart()">
-    <mat-card-header>
-      <mat-card-title>
-        <div>
-          {{partCard?.make}}
-          <button mat-icon-button (click)="openPart()">
-            <mat-icon>build</mat-icon>
-          </button>
-          
+<mat-card class="mat-elevation-z4" class="dashboard-card">
+  <div *ngIf="!confirmation">
+    <div (click)="openPart()">
+      <mat-card-header>
+        <mat-card-title>
+          <div>
+            {{partCard?.make}}
+            <button mat-icon-button (click)="openPart()">
+              <mat-icon>build</mat-icon>
+            </button>
+            
+          </div>
+          <div>
+            <span style="font-size:14px; text-align:right;">{{supplier.name}}</span>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
+      <mat-card-content class="dashboard-card-content">
+        <label>{{inStock()?'In stock: ':'Out of stock'}}{{inStock()?partCard.qty:''}}</label>
+        
+        <p>
+          Price: $ {{partCard?.price}}
+        </p>
+        <div *ngIf="!signed_in">
+          <p>View Only - Sign in to purchase</p>
         </div>
-        <div>
-          <span style="font-size:14px; text-align:right;">{{supplier.name}}</span>
-        </div>
-      </mat-card-title>
-    </mat-card-header>
-    <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
-    <mat-card-content class="dashboard-card-content">
-      <label>{{inStock()?'In stock: ':'Out of stock'}}{{inStock()?partCard.qty:''}}</label>
-      
-      <p>
-        Price: $ {{partCard?.price}}
-      </p>
-      <div *ngIf="!signed_in">
-        <p>View Only - Sign in to purchase</p>
-      </div>
-      <div *ngIf="signed_in">
-        <button mat-raised-button color="primary" (click)="onPurchase()">Purchase</button>
-        <button *ngIf="!inStock()" mat-raised-button color="primary" style="margin-left: 10px" (click)="viewSupplierDetails()">Contact Supplier</button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        
+      </mat-card-content>
+    </div>
+    <div *ngIf="signed_in">
+      <button mat-raised-button color="primary" (click)="confirmation = true">Purchase</button>
+      <button *ngIf="!inStock()" mat-raised-button color="primary" style="margin-left: 10px" (click)="viewSupplierDetails()">Contact Supplier</button>
+    </div>
+  </div>
+  <div *ngIf="confirmation">
+    <h2>Order part</h2>
+    <h4>An AutoHub Maintenance representative will contact you when the part is ready for pickup</h4>
+    <h4>Make sure to bring you provide your banking info apon pick up</h4>
+    <div>
+      <button mat-icon-button mat-dialog-close (click)="onPurchase()">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button (click)="confirmation = false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

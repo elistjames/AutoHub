@@ -20,8 +20,9 @@ export class InvoicesComponent implements OnInit {
     Amount: 0,
     custEmail: '',
     depNum: 0,
-    notes: ''
-  }
+    notes: '',
+    date: ''
+  };
 
   /** Based on the screen size, switch from standard to one column per row */
   isHandsetObserver: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -39,6 +40,7 @@ export class InvoicesComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver, private invoiceService: InvoiceService) {
      this.invoiceService.getInvoices().subscribe((invoices: Invoice[]) => {
        this.invoices = invoices as Invoice[];
+       this.invoices = this.invoices.reverse();
     });
   }
 

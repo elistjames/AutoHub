@@ -4,4 +4,5 @@ export interface Invoice {
     custEmail: string;
     depNum: number;
     notes: string;
+    date: string;
 }

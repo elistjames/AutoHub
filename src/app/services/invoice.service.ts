@@ -14,4 +14,15 @@ export class InvoiceService {
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.apiUrl+411);
   }
+
+  postInvoice(invoice: Invoice): Observable<Invoice>{
+    let new_invoice = {
+      Amount: invoice.Amount,
+      custEmail: invoice.custEmail,
+      depNum: invoice.depNum,
+      notes: invoice.notes,
+      date: invoice.date
+    }
+    return this.http.post<Invoice>(this.apiUrl+invoice.Invoice_num, new_invoice);
+  }
 }

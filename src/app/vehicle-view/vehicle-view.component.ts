@@ -4,9 +4,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Appointment } from '../interfaces/Appointment';
+import { Invoice } from '../interfaces/Invoice';
 import {Vehicle} from '../interfaces/Vehicle';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { InvoiceService } from '../services/invoice.service';
+import { VehiclesService } from '../services/vehicles.service';
 
 
 @Component({
@@ -38,7 +41,9 @@ export class VehicleViewComponent implements OnInit {
     public authService: AuthenticationService,
     public datepipe: DatePipe,
     public appointmentService: AppointmentService,
-    private router: Router
+    private router: Router,
+    private invoiceService: InvoiceService,
+    private vehicleService: VehiclesService
   ) {
     if(data.colour == 'none'){
       this.noColour = true;
@@ -61,8 +66,31 @@ export class VehicleViewComponent implements OnInit {
     this.bookDrive = true;
   }
 
+  
+
   onPurchase(): void{
-    console.log('Purchase Part')
+    console.log('Purchase Vehicle')
+
+    this.invoiceService.getInvoices().subscribe((invoices) => {
+      let new_invoice:Invoice = {
+        Invoice_num: 0,
+        Amount: this.data.price,
+        custEmail: this.authService.getProfile().email,
+        depNum: 0,
+        notes: 'Make: '+this.data.make+'   PlateNum:'+this.data.plateNum+'   Colour: '+this.data.colour,
+        date: this.getDate()
+      };
+      if(invoices.length > 0){
+        new_invoice.Invoice_num = invoices.length;
+      }
+
+      this.invoiceService.postInvoice(new_invoice).subscribe((invoice) => {return;});
+      return;
+    });
+    this.vehicleService.deleteVehicle(this.data.plateNum).subscribe(() => {
+      this.router.navigate(['/loading-page']);
+      return;
+    });
   }
 
   getDate(): string {

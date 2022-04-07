@@ -20,7 +20,7 @@ cors = CORS(app)
 
 api.add_resource(VEHICLES, "/vehicle/<string:plateNum>")
 api.add_resource(EMPLOYEES, "/employee/<string:password>/<string:email>")
-api.add_resource(PARTS, "/part/")
+api.add_resource(PARTS, "/part/<string:partNo>")
 api.add_resource(CUSTOMERS, "/customer/<string:password>/<string:email>")
 api.add_resource(APPOINTMENTS, "/appointment/<string:cust_email>")
 api.add_resource(SUPPLIERS, "/supplier/<int:id>")
