@@ -31,6 +31,7 @@ export class VehicleViewComponent implements OnInit {
   preExistingAppointment: boolean = false;
   time = 0;
   confirmationMessage = false;
+  purchaseMessage = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Vehicle,
@@ -57,9 +58,11 @@ export class VehicleViewComponent implements OnInit {
   }
 
   bookTestDrive(){
-
-    
     this.bookDrive = true;
+  }
+
+  onPurchase(): void{
+    console.log('Purchase Part')
   }
 
   getDate(): string {

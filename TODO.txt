@@ -1,15 +1,11 @@
 TODO: part has attribut (quantity) - Qunatity can be zero. If quantitty == 0 then show show contact supplier button (GET SUPPLIERn through id)
 
 
-TODO: Supplier has ID name and phone
-
-
 TODO: When a customer buy on vehicle or part, desplay message, create invoice (sales employees can view these)
-
-TODO: Sales Employees view vehicles and can mark as sold
 
 
 TODO: Invoice has attribut (DEpNum) 
 
 
 TODO: *****make sure every page checks if user is signed in upon initializing (if not: rout to main page)
+

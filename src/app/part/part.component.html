@@ -8,14 +8,15 @@
           </button>
           
         </div>
-        <div style>
-          <span style="font-size:14px; text-align:right;">In stock</span>
+        <div>
+          <span style="font-size:14px; text-align:right;">{{supplier.name}}</span>
         </div>
       </mat-card-title>
     </mat-card-header>
     <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
     <mat-card-content class="dashboard-card-content">
-      <p>{{inStock()?'In stock: ':'Out of stock'}}{{inStock()?partCard.qty:''}}</p>
+      <label>{{inStock()?'In stock: ':'Out of stock'}}{{inStock()?partCard.qty:''}}</label>
+      
       <p>
         Price: $ {{partCard?.price}}
       </p>
@@ -24,6 +25,7 @@
       </div>
       <div *ngIf="signed_in">
         <button mat-raised-button color="primary" (click)="onPurchase()">Purchase</button>
+        <button *ngIf="!inStock()" mat-raised-button color="primary" style="margin-left: 10px" (click)="viewSupplierDetails()">Contact Supplier</button>
       </div>
     </mat-card-content>
   </mat-card>

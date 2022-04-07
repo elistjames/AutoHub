@@ -4,6 +4,7 @@ import {VehicleViewComponent} from "../vehicle-view/vehicle-view.component";
 import {Vehicle} from '../interfaces/Vehicle';
 import { VehiclesService } from '../services/vehicles.service';
 import { ContentComponent } from '../content/content.component';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -34,14 +35,17 @@ export class VehicleComponent implements OnInit {
   newPrice!: number;
   newMake!: string;
   
+  signed_in = false;
 
   filledMessage = false;
 
-  constructor(public dialog: MatDialog, private content: ContentComponent, private vehicleService: VehiclesService) {
+  constructor(public dialog: MatDialog, private content: ContentComponent, private vehicleService: VehiclesService, private authService: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
+    this.signed_in = this.authService.signedIn();
+    console.log(this.signed_in);
     this.newPrice = this.vehicleCard.price;
     this.newMake = this.vehicleCard.make;
   }
@@ -73,6 +77,8 @@ export class VehicleComponent implements OnInit {
       return;
     });
   }
+
+  
 
   markVehicle(){
     this.content.markVehicle(this.vehicleCard.plateNum);

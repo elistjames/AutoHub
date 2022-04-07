@@ -2,8 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import { Subscription } from 'rxjs';
 import { Part } from '../interfaces/Part'
+import { Supplier } from '../interfaces/Supplier';
 import { PartViewComponent } from '../part-view/part-view.component';
 import { AuthenticationService } from '../services/authentication.service';
+import { SupplierService } from '../services/supplier.service';
 
 @Component({
   selector: 'app-part',
@@ -25,8 +27,15 @@ export class PartComponent implements OnInit {
   signed_in = false;
   subscription!: Subscription;
 
-  constructor(public dialog: MatDialog, public authService: AuthenticationService) {
-    
+  viewSupplier = false;
+
+  supplier: Supplier = {
+    id: 0,
+    name: '',
+    phoneNum: ''
+  };
+
+  constructor(public dialog: MatDialog, public authService: AuthenticationService, private supplierService: SupplierService) {
     
   }
   ngOnInit(): void {
@@ -48,6 +57,14 @@ export class PartComponent implements OnInit {
   inStock(): boolean{
     if(this.partCard.qty > 0){return true;}
     return false;
+  }
+
+  viewSupplierDetails() {
+    this.viewSupplier = true;
+
+    this.supplierService.getSupplier(this.partCard.supplierID).subscribe((supplier) => {
+      this.supplier = supplier as Supplier;
+    });
   }
 
 }

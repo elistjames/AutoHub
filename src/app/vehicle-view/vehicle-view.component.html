@@ -1,12 +1,17 @@
 <div>
-  <div *ngIf="!confirmationMessage">
-    <h2>{{data.make}}</h2>
+  <div *ngIf="!confirmationMessage && !purchaseMessage">
+    <label style="font-size: 18px">{{data.make}}</label>
+    <button style="margin-left: 20px;" mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
     <h3>Price: $ {{data.price}}</h3>
-    <button mat-raised-button color="primary"  mat-dialog-close>Close</button>
+    <hr>
     <button *ngIf="signed_in" style="margin-left: 10px" mat-raised-button color="primary" (click)="bookDrive = !bookDrive">{{bookDrive?'Cancel':'Book test drive'}}</button>
+    <button *ngIf="signed_in && !bookDrive" style="margin-left: 10px" mat-raised-button color="primary" (click)="purchaseMessage = true">Purchase</button>
+    
     <label *ngIf="!signed_in" style="margin-left: 10px; font-size: 11px;">Sign in for more options</label>
     <hr/>
-    <div *ngIf="!bookDrive">
+    <div *ngIf="!bookDrive && !purchaseMessage">
       <mat-dialog-content>
         <div fxLayout="column">
     
@@ -18,11 +23,11 @@
           <p *ngIf="!noColour">Color: {{data.colour}}</p>
           <p *ngIf="!noWeight">Weight: {{data.weight}}</p>
           <p *ngIf="!noSpeed">Top Speed: {{data.topSpeed}} km/h</p>
-          <p>Plate #: {{data.numSeats}}</p>
+          <p>Plate #: {{data.plateNum}}</p>
         </div>
       </mat-dialog-content>
     </div>
-    <div *ngIf="bookDrive">
+    <div *ngIf="bookDrive && !purchaseMessage">
       <div>
         <mat-card class="demo-inline-calendar-card">
           <mat-calendar [(selected)]="selectedDate"></mat-calendar>
@@ -54,5 +59,18 @@
     <h4>If you already have a schedualed appointment, this test drive will replace it</h4>
     <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Ok</button>
     <button *ngIf="allFilled()" style="margin-left: 10px" mat-raised-button color="accent" type="submit" (click)="confirmationMessage = false; bookDrive=false;">Cancel</button>
+  </div>
+  <div *ngIf="purchaseMessage && !bookDrive">
+    <h2>Order vehicle</h2>
+    <h4>An AutoHub sales representative will contact you shorlty with next steps</h4>
+    <h4>Make sure to bring you provide your banking info apon pick up</h4>
+    <div>
+      <button mat-icon-button (click)="onPurchase()">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button (click)="purchaseMessage = false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
