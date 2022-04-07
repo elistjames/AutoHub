@@ -46,6 +46,14 @@ export class PartService {
 
   }
 
+  updatePart(part: Part): Observable<any>{
+    let updated = {
+      qty: part.qty,
+      supplierID: part.supplierID
+    }
+    return this.http.put<any>(this.apiUrl+part.partNo, updated)
+  }
+
   deletePart(partNo?: string): Observable<any>{
     return this.http.delete<any>(this.apiUrl+partNo);
   }

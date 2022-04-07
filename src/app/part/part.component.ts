@@ -84,7 +84,8 @@ export class PartComponent implements OnInit {
       this.invoiceService.postInvoice(new_invoice).subscribe((invoice) => {return;});
       return;
     });
-    this.partService.deletePart(this.partCard.partNo).subscribe(() => {
+    this.partCard.qty -= 1;
+    this.partService.updatePart(this.partCard).subscribe(() => {
       this.router.navigate(['/parts-loading-page']);
       return;
     });

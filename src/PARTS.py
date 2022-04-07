@@ -36,7 +36,7 @@ part_post_args.add_argument ("make", type = str, help = "make is a string", requ
 part_post_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = True)
 part_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
 part_post_args.add_argument ("image", type = str, help = "image is a string", required = False)
-part_post_args.add_argument ("supplierID", type = int, help = "image is a int", required = True)
+part_post_args.add_argument ("supplierID", type = int, help = "supplierID in an int", required = True)
 part_post_args.add_argument ("qty", type = int, help = "qty is an int", required = True)
 
 #setup put argument parser
@@ -45,6 +45,7 @@ part_put_args.add_argument ("price", type = float, help = "price is a float", re
 part_put_args.add_argument ("make", type = str, help = "make is a string", required = False)
 part_put_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = False)
 part_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
+part_put_args.add_argument ("supplierID", type = int, help = "supplierID in an int", required = False)
 part_put_args.add_argument ("qty", type = int, help = "qty is an int", required = False)
 
 #set path resource fields
@@ -94,7 +95,11 @@ class PARTS(Resource):
                 if args["plateNum"]:
                         result.plateNum = args['plateNum']        
                 if args["depNum"]:
-                        result.depNum = args['depNum']           
+                        result.depNum = args['depNum']
+                if args["supplierID"]:
+                        result.supplierID = args['supplierID']
+                if args["qty"]:
+                        result.qty = args['qty']
                 db.session.commit() #commit session
                 return result
 
