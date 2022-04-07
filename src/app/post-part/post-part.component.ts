@@ -6,6 +6,8 @@ import { ContentComponent } from '../content/content.component';
 import { Part } from '../interfaces/Part';
 import { PartService } from '../services/part.service';
 import { PartsComponent } from '../parts/parts.component';
+import { Supplier } from '../interfaces/Supplier';
+import { SupplierService } from '../services/supplier.service';
 
 @Component({
   selector: 'app-post-part',
@@ -14,17 +16,27 @@ import { PartsComponent } from '../parts/parts.component';
 })
 export class PostPartComponent implements OnInit {
   price = 0;
+  qty = 0;
   imageChangedEvent: any = '';
   imageFile: any = '';
   croppedImage: any = '';
   selectedCategory = 'none';
+  selectedSupplier = 0;
   isLinear = true;
   newPart!: Part;
   imageFormGroup!: FormGroup;
   specsFormGroup!: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private partService: PartService, private parts:PartsComponent) {
+  suppliers: Supplier[] = [];
 
+  constructor(private _formBuilder: FormBuilder,
+    private content: ContentComponent,
+    private partService: PartService,
+    private parts:PartsComponent,
+    private supplierService: SupplierService) {
+      this.supplierService.getAllSuppliers().subscribe((suppliers) => {
+        this.suppliers = suppliers as Supplier[];
+      });
   }
 
 
@@ -68,6 +80,9 @@ export class PostPartComponent implements OnInit {
       return false;
     }
     if(this.price <= 0 || this.price > 100000){
+      return false;
+    }
+    if(this.qty < 1){
       return false;
     }
     return true;
@@ -116,7 +131,9 @@ export class PostPartComponent implements OnInit {
         make: this.specsFormGroup.get('make')?.value,
         plateNum: this.selectedCategory,
         depNum: 1,
-        image: this.croppedImage
+        image: this.croppedImage,
+        supplierID: this.selectedSupplier,
+        qty: this.qty
       }
   
       this.parts.postPart(newPart);

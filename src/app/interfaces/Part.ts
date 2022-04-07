@@ -5,4 +5,6 @@ export interface Part {
     plateNum?: string;
     depNum: number;
     image: string;
+    supplierID: number;
+    qty: number;
 }

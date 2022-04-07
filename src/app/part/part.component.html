@@ -11,11 +11,11 @@
     </mat-card-header>
     <img width="300" mat-card-image src='{{partCard?.image}}' alt="Photo of Part">
     <mat-card-content class="dashboard-card-content">
-      <h3>
+      <p>
         Price: $ {{partCard?.price}}
-      </h3>
+      </p>
       <div *ngIf="!signed_in">
-        <h3>View Only - Sign in to purchase</h3>
+        <p>View Only - Sign in to purchase</p>
       </div>
       <div *ngIf="signed_in">
         <button mat-raised-button color="primary" (click)="onPurchase()">Purchase</button>

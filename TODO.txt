@@ -10,3 +10,6 @@ TODO: Sales Employees view vehicles and can mark as sold
 
 
 TODO: Invoice has attribut (DEpNum) 
+
+
+TODO: *****make sure every page checks if user is signed in upon initializing (if not: rout to main page)
