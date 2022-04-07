@@ -21,10 +21,12 @@ class PART(db.Model):
         plateNum = db.Column(db.String, nullable = False)
         depNum = db.Column(db.Integer, nullable = False)
         image = db.Column(db.String, nullable = True)
+        supplierID = db.Column(db.Integer, nullable = False)
+        qty = db.Column(db.Integer, nullable = False)
 
         #return format
         def __repr__(self):           
-                return f"Part(partNo = {self.partNo}, price = {self.price}, make = {self.make}, plateNum = {self.plateNum}, depNum = {self.depNum}, image = {self.image})"
+                return f"Part(partNo = {self.partNo}, price = {self.price}, make = {self.make}, plateNum = {self.plateNum}, depNum = {self.depNum}, image = {self.image}, supplierID = {self.supplierID}, qty = {self.qty})"
 
 #setup post argument parser
 part_post_args = reqparse.RequestParser()
@@ -34,6 +36,8 @@ part_post_args.add_argument ("make", type = str, help = "make is a string", requ
 part_post_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = True)
 part_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
 part_post_args.add_argument ("image", type = str, help = "image is a string", required = False)
+part_post_args.add_argument ("supplierID", type = int, help = "image is a int", required = True)
+part_post_args.add_argument ("qty", type = int, help = "qty is an int", required = True)
 
 #setup put argument parser
 part_put_args = reqparse.RequestParser()
@@ -41,6 +45,7 @@ part_put_args.add_argument ("price", type = float, help = "price is a float", re
 part_put_args.add_argument ("make", type = str, help = "make is a string", required = False)
 part_put_args.add_argument ("plateNum", type = str, help = "plateNum is a string", required = False)
 part_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
+part_put_args.add_argument ("qty", type = int, help = "qty is an int", required = False)
 
 #set path resource fields
 resource_fields = {
@@ -50,6 +55,8 @@ resource_fields = {
         'plateNum' : fields.String,
         'depNum' : fields.Integer,
         'image' : fields.String,
+        'supplierID' : fields.Integer,
+        'qty' : fields.Integer
 }
 
 #create PART resource
@@ -66,7 +73,7 @@ class PARTS(Resource):
                 if result != None: #if result is not there
                         abort(409, message = "Part number taken...")
 
-                part = PART(partNo = args['partNo'], price = args['price'], make = args['make'], plateNum = args['plateNum'], depNum = args['depNum'], image = args['image']) #create PART object
+                part = PART(partNo = args['partNo'], price = args['price'], make = args['make'], plateNum = args['plateNum'], depNum = args['depNum'], image = args['image'], supplierID = args['supplierID'], qty = args['qty']) #create PART object
     
                 db.session.add(part) #add PART
                 db.session.commit() #commit changes
