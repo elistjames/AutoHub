@@ -1,4 +1,5 @@
 from dataclasses import field
+from datetime import datetime
 from unicodedata import category
 from flask import Flask, request;
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
@@ -20,6 +21,7 @@ class INVOICE(db.Model):
         custEmail = db.Column(db.String, nullable = False)
         depNum = db.Column(db.Integer, nullable = False)
         notes = db.Column(db.String, nullable = False)
+        date = db.Column(db.String, nullable = False)
 
         #return format
         def __repr__(self):           
@@ -31,12 +33,15 @@ invoice_post_args.add_argument ("Amount", type = float, help = "Amount is a floa
 invoice_post_args.add_argument ("custEmail", type = str, help = "custEmail is a string", required = True)
 invoice_post_args.add_argument ("depNum", type = int, help = "depNum is an int", required = True)
 invoice_post_args.add_argument ("notes", type = str, help = "notes is an string", required = True)
+invoice_post_args.add_argument ("date", type = str, help = "date is an date", required = True)
 
 #setup put argument parser
 invoice_put_args = reqparse.RequestParser()
 invoice_put_args.add_argument ("Amount", type = float, help = "Amount is a float", required = False)
 invoice_put_args.add_argument ("custEmail", type = str, help = "custEmail is a string", required = False)
 invoice_put_args.add_argument ("depNum", type = int, help = "depNum is an int", required = False)
+invoice_put_args.add_argument ("notes", type = str, help = "notes is an string", required = False)
+invoice_put_args.add_argument ("date", type = str, help = "date is an date", required = False)
 
 #set path resource fields
 resource_fields = {
@@ -44,7 +49,8 @@ resource_fields = {
         'Amount' : fields.Float,
         'custEmail' : fields.String,
         'depNum' : fields.Integer,
-        'notes' : fields.String
+        'notes' : fields.String,
+        'date' : fields.String
 }
 
 #create INVOICE resource
@@ -61,7 +67,7 @@ class INVOICES(Resource):
                 if result != None: #if result is not there
                         abort(409, message = "Invoice number taken...")
 
-                invoice = INVOICE(Invoice_num = Invoice_num, Amount = args['Amount'], custEmail = args['custEmail'], depNum = args['depNum']) #create INVOICE object
+                invoice = INVOICE(Invoice_num = Invoice_num, Amount = args['Amount'], custEmail = args['custEmail'], depNum = args['depNum'], notes = args['notes'], date = args['date']) #create INVOICE object
     
                 db.session.add(invoice) #add INVOICE
                 db.session.commit() #commit changes
@@ -80,7 +86,11 @@ class INVOICES(Resource):
                 if args["custEmail"]:
                         result.custEmail = args['custEmail']        
                 if args["depNum"]:
-                        result.depNum = args['depNum']           
+                        result.depNum = args['depNum']
+                if args["notes"]:
+                        result.notes = args['notes']  
+                if args["date"]:
+                        result.date = args['date']             
                 db.session.commit() #commit session
                 return result
 
