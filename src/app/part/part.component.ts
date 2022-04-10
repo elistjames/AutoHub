@@ -8,6 +8,7 @@ import { Part } from '../interfaces/Part'
 import { Supplier } from '../interfaces/Supplier';
 import { PartViewComponent } from '../part-view/part-view.component';
 import { AuthenticationService } from '../services/authentication.service';
+import { EmployeeService } from '../services/employee.service';
 import { InvoiceService } from '../services/invoice.service';
 import { PartService } from '../services/part.service';
 import { SupplierService } from '../services/supplier.service';
@@ -33,6 +34,7 @@ export class PartComponent implements OnInit {
   date!: any;
 
   signed_in = false;
+  emp_signed_in = false;
   subscription!: Subscription;
 
   viewSupplier = false;
@@ -44,7 +46,8 @@ export class PartComponent implements OnInit {
   };
 
   constructor(public dialog: MatDialog, 
-    public authService: AuthenticationService, 
+    public authService: AuthenticationService,
+    private empService: EmployeeService, 
     private supplierService: SupplierService, 
     private invoiceService: InvoiceService, 
     private datepipe: DatePipe,
@@ -55,6 +58,7 @@ export class PartComponent implements OnInit {
 
   ngOnInit(): void {
     this.signed_in = this.authService.signedIn();
+    this.emp_signed_in = this.empService.signedIn();
     console.log(this.signed_in);
   }
 
@@ -81,14 +85,18 @@ export class PartComponent implements OnInit {
         new_invoice.Invoice_num = invoices.length;
       }
 
-      this.invoiceService.postInvoice(new_invoice).subscribe((invoice) => {return;});
+      this.invoiceService.postInvoice(new_invoice).subscribe((invoice) => {
+        this.partCard.qty -= 1;
+        console.log(this.partCard.qty);
+        this.partService.updatePart(this.partCard).subscribe(() => {
+          this.router.navigate(['/parts-loading-page']);
+          return;
+        });
+        return;
+      });
       return;
     });
-    this.partCard.qty -= 1;
-    this.partService.updatePart(this.partCard).subscribe(() => {
-      this.router.navigate(['/parts-loading-page']);
-      return;
-    });
+    
   }
 
   getDate(): string {

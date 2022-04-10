@@ -5,7 +5,7 @@
 <div *ngIf="parts.length > 0">
   <div *ngIf="innerWidth<400" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols=1 rowHeight=550px>
+    <mat-grid-list cols=1 rowHeight=575px>
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>

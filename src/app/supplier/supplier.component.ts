@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { Supplier } from '../interfaces/Supplier';
 
 @Component({
@@ -15,13 +16,13 @@ export class SupplierComponent implements OnInit {
   };
   @Input() mobile: boolean = false;
 
-  constructor() { }
+  constructor(private suppliers: AddSupplierComponent) { }
 
   ngOnInit(): void {
   }
 
   removeSupplier(){
-    
+    this.suppliers.removeSupplier(this.supplierCard.id);
   }
 
 }

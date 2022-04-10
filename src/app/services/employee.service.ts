@@ -31,6 +31,8 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
+  signedIn(): boolean { return this.signed_in;}
+
   getEmployeeProfile(): Employee {
     return this.employee;
   }

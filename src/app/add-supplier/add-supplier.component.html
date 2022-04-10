@@ -11,6 +11,15 @@
                         <app-supplier [supplierCard]="supplier" [mobile]="true"></app-supplier>
                         
                     </mat-grid-tile>
+                    <mat-grid-tile *ngIf="!addSupplier">
+                        <mat-card class="mat-elevation-z4" class="dashboard-card" (click)="addSupplier = true;">
+                            <div>
+                                <mat-icon class="add">
+                                    add
+                                </mat-icon>
+                            </div>
+                        </mat-card>
+                    </mat-grid-tile>
                 </mat-grid-list>
             </div>
             <div *ngIf="innerWidth>800">
@@ -21,8 +30,35 @@
                         
                         
                     </mat-grid-tile>
+                    <mat-grid-tile *ngIf="!addSupplier">
+                        <mat-card class="mat-elevation-z4" class="dashboard-card" (click)="addSupplier = true;">
+                            <div>
+                                <mat-icon class="add">
+                                    add
+                                </mat-icon>
+                            </div>
+                        </mat-card>
+                    </mat-grid-tile>
                 </mat-grid-list>
             </div>
+        </div>
+        <div *ngIf="addSupplier" style="margin-left: 30px">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="supplier.name">
+                <mat-hint *ngIf="invalidName" style="color:red">Please enter a valid name</mat-hint>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input matInput [(ngModel)]="supplier.phoneNum">
+                <mat-hint *ngIf="invalidPhone" style="color:red">INVALID: format(#########)</mat-hint>
+            </mat-form-field>
+            <button style="margin-left:65px" mat-icon-button (click)="submitNew()">
+                <mat-icon aria-label="Add">add</mat-icon>
+            </button>
+            <button style="margin-left:10px" mat-icon-button (click)="addSupplier = false;">
+                <mat-icon aria-label="Close">remove</mat-icon>
+            </button> 
         </div>
     </mat-card>
     

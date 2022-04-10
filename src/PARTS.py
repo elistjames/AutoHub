@@ -87,19 +87,22 @@ class PARTS(Resource):
                 if not result:
                         abort(404, message = "Could not find part number") #display error message
 
+                
+
+
                 #arguments are passed in, update them
-                if args["price"]:
-                        result.price = args['price']
-                if args["make"]:
-                        result.make = args['make']        
-                if args["plateNum"]:
-                        result.plateNum = args['plateNum']        
-                if args["depNum"]:
-                        result.depNum = args['depNum']
-                if args["supplierID"]:
-                        result.supplierID = args['supplierID']
-                if args["qty"]:
-                        result.qty = args['qty']
+                
+                result.price = args['price']
+                
+                result.make = args['make']        
+                
+                result.plateNum = args['plateNum']        
+                
+                result.depNum = args['depNum']
+               
+                result.supplierID = args['supplierID']
+                
+                result.qty = args['qty']
                 db.session.commit() #commit session
                 return result
 

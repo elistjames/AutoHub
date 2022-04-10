@@ -48,9 +48,15 @@ export class PartService {
 
   updatePart(part: Part): Observable<any>{
     let updated = {
-      qty: part.qty,
-      supplierID: part.supplierID
+      price: part.price,
+      make: part.make,
+      plateNum: part.plateNum,
+      depNum: part.depNum,
+      supplierID: part.supplierID,
+      qty: part.qty
     }
+    console.log(part.qty);
+    console.log(updated.qty);
     return this.http.put<any>(this.apiUrl+part.partNo, updated)
   }
 

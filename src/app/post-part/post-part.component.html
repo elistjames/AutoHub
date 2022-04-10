@@ -44,7 +44,7 @@
               <mat-option value="OT">Truck</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field class="full-width" appearance="fill">
+          <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input matInput placeholder="Ex. Steering Wheel" formControlName="make">
             <mat-hint align="start"><p>Correct spelling will increase the chance of your post being seen</p> </mat-hint>
@@ -70,13 +70,6 @@
             <input matInput type="number" [(ngModel)]="price" placeholder="Price" [ngModelOptions]="{standalone: true}">
             <mat-hint align="start"><p>Cannot be 0 and the most you can post a vehicle for is $10,000</p> </mat-hint>
           </mat-form-field>
-          <mat-slider
-            [(ngModel)]="price"
-            thumbLabel
-            [displayWith]="formatLabel"
-            [max]="10000"
-            [min]="0"
-            aria-label="units" [ngModelOptions]="{standalone: true}"></mat-slider>
         </div>
         <div style="margin-top: 10px">
           <button mat-raised-button color="accent" matStepperPrevious>Back</button>

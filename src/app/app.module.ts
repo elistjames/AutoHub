@@ -156,7 +156,8 @@ const routes: Routes = [
     InvoiceService,
     AppointmentService,
     PartService,
-    SupplierService
+    SupplierService,
+    AddSupplierComponent
   ],
   bootstrap: [AppComponent]
 })

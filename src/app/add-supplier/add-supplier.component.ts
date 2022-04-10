@@ -20,6 +20,11 @@ export class AddSupplierComponent implements OnInit {
     phoneNum:''
   };
 
+  invalidPhone = false;
+  invalidName = false;
+
+  addSupplier = false;
+
   suppliers: Supplier[] = [];
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -53,5 +58,73 @@ export class AddSupplierComponent implements OnInit {
     this.innerWidth = event.target.innerWidth;
   }
 
+  submitNew(){
+    this.invalidName = false;
+    this.invalidPhone = false;
+    
+    if(this.supplier.phoneNum.length != 10 || !this.isNumber(this.supplier.phoneNum)){
+      this.invalidPhone = true;
+    }
 
+    if(this.supplier.name.replace(/\s/g, '') == ''){
+      this.invalidName = true;
+      return;
+    }
+
+    if(this.invalidPhone){ return;}
+
+    this.invalidName = false;
+    this.invalidPhone = false;
+    this.addSupplier = false;
+
+    let formattedNumber = '';
+
+    for(let i = 0; i < this.supplier.phoneNum.length; i++){
+      if(i == 3 || i == 6){
+        formattedNumber += '-';
+      }
+      formattedNumber += this.supplier.phoneNum[i];
+    }
+    console.log(formattedNumber);
+
+    this.supplier.phoneNum = formattedNumber;
+
+    this.supplierService.getAllSuppliers().subscribe((suppliers) => {
+      let current  = suppliers as Supplier[];
+
+      let newID = current[current.length - 1].id+1;
+
+      this.supplier.id = newID;
+
+      this.supplierService.postSupplier(this.supplier).subscribe((suppliers) => {
+        this.suppliers = suppliers as Supplier[];
+        this.supplier.id = 0;
+        this.supplier.name = '';
+        this.supplier.phoneNum = '';
+        return;
+      });
+      return;
+    });
+     
+  }
+
+  removeSupplier(id:number){
+    this.supplierService.deleteSupplier(id).subscribe(()=>{
+      this.supplierService.getAllSuppliers().subscribe((suppliers) => {
+        this.suppliers = suppliers as Supplier[];
+        return;
+      });
+      return;
+    })
+    return;
+  }
+
+  isNumber(phoneNum: string): boolean{
+    for(let i = 0; i < phoneNum.length; i++){
+      if(phoneNum[1].charCodeAt(0) < 48 || phoneNum[1].charCodeAt(0) > 57){
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -79,7 +79,7 @@ export class PostPartComponent implements OnInit {
     if(this.selectedCategory == 'none'){
       return false;
     }
-    if(this.price <= 0 || this.price > 100000){
+    if(this.price <= 0 || this.price > 10000){
       return false;
     }
     if(this.qty < 1){

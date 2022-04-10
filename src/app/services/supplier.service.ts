@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AddSupplierComponent } from '../add-supplier/add-supplier.component';
 import { Supplier } from '../interfaces/Supplier';
 
 @Injectable({
@@ -20,11 +21,15 @@ export class SupplierService {
     return this.http.get<Supplier>(this.apiUrl+id);
   }
 
-  postSupplier(supplier: Supplier): Observable<Supplier> {
+  postSupplier(supplier: Supplier): Observable<Supplier[]> {
     let supDetails = {
       name: supplier.name,
       phoneNum: supplier.phoneNum
     }
-    return this.http.post<Supplier>(this.apiUrl+supplier.id, supDetails);
+    return this.http.post<Supplier[]>(this.apiUrl+supplier.id, supDetails);
+  }
+
+  deleteSupplier(id:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl+id);
   }
 }

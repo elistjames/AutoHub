@@ -1,0 +1,12 @@
+.dashboard-card {
+  background-color:rgb(49, 49, 49);
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-card:hover {
+  background-color: rgb(133, 133, 133);
+}

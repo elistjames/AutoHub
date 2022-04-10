@@ -1,0 +1,50 @@
+.dashboard-card {
+  background-color: rgb(49, 49, 49);
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  
+  height: 45px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.dashboard-card:hover {
+  background-color: rgb(133, 133, 133);
+}
+
+.input-card {
+  background-color: rgb(49, 49, 49);
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  
+  height: 90px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.add {
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.add::hover {
+  
+  border: 3px #fff
+  
+}
+
+
+.add-no-hover {
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

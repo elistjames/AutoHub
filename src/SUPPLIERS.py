@@ -69,7 +69,7 @@ class SUPPLIERS(Resource):
     
                 db.session.add(supplier) #add SUPPLIER
                 db.session.commit() #commit changes
-                return supplier, 201
+                return SUPPLIER.query.all()
 
         @marshal_with(resource_fields) #marshal with resource fields
         def put(self, id):

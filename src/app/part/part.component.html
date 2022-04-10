@@ -10,8 +10,8 @@
             </button>
             
           </div>
-          <div>
-            <span style="font-size:14px; text-align:right;">{{supplier.name}}</span>
+          <div *ngIf="viewSupplier">
+            <span style="font-size:14px; text-align:right;">{{supplier.name}} Phone: {{supplier.phoneNum}}</span>
           </div>
         </mat-card-title>
       </mat-card-header>
@@ -22,14 +22,14 @@
         <p>
           Price: $ {{partCard?.price}}
         </p>
-        <div *ngIf="!signed_in">
+        <div *ngIf="!signed_in  && !emp_signed_in">
           <p>View Only - Sign in to purchase</p>
         </div>
         
       </mat-card-content>
     </div>
     <div *ngIf="signed_in">
-      <button mat-raised-button color="primary" (click)="confirmation = true">Purchase</button>
+      <button *ngIf="inStock()" mat-raised-button color="primary" (click)="confirmation = true">Purchase</button>
       <button *ngIf="!inStock()" mat-raised-button color="primary" style="margin-left: 10px" (click)="viewSupplierDetails()">Contact Supplier</button>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <h4>An AutoHub Maintenance representative will contact you when the part is ready for pickup</h4>
     <h4>Make sure to bring you provide your banking info apon pick up</h4>
     <div>
-      <button mat-icon-button mat-dialog-close (click)="onPurchase()">
+      <button mat-icon-button (click)="onPurchase()">
         <mat-icon>done</mat-icon>
       </button>
       <button mat-icon-button (click)="confirmation = false">
