@@ -23,7 +23,8 @@ export class AppointmentViewComponent implements OnInit {
     depNum: 0,
     description: ''
   };
-  @Input() mobile: boolean = false;
+  
+  @Input() innerWidth: number = 0;
 
   timeMap: TimeMap = {
     [9]: '9:00 am',

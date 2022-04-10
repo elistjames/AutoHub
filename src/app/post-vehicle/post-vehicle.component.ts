@@ -5,6 +5,7 @@ import { MatSlider} from "@angular/material/slider";
 import { Vehicle } from '../interfaces/Vehicle';
 import { VehiclesService } from '../services/vehicles.service';
 import { ContentComponent } from '../content/content.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -29,11 +30,16 @@ export class PostVehicleComponent implements OnInit {
   selectedSeats: number = 1;
   selectedYear: number = new Date().getFullYear() - 10;
   plateNum = '';
+  selectedDate: any;
+  today!: Date;
+  date!: any;
+  preExistingAppointment: boolean = false;
+  time = 0;
 
   
 
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService) {
+  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService, public datepipe: DatePipe,) {
 
     this.setupYears();
   }
@@ -105,6 +111,12 @@ export class PostVehicleComponent implements OnInit {
       return text;
   }
 
+  confirmDate(){
+    this.today = new Date(this.getDate());
+    this.date = this.today.setDate(this.today.getDate() + 7);
+    
+  }
+
 
 
   onSubmit(): void {
@@ -153,8 +165,6 @@ export class PostVehicleComponent implements OnInit {
     });
   }
 
-
-
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
@@ -171,6 +181,11 @@ export class PostVehicleComponent implements OnInit {
   }
   loadImageFailed() {
     /* show message */
+  }
+
+  getDate(): string {
+    this.date=new Date();
+    return <string>this.datepipe.transform(this.date, "yyyy-MM-dd");
   }
 
 

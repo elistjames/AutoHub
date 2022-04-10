@@ -57,7 +57,7 @@
   <div *ngIf="confirmationMessage">
     <h2>One appointment at a time</h2>
     <h4>If you already have a schedualed appointment, this test drive will replace it</h4>
-    <button *ngIf="allFilled()" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Ok</button>
+    <button *ngIf="allFilled()" mat-raised-button mat-dialog-close color="primary" type="submit" (click)="onSubmit()">Ok</button>
     <button *ngIf="allFilled()" style="margin-left: 10px" mat-raised-button color="accent" type="submit" (click)="confirmationMessage = false; bookDrive=false;">Cancel</button>
   </div>
   <div *ngIf="purchaseMessage && !bookDrive">

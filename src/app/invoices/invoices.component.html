@@ -9,6 +9,7 @@
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
+        
         <div *ngIf="innerWidth>800&&innerWidth<=919">
             <mat-grid-list cols="1" rowHeight="100">
                 <mat-grid-tile *ngFor="let invoice of invoices">
@@ -19,6 +20,7 @@
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
+
         <div *ngIf="innerWidth>920">
             <mat-grid-list cols="1" rowHeight="80">
                 <mat-grid-tile *ngFor="let invoice of invoices">

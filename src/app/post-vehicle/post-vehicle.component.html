@@ -115,11 +115,21 @@
                 style="margin-left: 5px"
                 color="primary"
                 mat-raised-button
-                (click)="onSubmit()"
-                routerLink="/">
+                (click)="confirmDate();"
+                matStepperNext>
           Upload
         </button>
       </div>
     </form>
+  </mat-step>
+  <mat-step>
+    <div>
+      <h1>Important:</h1>
+      <br>
+      <h3>Please bring the car to the local dealsership before {{this.today}}</h3>
+    </div>
+    <div style="margin-top: 10px">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Ok</button>
+    </div>
   </mat-step>
 </mat-stepper>

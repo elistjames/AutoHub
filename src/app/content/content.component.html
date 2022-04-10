@@ -109,7 +109,7 @@
   </div>
   <div *ngIf="innerWidth>=960&&innerWidth<1000" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="2" rowHeight="550">
+    <mat-grid-list cols="2" rowHeight="500">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
       </mat-grid-tile>
