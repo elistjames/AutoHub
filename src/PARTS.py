@@ -92,17 +92,23 @@ class PARTS(Resource):
 
                 #arguments are passed in, update them
                 
-                result.price = args['price']
+                if args["price"]:
+                        result.price = args['price']
                 
-                result.make = args['make']        
+                if args["make"]:
+                        result.make = args['make']        
                 
-                result.plateNum = args['plateNum']        
+                if args["plateNum"]:
+                        result.plateNum = args['plateNum']        
                 
-                result.depNum = args['depNum']
+                if args["depNum"]:
+                        result.depNum = args['depNum']
                
-                result.supplierID = args['supplierID']
+                if args["supplierID"]:
+                        result.supplierID = args['supplierID']
                 
-                result.qty = args['qty']
+                if args["qty"]:
+                        result.qty = args['qty']
                 db.session.commit() #commit session
                 return result
 
