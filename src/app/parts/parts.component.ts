@@ -51,6 +51,7 @@ export class PartsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
+    console.log(this.innerWidth)
   }
 
   ngOnInit(): void {

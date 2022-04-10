@@ -5,14 +5,78 @@ Front End Requirements:
     User requirements:
         - User can Sign in / Sign out.
         - User can create account
-        - User view all vehicles on content page.
-        - User can filter the content page
-        - User can book an appointment for teh following reasons:
+        - User view all vehicles and parts on content page.
+        - User can filter the content and parts page.
+        - User can post new vehicles which will trigger the following:
+            - Message comes up telling user when to deliver the car by.
+            - New vehicle post is shown on content page.
+            - routed back to main content page.
+
+        - User can book test drives:
+            - pick a date, 7 days from current day.
+            - pick a time.
+            - If they already have an appointment, this will overwrite it.
+
+        - User can purchase a car up front:
+            - confirmation displays to the user.
+            - Invoice is created and sent to the database.
+            - Vehicle is removed from database (I think).
+
+        - User can purchase a part (If in stock):
+            - Confirmation message displays.
+            - Invoice is created.
+            - Part qty is updates to -1 the origional.
+
+        - User can cotact supplier of the part (If out of stock):
+            - Suppliers name and number will display on the part post card.
+
+        - User can book an appointment for the following reasons:
             - maintenance to their own car
             - sell their car to the dealership.
             - buy a car from the dealership.
-        - user can post their own vehicles which will lead to them arranging an appointment with CarHub
 
-    Employee (manager) requirements:
-        - can view vehicle posts and may remove them them
+        - User can edit their account
+        - User can delete thier account
+
+
+    Employee requirements:
+
+        - You can create an employee account, but you must have put in the employee key code to create account
+        - If you want to make a manager of a department when creating an account, the correct department manager key must be inputted
+        - Employees can sign in the same way as users (directs them to their respected employee page)
+        - EMployees can sign out
+
+        Sales:
+
+            Employee:
+                - Can view vehicles and can change the price and the name of the vehicle.
+                - Can mark a vehicle as sold (deletes the vehicle)
+                - can edit thier profile details.
+                - can view past invoices (parts and vehicles)
+            Manager:
+                - Has all the above abilities
+                - Can view the other employees in the department:
+                    - Able to promote employees
+                    - terminate employees
+                - Can view appointments:
+                    - clicking on appontments will reveal the details
+                    - Able to mark the appointment as read (deletes the appointment form the database)
+
+        Maintenance:
+
+            Employee:
+                - Able to post parts (specifies the supplier that the parts is from).
+                - Able to add new suppliers to their supplier list
+                - Can view parts
+                - Able to view past invoices (parts and vehicles)
+
+            Manager:
+                - Have all the abilities of a regular employee above
+                - Ability to view other employees in the department:
+                    - Able to promote employees
+                    - terminate employees
+                - Can view past or upcomming appointments, and can mark them as read
+
+
+
 

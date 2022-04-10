@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z4" class="dashboard-card">
-  <div *ngIf="!confirmation">
+  <div *ngIf="!confirmation && !viewSupplier">
     <div (click)="openPart()">
       <mat-card-header>
         <mat-card-title>
@@ -9,9 +9,6 @@
               <mat-icon>build</mat-icon>
             </button>
             
-          </div>
-          <div *ngIf="viewSupplier">
-            <span style="font-size:14px; text-align:right;">{{supplier.name}} Phone: {{supplier.phoneNum}}</span>
           </div>
         </mat-card-title>
       </mat-card-header>
@@ -45,5 +42,22 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
+  </div>
+  <div *ngIf="viewSupplier">
+    <mat-card-header>
+      <mat-card-title>
+        {{supplier.name}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin: 30px">
+      <mat-card-subtitle>
+        {{supplier.phoneNum}}
+      </mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer style="margin: 30px">
+      <button mat-icon-button (click)="viewSupplier = false;">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-footer>
   </div>
 </mat-card>

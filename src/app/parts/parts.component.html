@@ -83,15 +83,15 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <div *ngIf="innerWidth>=860&&innerWidth<930" class="grid-container">
+  <div *ngIf="innerWidth>=860&&innerWidth<920" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="1" rowHeight="820">
+    <mat-grid-list cols="1" rowHeight="860">
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <div *ngIf="innerWidth>=930&&innerWidth<960" class="grid-container">
+  <div *ngIf="innerWidth>=920&&innerWidth<960" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="650">
       <mat-grid-tile *ngFor="let card of parts">
@@ -181,7 +181,7 @@
   </div>
   <div *ngIf="innerWidth>=1450&&innerWidth<1550" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="3" rowHeight="620">
+    <mat-grid-list cols="3" rowHeight="630">
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>
@@ -189,7 +189,7 @@
   </div>
   <div *ngIf="innerWidth>=1550&&innerWidth<1650" class="grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="3" rowHeight="650">
+    <mat-grid-list cols="3" rowHeight="660">
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>
@@ -197,7 +197,7 @@
   </div>
   <div *ngIf="innerWidth>=1650&&innerWidth<1750" class="big-grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="3" rowHeight="670">
+    <mat-grid-list cols="3" rowHeight="680">
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>
@@ -213,7 +213,7 @@
   </div>
   <div *ngIf="innerWidth>=1850" class="big-grid-container">
     <h1 class="mat-h1">{{contentTitle}}:</h1>
-    <mat-grid-list cols="3" rowHeight="710">
+    <mat-grid-list cols="3" rowHeight="730">
       <mat-grid-tile *ngFor="let card of parts">
         <app-part [partCard]="card"></app-part>
       </mat-grid-tile>
