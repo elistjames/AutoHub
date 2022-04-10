@@ -80,7 +80,9 @@ class SUPPLIERS(Resource):
 
                 #arguments are passed in, update them
                 if args["name"]:
-                        result.name = args['name']         
+                        result.name = args['name']  
+                if args["phoneNum"]:
+                        result.phoneNum = args['phoneNum']             
                 db.session.commit() #commit session
                 return result
 
