@@ -8,6 +8,7 @@ import { Invoice } from '../interfaces/Invoice';
 import {Vehicle} from '../interfaces/Vehicle';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { EmployeeService } from '../services/employee.service';
 import { InvoiceService } from '../services/invoice.service';
 import { VehiclesService } from '../services/vehicles.service';
 
@@ -18,7 +19,8 @@ import { VehiclesService } from '../services/vehicles.service';
   styleUrls: ['./vehicle-view.component.css']
 })
 export class VehicleViewComponent implements OnInit {
-  signed_in?:boolean
+  signed_in = false;
+  emp_signed_in = false;
   subscription!: Subscription;
   signInMessage = false;
 
@@ -39,6 +41,7 @@ export class VehicleViewComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Vehicle,
     public authService: AuthenticationService,
+    private empService: EmployeeService,
     public datepipe: DatePipe,
     public appointmentService: AppointmentService,
     private router: Router,
@@ -58,6 +61,7 @@ export class VehicleViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.signed_in = this.authService.signedIn();
+    this.emp_signed_in = this.empService.signedIn();
     console.log(this.signed_in);
     
   }

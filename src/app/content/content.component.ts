@@ -20,6 +20,8 @@ export class ContentComponent {
   contentTitle: string = "Vehicles";
   vehicles: Vehicle[] = [];
 
+  plateNum = '';
+
   contentFilter: Filter = {
     categoryFilter: "all",
     colorFilter: ['all'],
@@ -131,6 +133,19 @@ export class ContentComponent {
     console.log(filteredVehicles);
 
     return filteredVehicles;
+  }
+
+  searchByPlate(plateNum: string){
+    this.vehiclesService.getVehicles().subscribe((vehicles) => {
+      this.vehicles = vehicles as Vehicle[];
+      this.vehicles = this.vehicles.filter((vehicle) => (vehicle.plateNum == plateNum));
+    });
+  }
+
+  viewAll(){
+    this.vehiclesService.getVehicles().subscribe((vehicles) => {
+      this.vehicles = vehicles as Vehicle[];
+    });
   }
 
   isSubstring(str1: string, str2: string): boolean {

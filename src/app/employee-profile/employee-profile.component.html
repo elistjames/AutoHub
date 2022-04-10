@@ -6,14 +6,14 @@
     </h1>
     <div>
         <label style="font-size: 18px; color: #c50061">Username: </label>
-    <label style="font-size: 18px">{{employee.email}}</label>
-    <br/>
-    <label style="font-size: 18px; color: #c50061">Password: </label>
-    <label *ngIf="!hidePassword" style="font-size: 18px">{{employee.password}}</label>
-    <label *ngIf="hidePassword" style="font-size: 18px">*****************</label>
-    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
+        <label style="font-size: 18px">{{employee.email}}</label>
+        <br/>
+        <label style="font-size: 18px; color: #c50061">Password: </label>
+        <label *ngIf="!hidePassword" style="font-size: 18px">{{unhashedPassword}}</label>
+        <label *ngIf="hidePassword" style="font-size: 18px">*****************</label>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
     </div>
     
     <div style="background-color:#2D2D2D; margin-top: 20px; padding: 10px; border: 3px solid #c50061; border-radius: 10px; display: center;">

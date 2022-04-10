@@ -66,6 +66,13 @@ export class SignInComponent implements OnInit {
                 isManager: response.isManager
               }
 
+              let emailPass = {
+                email: result.email,
+                password: result.password
+              }
+
+              this.empService.setCurrent(emailPass);
+
               this.empService.signIn(currentEmployee);
               
               this.router.navigate(['/employee-page']);

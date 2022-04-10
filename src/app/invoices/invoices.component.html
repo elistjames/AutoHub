@@ -33,7 +33,7 @@
         </div>
     </div>
     <div *ngIf="details">
-        <mat-card (click)="details = !details">
+        <mat-card (dblclick)="details = !details">
             <mat-card-header>
                 {{invoice_clicked.custEmail}}
             </mat-card-header>

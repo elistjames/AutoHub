@@ -17,6 +17,9 @@ export class EmployeeProfileComponent implements OnInit {
   newFirst: string = '';
   newLast: string = '';
 
+  unhashedPassword = '';
+  unhashedEmail = '';
+
   @Input() employee: Employee = {
     ssn: 0,
     l_name: '',
@@ -30,6 +33,8 @@ export class EmployeeProfileComponent implements OnInit {
   constructor(private empService: EmployeeService, private router: Router) { }
 
   ngOnInit(): void {
+    this.unhashedEmail = this.empService.getUnHashedEmail();
+    this.unhashedPassword = this.empService.getUnHashedPassword();
   }
 
   updateAccount(): void{
@@ -54,6 +59,8 @@ export class EmployeeProfileComponent implements OnInit {
     }
     this.empService.updateEmployee(updated).subscribe((employee) => {
       this.employee = employee;
+      this.empService.signOut();
+      this.router.navigate(['/']);
     })
     // call employeeService to send PUT request to api with the new account details
   }

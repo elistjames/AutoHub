@@ -9,7 +9,7 @@
     <button *ngIf="signed_in" style="margin-left: 10px" mat-raised-button color="primary" (click)="bookDrive = !bookDrive">{{bookDrive?'Cancel':'Book test drive'}}</button>
     <button *ngIf="signed_in && !bookDrive" style="margin-left: 10px" mat-raised-button color="primary" (click)="purchaseMessage = true">Purchase</button>
     
-    <label *ngIf="!signed_in" style="margin-left: 10px; font-size: 11px;">Sign in for more options</label>
+    <label *ngIf="!signed_in && !emp_signed_in" style="margin-left: 10px; font-size: 11px;">Sign in for more options</label>
     <hr/>
     <div *ngIf="!bookDrive && !purchaseMessage">
       <mat-dialog-content>

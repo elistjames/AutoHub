@@ -2,9 +2,17 @@
   <mat-icon style="width: 100px">sentiment_very_dissatisfied</mat-icon>
   <h1>No vehicles found</h1>
 </div>
+<div *ngIf="employee" style="margin: 60px;">
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Plate Number</mat-label>
+    <input matInput [(ngModel)]="plateNum">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="searchByPlate(plateNum)">Search</button>
+  <button mat-raised-button color="accent" (click)="viewAll()">Search</button>
+</div>
 <div *ngIf="vehicles.length > 0">
   <div *ngIf="innerWidth<400" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols=1 rowHeight=500px>
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -12,7 +20,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=400&&innerWidth<450" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols=1 rowHeight=550px>
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -20,7 +28,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=450&&innerWidth<500" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="600px">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -28,7 +36,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=500&&innerWidth<550" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="650px">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -36,7 +44,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=550&&innerWidth<600" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="700">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -44,7 +52,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=600&&innerWidth<650" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="550">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -52,7 +60,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=650&&innerWidth<700" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="600">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -60,7 +68,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=700&&innerWidth<750" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="650">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -68,7 +76,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=750&&innerWidth<800" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="700">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -76,7 +84,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=800&&innerWidth<860" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="1" rowHeight="760">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -84,7 +92,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=860&&innerWidth<900" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="500">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -92,7 +100,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=900&&innerWidth<920" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="500">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -100,7 +108,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=920&&innerWidth<960" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="600">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -108,7 +116,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=960&&innerWidth<1000" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="500">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -116,7 +124,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1000&&innerWidth<1050" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="550">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -124,7 +132,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1050&&innerWidth<1100" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="575">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -132,7 +140,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1100&&innerWidth<1150" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="600">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -140,7 +148,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1150&&innerWidth<1200" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="625">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -148,7 +156,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1200&&innerWidth<1250" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="650">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -156,7 +164,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1250&&innerWidth<1300" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="675">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -164,7 +172,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1300&&innerWidth<1350" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="2" rowHeight="700">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -172,7 +180,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1350&&innerWidth<1400" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="550">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -180,7 +188,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1400&&innerWidth<1450" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="550">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -188,7 +196,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1450&&innerWidth<1550" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="570">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -196,7 +204,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1550&&innerWidth<1650" class="grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="600">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -204,7 +212,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1650&&innerWidth<1750" class="big-grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="620">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -212,7 +220,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1750&&innerWidth<1850" class="big-grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="640">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>
@@ -220,7 +228,7 @@
     </mat-grid-list>
   </div>
   <div *ngIf="innerWidth>=1850" class="big-grid-container">
-    <h1 class="mat-h1">{{contentTitle}}:</h1>
+    <h1 *ngIf="!employee" class="mat-h1">{{contentTitle}}:</h1>
     <mat-grid-list cols="3" rowHeight="660">
       <mat-grid-tile *ngFor="let card of vehicles">
         <app-vehicle [vehicleCard]="card" [employee]="employee"></app-vehicle>

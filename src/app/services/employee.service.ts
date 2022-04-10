@@ -19,6 +19,9 @@ export class EmployeeService {
   validLogin: boolean = false;
   emailAvailable: boolean = false;
 
+  currentEmail = '';
+  currentPassword = '';
+
   employee: Employee = {
     ssn: 0,
     l_name: '',
@@ -113,5 +116,18 @@ export class EmployeeService {
 
   validateEmail(): boolean {
     return this.emailAvailable;
+  }
+
+  setCurrent(emailPass: any){
+    this.currentEmail = emailPass.email;
+    this.currentPassword = emailPass.password;
+  }
+
+  getUnHashedEmail(){
+    return this.currentEmail;
+  }
+
+  getUnHashedPassword(){
+    return this.currentPassword;
   }
 }
