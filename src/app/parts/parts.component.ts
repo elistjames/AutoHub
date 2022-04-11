@@ -41,6 +41,7 @@ export class PartsComponent implements OnInit {
   
 
   constructor(private breakpointObserver: BreakpointObserver, private partService: PartService, private router: Router) {
+    this.contentFilter = this.partService.getFilters();
     this.partService.getParts().subscribe((parts) => {
       this.parts = parts as Part[];
       this.parts = this.filterParts(this.parts);
@@ -84,8 +85,6 @@ export class PartsComponent implements OnInit {
         maxPrice = possibleMax;
       }
     }
-
-    
 
     
     if(this.contentFilter.categoryFilter != "all"){
