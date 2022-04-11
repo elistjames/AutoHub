@@ -36,7 +36,11 @@ export class ProfileComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(private authService: AuthenticationService, private router: Router) {
+    if(!this.authService.signedIn()){
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
     this.user = this.authService.getProfile();

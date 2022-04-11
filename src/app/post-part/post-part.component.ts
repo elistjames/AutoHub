@@ -8,6 +8,8 @@ import { PartService } from '../services/part.service';
 import { PartsComponent } from '../parts/parts.component';
 import { Supplier } from '../interfaces/Supplier';
 import { SupplierService } from '../services/supplier.service';
+import { Router } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-post-part',
@@ -29,11 +31,19 @@ export class PostPartComponent implements OnInit {
 
   suppliers: Supplier[] = [];
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(
+    private _formBuilder: FormBuilder,
     private content: ContentComponent,
     private partService: PartService,
     private parts:PartsComponent,
-    private supplierService: SupplierService) {
+    private supplierService: SupplierService,
+    private empService: EmployeeService,
+    private router: Router
+    ) {
+      if(!this.empService.signedIn()){
+        this.router.navigate(['/']);
+      }
+      
       this.supplierService.getAllSuppliers().subscribe((suppliers) => {
         this.suppliers = suppliers as Supplier[];
       });
@@ -42,6 +52,7 @@ export class PostPartComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.imageFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
     });

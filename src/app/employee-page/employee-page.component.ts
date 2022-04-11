@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from '../interfaces/Employee';
+import { AuthenticationService } from '../services/authentication.service';
 import { EmployeeService } from '../services/employee.service';
 
 @Component({
@@ -18,8 +20,13 @@ export class EmployeePageComponent implements OnInit {
     isManager: false
   }
 
-  constructor(public empSevices: EmployeeService) {
+
+
+  constructor(public empSevices: EmployeeService, private router: Router) {
     this.currentEmployee = this.empSevices.getEmployeeProfile();
+    if(!this.empSevices.signedIn()){
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {

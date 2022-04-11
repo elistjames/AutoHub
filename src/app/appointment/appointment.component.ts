@@ -28,8 +28,9 @@ export class AppointmentComponent implements OnInit {
   description: string = '';
 
   constructor(private fb: FormBuilder, public datepipe: DatePipe, private authService: AuthenticationService, public appointmentService: AppointmentService, private router: Router) {
-
-
+    if(!this.authService.signedIn()){
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {

@@ -6,6 +6,8 @@ import { Vehicle } from '../interfaces/Vehicle';
 import { VehiclesService } from '../services/vehicles.service';
 import { ContentComponent } from '../content/content.component';
 import { DatePipe } from '@angular/common';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 
 
@@ -39,9 +41,18 @@ export class PostVehicleComponent implements OnInit {
   
 
 
-  constructor(private _formBuilder: FormBuilder, private content: ContentComponent, private vehicleService:VehiclesService, public datepipe: DatePipe,) {
+  constructor(private _formBuilder: FormBuilder, 
+    private content: ContentComponent,
+    private vehicleService:VehiclesService, 
+    public datepipe: DatePipe,
+    private authService:AuthenticationService,
+    private router:Router
+    ) {
 
-    this.setupYears();
+      if(!this.authService.signedIn()){
+        this.router.navigate(['/']);
+      }
+      this.setupYears();
   }
 
 

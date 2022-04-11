@@ -3,6 +3,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { Supplier } from '../interfaces/Supplier';
+import { EmployeeService } from '../services/employee.service';
 import { SupplierService } from '../services/supplier.service';
 
 @Component({
@@ -39,7 +40,10 @@ export class AddSupplierComponent implements OnInit {
     })
   );
 
-  constructor(private supplierService:SupplierService, private router:Router, private breakpointObserver: BreakpointObserver) {
+  constructor(private supplierService:SupplierService, private router:Router, private breakpointObserver: BreakpointObserver, public empSevices: EmployeeService) {
+    if(!this.empSevices.signedIn()){
+      this.router.navigate(['/']);
+    }
     this.supplierService.getAllSuppliers().subscribe((suppliers) => {
       this.suppliers = suppliers as Supplier[];
     });
