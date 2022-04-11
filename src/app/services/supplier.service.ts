@@ -32,4 +32,12 @@ export class SupplierService {
   deleteSupplier(id:number): Observable<any> {
     return this.http.delete<any>(this.apiUrl+id);
   }
+
+  updateSupplier(supplier: Supplier): Observable<any> {
+    let updated = {
+      name: supplier.name,
+      phoneNum: supplier.phoneNum
+    }
+    return this.http.put(this.apiUrl+supplier.id, updated)
+  }
 }

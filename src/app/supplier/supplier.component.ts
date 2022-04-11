@@ -16,6 +16,8 @@ export class SupplierComponent implements OnInit {
   };
   @Input() mobile: boolean = false;
 
+  
+
   constructor(private suppliers: AddSupplierComponent) { }
 
   ngOnInit(): void {
@@ -23,6 +25,10 @@ export class SupplierComponent implements OnInit {
 
   removeSupplier(){
     this.suppliers.removeSupplier(this.supplierCard.id);
+  }
+
+  editSupplier(){
+    this.suppliers.editSupplier(this.supplierCard);
   }
 
 }

@@ -1,14 +1,15 @@
-<div *ngIf="vehicles.length == 0" class="none-found">
-  <mat-icon style="width: 100px">sentiment_very_dissatisfied</mat-icon>
-  <h1>No vehicles found</h1>
-</div>
+
 <div *ngIf="employee" style="margin: 60px;">
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>Plate Number</mat-label>
     <input matInput [(ngModel)]="plateNum">
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="searchByPlate(plateNum)">Search</button>
-  <button mat-raised-button color="accent" (click)="viewAll()">Search</button>
+  <button mat-raised-button color="accent" style="margin-left: 20px" (click)="viewAll()">All</button>
+</div>
+<div *ngIf="vehicles.length == 0" class="none-found">
+  <mat-icon style="width: 100px">sentiment_very_dissatisfied</mat-icon>
+  <h1>No vehicles found</h1>
 </div>
 <div *ngIf="vehicles.length > 0">
   <div *ngIf="innerWidth<400" class="grid-container">

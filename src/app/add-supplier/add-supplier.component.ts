@@ -22,6 +22,7 @@ export class AddSupplierComponent implements OnInit {
 
   invalidPhone = false;
   invalidName = false;
+  editMode = false;
 
   addSupplier = false;
 
@@ -117,6 +118,54 @@ export class AddSupplierComponent implements OnInit {
       return;
     })
     return;
+  }
+
+  editSupplier(supplier: Supplier){
+    this.editMode = true;
+    this.supplier.id = supplier.id;
+    this.supplier.name = supplier.name;
+    this.supplier.phoneNum = supplier.phoneNum.replace("-", "");
+    this.supplier.phoneNum = this.supplier.phoneNum.replace("-", "");
+  }
+
+  updateSupplier(){
+    this.invalidName = false;
+    this.invalidPhone = false;
+    
+    if(this.supplier.phoneNum.length != 10 || !this.isNumber(this.supplier.phoneNum)){
+      this.invalidPhone = true;
+    }
+
+    if(this.supplier.name.replace(/\s/g, '') == ''){
+      this.invalidName = true;
+      return;
+    }
+
+    if(this.invalidPhone){ return;}
+
+    this.invalidName = false;
+    this.invalidPhone = false;
+    this.editMode = false;
+
+    let formattedNumber = '';
+
+    for(let i = 0; i < this.supplier.phoneNum.length; i++){
+      if(i == 3 || i == 6){
+        formattedNumber += '-';
+      }
+      formattedNumber += this.supplier.phoneNum[i];
+    }
+    console.log(formattedNumber);
+
+    this.supplier.phoneNum = formattedNumber;
+
+    this.supplierService.updateSupplier(this.supplier).subscribe(() => {
+      this.supplierService.getAllSuppliers().subscribe((suppliers) => {
+        this.suppliers = suppliers as Supplier[];
+        return;
+      });
+      return;
+    });
   }
 
   isNumber(phoneNum: string): boolean{
