@@ -134,7 +134,7 @@ export class SearchComponent implements OnInit {
         this.data.colorFilter.push('all');
       }
     }
-    console.log(this.data.colorFilter);
+    
   }
 
   checkColorState(input: any){
@@ -165,7 +165,7 @@ export class SearchComponent implements OnInit {
   }
 
   clearFilters() {
-    console.log("clearing filters");
+    
     this.data.colorFilter = ['all'];
     this.data.minYear = this.minYearOption;
     this.updateMaxYear();
@@ -190,7 +190,7 @@ export class SearchComponent implements OnInit {
         this.data.priceRanges.push({min: 0, max: 100000});
       }
     }
-    console.log(this.data.priceRanges);
+    
   }
 
   filterPartPrice(range: any) {
@@ -206,7 +206,7 @@ export class SearchComponent implements OnInit {
         this.data.priceRanges.push({min: 0, max: 100000});
       }
     }
-    console.log(this.data.priceRanges);
+    
   }
 
 

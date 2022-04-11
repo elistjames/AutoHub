@@ -53,7 +53,6 @@ export class CreateAccountComponent {
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
     })
   }
 
@@ -130,7 +129,6 @@ export class CreateAccountComponent {
   }
 
   onSubmit(): void {
-    console.log('creating account');
     // Add new user
     if(this.employeeAccount){
 
@@ -163,7 +161,7 @@ export class CreateAccountComponent {
         take(1),
       ).subscribe((response) => {
         this.emailAvailable = this.empService.validateEmail();
-        console.log(this.emailAvailable);
+        
         if(this.emailAvailable){
           this.emailAvailable = true;
           this.router.navigate(['loading-page']);
@@ -172,8 +170,6 @@ export class CreateAccountComponent {
           // not available
         }
       })
-
-      console.log('creating account')
 
 
     }
@@ -187,7 +183,6 @@ export class CreateAccountComponent {
         take(1),
       ).subscribe((response) => {
         this.emailAvailable = this.authService.validateEmail();
-        console.log(this.emailAvailable);
         if(this.emailAvailable){
           this.router.navigate(['loading-page']);
         }

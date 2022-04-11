@@ -34,11 +34,11 @@
 
   <div *ngIf="dat.employeeMode">
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Employee Email</mat-label>
         <input matInput name="email" placeholder="example@example.com" [(ngModel)]="dat.email">
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Employee password</mat-label>
         <input matInput name="password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="dat.password">
         <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">

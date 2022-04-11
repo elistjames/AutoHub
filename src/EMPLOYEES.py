@@ -76,7 +76,7 @@ def unEncode(stringPass):
 class EMPLOYEES(Resource):
         @marshal_with(resource_fields) #marshal with resource fields
         def get(self, password, email):
-                print(unEncode("cmFjZWNhcg=="))
+                print(unEncode("Y0dGemMzZHZjbVE9"))
 
                 if email == "all" and password == "all":
                         # get all

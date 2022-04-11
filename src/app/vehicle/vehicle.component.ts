@@ -45,7 +45,7 @@ export class VehicleComponent implements OnInit {
 
   ngOnInit(): void {
     this.signed_in = this.authService.signedIn();
-    console.log(this.signed_in);
+    
     this.newPrice = this.vehicleCard.price;
     this.newMake = this.vehicleCard.make;
   }

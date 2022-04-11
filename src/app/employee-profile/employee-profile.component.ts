@@ -44,7 +44,7 @@ export class EmployeeProfileComponent implements OnInit {
       l_name: this.employee.l_name,
       f_name: this.employee.f_name,
       email: this.employee.email,
-      password: this.employee.password,
+      password: this.unhashedPassword,
       depNum: this.employee.depNum,
       isManager: this.employee.isManager
     }
@@ -52,10 +52,10 @@ export class EmployeeProfileComponent implements OnInit {
       updated.password = this.newPassword;
     }
     if(this.newFirst?.replace(/\s/g, "") != ''){
-      updated.password = this.newFirst;
+      updated.f_name = this.newFirst;
     }
     if(this.newLast?.replace(/\s/g, "") != ''){
-      updated.password = this.newLast;
+      updated.l_name = this.newLast;
     }
     this.empService.updateEmployee(updated).subscribe((employee) => {
       this.employee = employee;

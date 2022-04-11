@@ -51,7 +51,7 @@ export class PartsComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
-    console.log(this.innerWidth)
+    
   }
 
   ngOnInit(): void {
@@ -60,7 +60,7 @@ export class PartsComponent implements OnInit {
     
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
+      
     })
   }
 
@@ -85,21 +85,20 @@ export class PartsComponent implements OnInit {
       }
     }
 
-    console.log(maxPrice);
-    console.log(minPrice);
+    
 
-    console.log(filteredParts);
+    
     if(this.contentFilter.categoryFilter != "all"){
       filteredParts = filteredParts.filter((part) => part.plateNum == this.contentFilter.categoryFilter);
     }
 
-    console.log(filteredParts);
+    
     if(this.contentFilter.make != ''){
       filteredParts = filteredParts.filter((part) => this.isSubstring(this.contentFilter.make.toLowerCase().replace(/[^a-z0-9]+/gi, ''), part.make.toLowerCase().replace(/[^a-z0-9]+/gi, '')));
     }
-    console.log(filteredParts);
+    
     filteredParts = filteredParts.filter((part) => part.price >= minPrice && part.price <= maxPrice);
-    console.log(filteredParts);
+    
 
     return filteredParts;
   }

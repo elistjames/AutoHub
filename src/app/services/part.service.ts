@@ -55,8 +55,7 @@ export class PartService {
       supplierID: part.supplierID,
       qty: part.qty
     }
-    console.log(part.qty);
-    console.log(updated.qty);
+    
     return this.http.put<any>(this.apiUrl+part.partNo, updated)
   }
 

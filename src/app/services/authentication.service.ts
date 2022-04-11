@@ -41,7 +41,7 @@ export class AuthenticationService {
     return this.http.get<any>(this.apiUrl+'/'+password+'/'+email).pipe(catchError((error) => {
       this.validLogin = false;
       this.subject.next(this.validLogin);
-      console.log("Invalid Login");
+      
       return error.message;
     }));
   }
@@ -54,7 +54,7 @@ export class AuthenticationService {
     }
     return this.http.post<any>(this.apiUrl+'/'+user.password+'/'+user.email, newuserNames).pipe(catchError((error) => {
       this.emailAvailable = false;
-      console.log("Email taken");
+      
       return error.message;
     }));
   }

@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
       l_name: this.user.l_name,
       f_name: this.user.f_name,
       email: this.user.email,
-      password: this.user.password
+      password: this.unhashedPassword
     }
     if(this.newPassword?.replace(/\s/g, "") != ''){
       updated.password = this.newPassword;
@@ -67,6 +67,8 @@ export class ProfileComponent implements OnInit {
     }
     this.authService.updateUser(updated).subscribe((user) => {
       this.user = user;
+      this.authService.signOut();
+      this.router.navigate(['/']);
     })
     // call employeeService to send PUT request to api with the new account details
     // call authService to put new account details

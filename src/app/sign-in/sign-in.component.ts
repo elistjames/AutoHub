@@ -41,9 +41,9 @@ export class SignInComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      
       if(result.email != ''){
-        console.log("user clicked sign in")
+        
         if(result.employeeMode){
           this.email = result.email;
           this.password = result.password;
@@ -52,10 +52,10 @@ export class SignInComponent implements OnInit {
           this.empService.verifyEmployee(this.password, this.email).pipe(
             take(1),
           ).subscribe((response) => {
-            console.log("cool")
+            
             this.validLogin = this.empService.validateLogin();
             if(this.validLogin){
-              console.log("Signed In");
+              
               const currentEmployee: Employee = {
                 ssn: response.ssn,
                 l_name: response.l_name,
@@ -78,7 +78,7 @@ export class SignInComponent implements OnInit {
               this.router.navigate(['/employee-page']);
             }
             else{
-              console.log('invalidLogin');
+              
 
               this.openDialog();
             }
@@ -92,10 +92,10 @@ export class SignInComponent implements OnInit {
           this.authService.verifyUser(this.password, this.email).pipe(
             take(1),
           ).subscribe((response) => {
-            console.log("cool")
+            
             this.validLogin = this.authService.validateLogin();
             if(this.validLogin){
-              console.log("Signed In");
+              
               const currentUser: User = {
                 email: response.email,
                 password: response.password,
@@ -115,7 +115,7 @@ export class SignInComponent implements OnInit {
               this.router.navigate(['/loading-page']);
             }
             else{
-              console.log('invalidLogin');
+              
 
               this.openDialog();
             }
@@ -125,7 +125,7 @@ export class SignInComponent implements OnInit {
         }
       }
       else{
-        console.log("canceled sign in")
+        
       }
 
     });

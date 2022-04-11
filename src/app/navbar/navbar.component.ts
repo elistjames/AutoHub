@@ -58,8 +58,7 @@ export class NavbarComponent {
   }
 
   openSearch(): void {
-    console.log("employee signed in: " + this.emp_signed_in);
-    console.log("user signed in: " + this.signed_in);
+    
     const dialogRef = this.dialog.open(SearchComponent, {
       width: '800px',
       data: this.contentFilter,
@@ -79,7 +78,7 @@ export class NavbarComponent {
   }
 
   onSignOut(): void {
-    console.log(this.signed_in);
+    
     if(this.signed_in){
       this.authService.signOut();
     }

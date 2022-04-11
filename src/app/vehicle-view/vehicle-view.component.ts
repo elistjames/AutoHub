@@ -62,7 +62,7 @@ export class VehicleViewComponent implements OnInit {
   ngOnInit(): void {
     this.signed_in = this.authService.signedIn();
     this.emp_signed_in = this.empService.signedIn();
-    console.log(this.signed_in);
+    
     
   }
 
@@ -73,7 +73,7 @@ export class VehicleViewComponent implements OnInit {
   
 
   onPurchase(): void{
-    console.log('Purchase Vehicle')
+    
 
     this.invoiceService.getInvoices().subscribe((invoices) => {
       let new_invoice:Invoice = {
@@ -116,8 +116,7 @@ export class VehicleViewComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.selectedDate.format("yyyy-MM-dd"));
-    console.log(this.time);
+    
 
     let newAppointment:Appointment = {
       cust_email: this.authService.getProfile().email,
@@ -133,11 +132,11 @@ export class VehicleViewComponent implements OnInit {
     ).subscribe((response) => {
       this.preExistingAppointment = this.appointmentService.alreadyHasAppointment();
       if(this.preExistingAppointment){
-        console.log('Already has booked appointment Ask to');
+        
         
         this.appointmentService.deleteAppointment(newAppointment).subscribe(()=>{
           this.appointmentService.postAppointment(newAppointment).subscribe((response)=>{
-            console.log('overwritten');
+            
             return;
           });
           return;

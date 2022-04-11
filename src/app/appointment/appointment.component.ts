@@ -60,10 +60,10 @@ export class AppointmentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.selectedDate.format("yyyy-MM-dd"));
-    console.log(this.appointmentForm.get('time')?.value);
-    console.log(this.appointmentForm.get('department')?.value);
-    console.log(this.description);
+    (this.selectedDate.format("yyyy-MM-dd"));
+    (this.appointmentForm.get('time')?.value);
+    (this.appointmentForm.get('department')?.value);
+    (this.description);
 
     let newAppointment:Appointment = {
       cust_email: this.authService.getProfile().email,
@@ -83,7 +83,7 @@ export class AppointmentComponent implements OnInit {
     ).subscribe((response) => {
       this.preExistingAppointment = this.appointmentService.alreadyHasAppointment();
       if(this.preExistingAppointment){
-        console.log('Already has booked appointment (update appointment)');
+        ('Already has booked appointment (update appointment)');
         this.updateAppointment(newAppointment);
       }
       else{
@@ -98,9 +98,9 @@ export class AppointmentComponent implements OnInit {
   updateAppointment(newAppointment: Appointment){
     this.appointmentService.getAppointments().subscribe((appointments) => {
       let current = appointments;
-      console.log(current);
+      
       current = current.filter((appointment) => (appointment.cust_email == newAppointment.cust_email));
-      console.log(current);
+      
       let updated:Appointment = {
         cust_email: current[0].cust_email,
         date: current[0].date,
@@ -109,7 +109,7 @@ export class AppointmentComponent implements OnInit {
         description: current[0].description + '-> Also, '+newAppointment.description
       }
       this.appointmentService.updateAppointment(updated).subscribe((appointment:any) => {});
-      console.log('appointment updated');
+      
       
     });
     return;

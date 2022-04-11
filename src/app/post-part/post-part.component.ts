@@ -113,7 +113,7 @@ export class PostPartComponent implements OnInit {
   onSubmit(): void {
     //save uploaded image
     let file = base64ToFile(this.croppedImage);
-    console.log(file);
+    
     // Send new vehicle to api
 
     this.partService.verifyPartNumber().subscribe((partNums) => {
@@ -123,14 +123,14 @@ export class PostPartComponent implements OnInit {
         
         possiblePartNum = "AHP-"+this.generatePartNumber()+"-"+this.generatePartNumber();
         let existingPartNum = partNums.filter((partNum) => partNum.partNo ==  possiblePartNum);
-        console.log(existingPartNum.length);
+        
         if(existingPartNum.length == 0){
 
-          console.log("Valid plate number found: "+ possiblePartNum);
+          
           validPN = true;
         }
         else{
-          console.log("Plate number taken: "+ possiblePartNum);
+          
            
         }
       }
@@ -160,7 +160,7 @@ export class PostPartComponent implements OnInit {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event);
+    
     this.croppedImage = event.base64;
 
   }
@@ -176,8 +176,7 @@ export class PostPartComponent implements OnInit {
 
 
   checkValues(): void{
-    console.log(this.selectedCategory);
-    console.log(this.croppedImage);
+    
   }
 
 }

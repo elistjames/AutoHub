@@ -46,10 +46,10 @@ export class ContentComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private vehiclesService: VehiclesService, private router: Router) {
     this.contentFilter = this.vehiclesService.getFilters();
-    console.log(this.contentFilter);
+    (this.contentFilter);
     this.vehiclesService.getVehicles().subscribe((vehicles) => {
       this.vehicles = vehicles as Vehicle[];
-      console.log(this.vehicles);
+      (this.vehicles);
       this.vehicles = this.filterContent(this.vehicles);
       
     });
@@ -63,20 +63,20 @@ export class ContentComponent {
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
+      (this.innerWidth);
     })
   }
 
   postVehicle(vehicle: Vehicle) {
     this.vehiclesService.postVehicle(vehicle).subscribe((vehicle: Vehicle) => (this.vehicles.push(vehicle)));
-    console.log("vehicle added");
-    console.log(this.vehicles);
+    ("vehicle added");
+    (this.vehicles);
     this.router.navigate(['/loading-page'])
   }
 
   markVehicle(plateNum?: string){
     this.vehiclesService.deleteVehicle(plateNum).subscribe(() => {
-      console.log('vehicle maked as sold');
+      ('vehicle maked as sold');
       this.vehiclesService.getVehicles().subscribe((vehicles) => {
         this.vehicles = vehicles as Vehicle[];
         return;
@@ -107,30 +107,30 @@ export class ContentComponent {
       }
     }
 
-    console.log(maxPrice);
-    console.log(minPrice);
+    (maxPrice);
+    (minPrice);
 
-    console.log(filteredVehicles);
+    (filteredVehicles);
     if(this.contentFilter.categoryFilter != "all"){
       filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.category == this.contentFilter.categoryFilter);
     }
-    console.log(filteredVehicles);
+    (filteredVehicles);
     if(this.contentFilter.colorFilter[0] != "all"){
       filteredVehicles = filteredVehicles.filter((vehicle) => this.contentFilter.colorFilter.includes(vehicle.colour));
     }
-    console.log(filteredVehicles);
+    (filteredVehicles);
     if(this.contentFilter.seats != 0){
       filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.numSeats == this.contentFilter.seats);
     }
-    console.log(filteredVehicles);
+    (filteredVehicles);
     if(this.contentFilter.make != ''){
       filteredVehicles = filteredVehicles.filter((vehicle) => this.isSubstring(this.contentFilter.make.toLowerCase().replace(/[^a-z0-9]+/gi, ''), vehicle.make.toLowerCase().replace(/[^a-z0-9]+/gi, '')));
     }
-    console.log(filteredVehicles);
+    (filteredVehicles);
     filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.price >= minPrice && vehicle.price <= maxPrice);
-    console.log(filteredVehicles);
+    (filteredVehicles);
     filteredVehicles = filteredVehicles.filter((vehicle) => vehicle.year >= this.contentFilter.minYear && vehicle.year <= this.contentFilter.maxYear);
-    console.log(filteredVehicles);
+    (filteredVehicles);
 
     return filteredVehicles;
   }

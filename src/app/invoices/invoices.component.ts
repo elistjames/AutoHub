@@ -48,14 +48,14 @@ export class InvoicesComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
+      (this.innerWidth);
     })
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
-    console.log(this.innerWidth);
+    (this.innerWidth);
   }
 
   viewDetails(invoice: Invoice): void {

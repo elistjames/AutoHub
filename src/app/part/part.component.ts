@@ -59,7 +59,7 @@ export class PartComponent implements OnInit {
   ngOnInit(): void {
     this.signed_in = this.authService.signedIn();
     this.emp_signed_in = this.empService.signedIn();
-    console.log(this.signed_in);
+    
   }
 
   openPart(): void {
@@ -70,7 +70,7 @@ export class PartComponent implements OnInit {
   }
 
   onPurchase(): void{
-    console.log('Purchase Part')
+    
 
     this.invoiceService.getInvoices().subscribe((invoices) => {
       let new_invoice:Invoice = {
@@ -87,7 +87,7 @@ export class PartComponent implements OnInit {
 
       this.invoiceService.postInvoice(new_invoice).subscribe((invoice) => {
         this.partCard.qty -= 1;
-        console.log(this.partCard.qty);
+        
         this.partService.updatePart(this.partCard).subscribe(() => {
           this.router.navigate(['/parts-loading-page']);
           return;

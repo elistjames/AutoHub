@@ -133,7 +133,7 @@ export class PostVehicleComponent implements OnInit {
   onSubmit(): void {
     //save uploaded image
     let file = base64ToFile(this.croppedImage);
-    console.log(file);
+    
     // Send new vehicle to api
 
     
@@ -144,14 +144,14 @@ export class PostVehicleComponent implements OnInit {
         
         possiblePlateNum = "AH-"+this.generatePlateNumber()+"-"+this.generatePlateNumber();
         let existingPlateNum = plateNums.filter((plateNum) => plateNum.plateNum ==  possiblePlateNum);
-        console.log(existingPlateNum.length);
+        
         if(existingPlateNum.length == 0){
 
-          console.log("Valid plate number found: "+ possiblePlateNum);
+          
           validPN = true;
         }
         else{
-          console.log("Plate number taken: "+ possiblePlateNum);
+          
            
         }
       }
@@ -180,7 +180,7 @@ export class PostVehicleComponent implements OnInit {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event);
+    
     this.croppedImage = event.base64;
 
   }
@@ -201,8 +201,7 @@ export class PostVehicleComponent implements OnInit {
 
 
   checkValues(): void{
-    console.log(this.selectedCategory);
-    console.log(this.croppedImage);
+    
   }
 
 }

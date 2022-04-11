@@ -54,7 +54,7 @@ export class AddSupplierComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
+      (this.innerWidth);
     })
   }
 
@@ -90,7 +90,7 @@ export class AddSupplierComponent implements OnInit {
       }
       formattedNumber += this.supplier.phoneNum[i];
     }
-    console.log(formattedNumber);
+    (formattedNumber);
 
     this.supplier.phoneNum = formattedNumber;
 
@@ -159,7 +159,7 @@ export class AddSupplierComponent implements OnInit {
       }
       formattedNumber += this.supplier.phoneNum[i];
     }
-    console.log(formattedNumber);
+    (formattedNumber);
 
     this.supplier.phoneNum = formattedNumber;
 

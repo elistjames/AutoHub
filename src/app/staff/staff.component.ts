@@ -38,14 +38,14 @@ export class StaffComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.innerWidth = event.target.innerWidth;
-    console.log(this.innerWidth);
+    
   }
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
-      console.log(this.innerWidth);
+      
     })
   }
 
