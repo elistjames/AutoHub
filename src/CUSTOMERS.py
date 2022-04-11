@@ -90,7 +90,7 @@ class CUSTOMERS(Resource):
                 base64_message = base64_bytes.decode('ascii')
 
                 args = customer_post_args.parse_args() #parse arguemnts
-                result = CUSTOMER.query.filter_by(password = base64_message, email = email).first() ##check to see if account exists already
+                result = CUSTOMER.query.filter_by(email = email).first() ##check to see if account exists already
                 if result != None: #if result is not there
                         abort(409, message = "Email taken...")
 
