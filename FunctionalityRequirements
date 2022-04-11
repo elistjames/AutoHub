@@ -1,4 +1,4 @@
-API Requirements:
+ API Requirements:
 
 Front End Requirements:
 
@@ -53,6 +53,7 @@ Front End Requirements:
                 - Can mark a vehicle as sold (deletes the vehicle)
                 - can edit thier profile details.
                 - can view past invoices (parts and vehicles)
+                - can search vehicles by plateNumber
             Manager:
                 - Has all the above abilities
                 - Can view the other employees in the department:
@@ -68,7 +69,9 @@ Front End Requirements:
                 - Able to post parts (specifies the supplier that the parts is from).
                 - Able to add new suppliers to their supplier list
                 - Can view parts
-                - Able to view past invoices (parts and vehicles)
+                - Able to view past invoices (parts and vehicles):
+                    - double click to view details
+                - Can edit suppliers
 
             Manager:
                 - Have all the abilities of a regular employee above
